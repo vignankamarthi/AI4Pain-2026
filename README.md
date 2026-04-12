@@ -101,7 +101,6 @@ AI4Pain-2026/
 │   ├── NN2_SOTA_RESEARCH.md
 │   └── NN3_NOVEL_FRAMEWORK.md
 ├── results/
-├── reports/                   # ACII 2026 PAAIn manuscript
 ├── tests/
 └── data/                      # Challenge data (not in git)
 ```
