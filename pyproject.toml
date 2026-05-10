@@ -1,0 +1,22 @@
+[tool.pytest.ini_options]
+minversion = "7.4"
+testpaths = ["tests/unit", "tests/integration"]
+python_files = ["test_*.py"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+]
+markers = [
+    "tdd_red: TDD red-state test, awaiting implementation",
+    "integration: integration test spanning multiple modules",
+]
+
+[tool.coverage.run]
+source = ["framework", "ai4pain"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+fail_under = 0  # raise after first impl session

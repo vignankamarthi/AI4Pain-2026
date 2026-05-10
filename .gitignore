@@ -2,8 +2,13 @@
 CLAUDE.md
 MEMORY.md
 ANTIPATTERNS.md
-PLAN.md
+FRAMEWORK.md
 COMMITS.md
+
+# Plan + experiment artifacts (gitignored, ledger persists locally)
+experiments/
+ledger/
+papers/
 
 # Python
 __pycache__/
@@ -13,6 +18,7 @@ __pycache__/
 dist/
 build/
 .eggs/
+.pytest_cache/
 
 # Virtual environments
 .venv/
@@ -34,6 +40,18 @@ data/interim/
 *.pickle
 *.parquet
 
+# SQLite databases (ledger lives here)
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Model checkpoints and large weights
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+
 # LaTeX build artifacts
 *.aux
 *.log
@@ -44,17 +62,6 @@ data/interim/
 *.bbl
 *.blg
 *.toc
-
-# Model checkpoints and large weights
-checkpoints/
-*.pth
-*.pt
-*.ckpt
-
-# Rust build
-feature-extraction-rust/target/
-target/
-# Note: Cargo.lock IS tracked (binary crate convention)
 
 # OS
 .DS_Store
@@ -69,5 +76,4 @@ Thumbs.db
 # Cluster / SLURM
 slurm-*.out
 *.err
-logs/*.out
-logs/*.err
+logs/
