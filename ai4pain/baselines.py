@@ -34,6 +34,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 from ai4pain.data import load_split
 from ai4pain.metrics import full_metric_suite
+from ai4pain.splits import k_subject_subset
 
 
 class BiGRUClassifier(nn.Module):
@@ -124,10 +125,28 @@ def train_baseline(spec: dict, data_root: Path, out_dir: Path) -> dict:
                                               ["Bvp", "Eda", "Resp", "SpO2"]))
 
     print(f"[baseline_bigru] loading train from {data_root}", flush=True)
-    X_train, y_train, _ = load_split(data_root, "train", signals=signals)
-    print(f"[baseline_bigru] {len(X_train)} train trials", flush=True)
+    X_train, y_train, subjects_train = load_split(data_root, "train", signals=signals)
+    print(f"[baseline_bigru] {len(X_train)} train trials from "
+          f"{len(set(subjects_train.tolist()))} subjects", flush=True)
     X_val, y_val, _ = load_split(data_root, "validation", signals=signals)
     print(f"[baseline_bigru] {len(X_val)} val trials", flush=True)
+
+    # Optional subject subset filter (used by framework.eval subset-transfer).
+    data_cfg = spec.get("data", {})
+    subset_size = data_cfg.get("subset_size")
+    subset_seed = data_cfg.get("subset_seed", 0)
+    if subset_size:
+        all_train_subjects = sorted(set(subjects_train.tolist()))
+        chosen = set(k_subject_subset(all_train_subjects,
+                                       k=int(subset_size),
+                                       seed=int(subset_seed)))
+        mask = np.array([s in chosen for s in subjects_train.tolist()], dtype=bool)
+        X_train = [X_train[i] for i in range(len(X_train)) if mask[i]]
+        y_train = y_train[mask]
+        subjects_train = subjects_train[mask]
+        print(f"[baseline_bigru] subset filter: K={subset_size} seed={subset_seed} "
+              f"-> {len(X_train)} trials from {len(chosen)} subjects "
+              f"({sorted(chosen)})", flush=True)
 
     Xtr = pad_trials_to_max(X_train)
     Xv = pad_trials_to_max(X_val)
