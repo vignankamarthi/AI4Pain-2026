@@ -1,0 +1,254 @@
+{
+  "name": "iter_0006_island0_scale_lr_change_kernel",
+  "best_val_metrics": {
+    "balanced_acc": 0.46759259259259256,
+    "macro_f1": 0.42816344678226703,
+    "per_class_pr": {
+      "NP": [
+        0.5512820512820513,
+        0.5972222222222222
+      ],
+      "AP": [
+        0.41350210970464135,
+        0.6805555555555556
+      ],
+      "HP": [
+        0.46153846153846156,
+        0.125
+      ]
+    },
+    "confusion_3x3": [
+      [
+        86,
+        46,
+        12
+      ],
+      [
+        37,
+        98,
+        9
+      ],
+      [
+        33,
+        93,
+        18
+      ]
+    ],
+    "auc_ovr": 0.6456806198559671,
+    "ece": 0.06231847619292912
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.4398148148148149,
+    "macro_f1": 0.43384607508398015,
+    "per_class_pr": {
+      "NP": [
+        0.6120689655172413,
+        0.4930555555555556
+      ],
+      "AP": [
+        0.45454545454545453,
+        0.24305555555555555
+      ],
+      "HP": [
+        0.3514644351464435,
+        0.5833333333333334
+      ]
+    },
+    "confusion_3x3": [
+      [
+        71,
+        5,
+        68
+      ],
+      [
+        22,
+        35,
+        87
+      ],
+      [
+        23,
+        37,
+        84
+      ]
+    ],
+    "auc_ovr": 0.6478829089506172,
+    "ece": 0.07719264917627529
+  },
+  "history": [
+    {
+      "epoch": 0,
+      "train_loss": 1.169902503490448,
+      "train_bal_acc": 0.37222222222222223,
+      "val_bal_acc": 0.3912037037037037,
+      "val_macro_f1": 0.2976960844734788
+    },
+    {
+      "epoch": 1,
+      "train_loss": 1.065539409716924,
+      "train_bal_acc": 0.47222222222222227,
+      "val_bal_acc": 0.3773148148148148,
+      "val_macro_f1": 0.37345620136311225
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.0409818440675735,
+      "train_bal_acc": 0.41944444444444445,
+      "val_bal_acc": 0.425925925925926,
+      "val_macro_f1": 0.3538493227202904
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.046704317132632,
+      "train_bal_acc": 0.4472222222222222,
+      "val_bal_acc": 0.39351851851851855,
+      "val_macro_f1": 0.31326767624706897
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.023829425374667,
+      "train_bal_acc": 0.47222222222222227,
+      "val_bal_acc": 0.42824074074074076,
+      "val_macro_f1": 0.380334873774056
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.9694390098253886,
+      "train_bal_acc": 0.4694444444444444,
+      "val_bal_acc": 0.4050925925925926,
+      "val_macro_f1": 0.319325040025865
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.0108279089132945,
+      "train_bal_acc": 0.5,
+      "val_bal_acc": 0.4328703703703703,
+      "val_macro_f1": 0.40071119843249553
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.9798247913519541,
+      "train_bal_acc": 0.48611111111111116,
+      "val_bal_acc": 0.41898148148148145,
+      "val_macro_f1": 0.38933590495937337
+    },
+    {
+      "epoch": 8,
+      "train_loss": 1.0081711461146672,
+      "train_bal_acc": 0.47222222222222215,
+      "val_bal_acc": 0.4583333333333333,
+      "val_macro_f1": 0.45881367882954344
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.9856053938468298,
+      "train_bal_acc": 0.4166666666666667,
+      "val_bal_acc": 0.40046296296296297,
+      "val_macro_f1": 0.35381810209289183
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.9636121491591135,
+      "train_bal_acc": 0.5277777777777778,
+      "val_bal_acc": 0.4166666666666667,
+      "val_macro_f1": 0.38026280083159714
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.9751734634240469,
+      "train_bal_acc": 0.5388888888888889,
+      "val_bal_acc": 0.40509259259259256,
+      "val_macro_f1": 0.37988508168090435
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.9449902723232905,
+      "train_bal_acc": 0.5305555555555556,
+      "val_bal_acc": 0.44675925925925924,
+      "val_macro_f1": 0.4238451441841273
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.968634749452273,
+      "train_bal_acc": 0.5277777777777778,
+      "val_bal_acc": 0.46759259259259256,
+      "val_macro_f1": 0.42816344678226703
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.94538747270902,
+      "train_bal_acc": 0.4944444444444444,
+      "val_bal_acc": 0.4467592592592593,
+      "val_macro_f1": 0.45149007257260637
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.986077348391215,
+      "train_bal_acc": 0.5388888888888889,
+      "val_bal_acc": 0.4328703703703704,
+      "val_macro_f1": 0.38871517002314165
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.993306040763855,
+      "train_bal_acc": 0.525,
+      "val_bal_acc": 0.4421296296296296,
+      "val_macro_f1": 0.4366595723117462
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.9445349673430125,
+      "train_bal_acc": 0.5111111111111111,
+      "val_bal_acc": 0.4398148148148148,
+      "val_macro_f1": 0.4088697447606228
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.9205709397792816,
+      "train_bal_acc": 0.5805555555555556,
+      "val_bal_acc": 0.4513888888888889,
+      "val_macro_f1": 0.44556696773602983
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.9254474292198817,
+      "train_bal_acc": 0.5499999999999999,
+      "val_bal_acc": 0.4398148148148149,
+      "val_macro_f1": 0.43384607508398015
+    }
+  ],
+  "param_count": 59203,
+  "train_seconds": 1.168727159500122,
+  "inference_seconds": 0.0009667873382568359,
+  "device": "cuda",
+  "spec": {
+    "data": {
+      "subset_seed": 0,
+      "subset_size": 10
+    },
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "base_channels": 32,
+      "depth": 4,
+      "family": "1d_cnn",
+      "kernel_size": 7,
+      "use_residual": true
+    },
+    "name": "iter_0006_island0_scale_lr_change_kernel",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0006 island 0 (1d_cnn) stochastic mutation. Strategies sampled (rng=60606, attempt 1): ['scale_lr', 'change_kernel']. Composite scoring active (novelty_alpha=0.45). Building on iter_0005's 3/5 improvements (1d_cnn 0.456, transformer 0.449, multi_stream 0.458). Bigru remained at 0.4769 ceiling. Expanding strategy menus for iter_0006.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 20,
+      "loss": "ce_class_balanced",
+      "lr": 0.003,
+      "optimizer": "adam",
+      "seed": 600
+    }
+  }
+}
