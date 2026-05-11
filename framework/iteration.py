@@ -330,8 +330,17 @@ def prepare_batch(ledger: Ledger, island_count: int,
         recent_deltas.append(recent_accs[i] - recent_accs[i - 1])
 
     if evolve_meta:
+        # Pass genome's current values as relaxation defaults so Level 2
+        # mutations (e.g., novelty_alpha 0.3 -> 0.45 -> 0.675) actually
+        # persist instead of washing out to the hardcoded baseline.
+        genome_defaults = {
+            "temperature": base_meta.get("temperature", 1.0),
+            "novelty_alpha": base_meta.get("novelty_alpha", 0.3),
+            "tabu_k": 50,
+            "lineage_cap": 5,
+        }
         new_meta = step_meta_state(base_meta, recent_deltas=recent_deltas,
-                                    rng=rng)
+                                    rng=rng, defaults=genome_defaults)
         # Persist
         next_iter = (prior_meta["iteration"] + 1) if prior_meta else 1
         ledger.write_meta_state(

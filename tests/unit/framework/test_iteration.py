@@ -217,6 +217,27 @@ def minimal_specs():
     ]
 
 
+def test_step_meta_state_with_genome_defaults_persists_l2_mutation(tmp_db_path,
+                                                                     minimal_specs):
+    """Level 2 mutates genome novelty_alpha to 0.45; relaxation must pull
+    toward 0.45, not the hardcoded 0.3 baseline."""
+    led = ledger.Ledger(tmp_db_path)
+    led.init_schema()
+    it.seed_population(led, minimal_specs, island_count=5)
+    # Seed meta_state at the genome's post-L2 values
+    led.write_meta_state(iteration=1, p_lit=0.5, novelty_alpha=0.45,
+                          temperature=0.7,
+                          failure_boost={"failure_boost_active": False})
+    # Now run prepare_batch with evolve_meta=True; novelty_alpha should
+    # relax toward 0.45 (genome default), NOT toward 0.3.
+    it.prepare_batch(led, island_count=5, tournament_size=3, rng_seed=42,
+                      evolve_meta=True)
+    state = led.read_latest_meta_state()
+    # Relaxation rate is 0.1, so new = 0.45 + 0.1*(0.45 - 0.45) = 0.45 exactly
+    assert abs(state["novelty_alpha"] - 0.45) < 0.01
+    led.close()
+
+
 def test_prepare_batch_persists_meta_state(tmp_db_path, minimal_specs):
     """Each prepare_batch call writes a new meta_state row reflecting the
     stepped (drifted p_lit + failure_boost-updated) state."""

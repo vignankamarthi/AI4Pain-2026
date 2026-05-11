@@ -94,9 +94,15 @@ def step_meta_state(current_meta: dict, recent_deltas: list[float],
                     window: int = 5, threshold: float = -0.02,
                     p_lit_sigma: float = 0.05,
                     p_lit_bounds: tuple[float, float] = (0.2, 0.8),
-                    rng: random.Random | None = None) -> dict:
+                    rng: random.Random | None = None,
+                    defaults: dict | None = None) -> dict:
     """One iteration of Level 1 meta drift. Combines 6.1 mix-ratio drift and
     6.2 failure-aware boost.
+
+    `defaults`: relaxation targets when failure_boost is INACTIVE. Pass the
+    current genome's values here so Level 2 mutations persist; otherwise
+    relaxation pulls back to the hardcoded `_DEFAULT_META_STATE_DEFAULTS`
+    baseline and washes out any genome change to novelty_alpha/temperature.
 
     Returns a complete meta-state dict.
     """
@@ -104,7 +110,8 @@ def step_meta_state(current_meta: dict, recent_deltas: list[float],
         recent_deltas, window=window, threshold=threshold, current_state=current_meta)
     # If not in failure regime, relax temperature/alpha back toward defaults.
     if not boosted["failure_boost_active"]:
-        boosted = relax_toward_defaults(boosted, _DEFAULT_META_STATE_DEFAULTS, rate=0.1)
+        boosted = relax_toward_defaults(
+            boosted, defaults or _DEFAULT_META_STATE_DEFAULTS, rate=0.1)
     boosted["p_lit"] = drift_mix_ratio(
         current_meta.get("p_lit", 0.5), sigma=p_lit_sigma,
         bounds=p_lit_bounds, rng=rng)
