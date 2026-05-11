@@ -1,0 +1,31 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "family": "multi_stream_bigru",
+    "fusion": "late_concat",
+    "fusion_dropout": 0.4,
+    "per_channel_hidden": 32,
+    "per_channel_layers": 1
+  },
+  "name": "iter_0004_island3_fusion_dropout_up",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "multi_stream: 0.456->0.444->0.442. Width was wrong axis. Try regularization: revert to iter_0001 (per_ch_hidden 32, layers 1) but bump fusion_dropout 0.2->0.4 to prevent late-fusion overfit.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 20,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adam",
+    "seed": 404
+  }
+}

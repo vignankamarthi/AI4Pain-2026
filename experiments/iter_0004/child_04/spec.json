@@ -1,0 +1,42 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": {
+    "family": "minirocket",
+    "max_dilations_per_kernel": 64,
+    "num_features": 9996,
+    "per_channel": true,
+    "random_state": 42
+  },
+  "model": {
+    "alphas": [
+      1e-05,
+      0.0001,
+      0.001,
+      0.003,
+      0.01,
+      0.03,
+      0.1,
+      0.3,
+      1.0,
+      3.0
+    ],
+    "class_weight": null,
+    "family": "ridge_classifier_cv"
+  },
+  "name": "iter_0004_island4_extend_alphas_low",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "MINIROCKET broke through to 0.4468 with class_weight=None + finer alphas. Amplify: keep class_weight=None, extend alpha grid further into low-regularization regime to confirm we're at the right strength.",
+  "training": {
+    "loss": "ridge_regression_cv",
+    "seed": 405
+  }
+}

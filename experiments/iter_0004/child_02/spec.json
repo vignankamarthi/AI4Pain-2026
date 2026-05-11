@@ -1,0 +1,32 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "d_model": 64,
+    "dropout": 0.2,
+    "family": "transformer",
+    "ff_dim": 128,
+    "num_heads": 4,
+    "num_layers": 2
+  },
+  "name": "iter_0004_island2_moderate_reg",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "transformer: 0.419(under-fit)->0.435(overfit)->0.433(heavy-reg). Sweet spot is somewhere in between. Try: d_model 64 (orig), num_heads 4, num_layers 2, dropout 0.2 (moderate), epochs 20 (orig).",
+  "training": {
+    "batch_size": 32,
+    "epochs": 20,
+    "loss": "ce_class_balanced",
+    "lr": 0.0005,
+    "optimizer": "adamw",
+    "seed": 403
+  }
+}

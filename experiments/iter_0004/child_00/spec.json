@@ -1,0 +1,31 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "base_channels": 32,
+    "depth": 4,
+    "family": "1d_cnn",
+    "kernel_size": 7,
+    "use_residual": false
+  },
+  "name": "iter_0004_island0_no_residual",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "1d_cnn at 0.451->0.454->0.440 trending DOWN. Try structural toggle: use_residual True->False with iter_0001 baseline (depth 4, base_channels 32, kernel 7). Tests if residual is helping or hurting on this data scale.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 20,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adam",
+    "seed": 401
+  }
+}

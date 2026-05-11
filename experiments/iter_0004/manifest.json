@@ -1,0 +1,54 @@
+{
+  "experiments": [
+    {
+      "run_id": "r_00000016",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0004/child_00",
+      "island": 0,
+      "tag": "no_residual",
+      "parent": "r_00000006",
+      "family": "1d_cnn"
+    },
+    {
+      "run_id": "r_00000017",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0004/child_01",
+      "island": 1,
+      "tag": "h64_l1_e50_lr1e3",
+      "parent": "r_00000002",
+      "family": "bigru"
+    },
+    {
+      "run_id": "r_00000018",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0004/child_02",
+      "island": 2,
+      "tag": "moderate_reg",
+      "parent": "r_00000008",
+      "family": "transformer"
+    },
+    {
+      "run_id": "r_00000019",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0004/child_03",
+      "island": 3,
+      "tag": "fusion_dropout_up",
+      "parent": "r_00000004",
+      "family": "multi_stream_bigru"
+    },
+    {
+      "run_id": "r_00000020",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0004/child_04",
+      "island": 4,
+      "tag": "extend_alphas_low",
+      "parent": "r_00000015",
+      "family": "ridge_classifier_cv"
+    }
+  ]
+}

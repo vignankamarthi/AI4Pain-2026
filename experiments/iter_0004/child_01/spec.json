@@ -1,0 +1,30 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "dropout": 0.2,
+    "family": "bigru",
+    "hidden_size": 64,
+    "num_layers": 1
+  },
+  "name": "iter_0004_island1_h64_l1_e50_lr1e3",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "bigru saturated at 0.4583 (iter_0001+iter_0002) then dropped to 0.4444 with slower lr. Final saturation probe: iter_0001-exact spec but 50 epochs (2.5x). If still 0.458, dataset ceiling is FINAL for bigru.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 50,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adam",
+    "seed": 402
+  }
+}
