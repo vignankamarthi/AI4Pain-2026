@@ -1,0 +1,54 @@
+{
+  "experiments": [
+    {
+      "run_id": "r_00000006",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0002/child_00",
+      "island": 0,
+      "tag": "shrink_to_avoid_overfit",
+      "parent": "r_00000001",
+      "family": "1d_cnn"
+    },
+    {
+      "run_id": "r_00000007",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0002/child_01",
+      "island": 1,
+      "tag": "h96_layers2",
+      "parent": "r_00000002",
+      "family": "bigru"
+    },
+    {
+      "run_id": "r_00000008",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0002/child_02",
+      "island": 2,
+      "tag": "deeper_more_epochs",
+      "parent": "r_00000003",
+      "family": "transformer"
+    },
+    {
+      "run_id": "r_00000009",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0002/child_03",
+      "island": 3,
+      "tag": "wider_streams",
+      "parent": "r_00000004",
+      "family": "multi_stream_bigru"
+    },
+    {
+      "run_id": "r_00000010",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0002/child_04",
+      "island": 4,
+      "tag": "more_dilations",
+      "parent": "r_00000005",
+      "family": "ridge_classifier_cv"
+    }
+  ]
+}

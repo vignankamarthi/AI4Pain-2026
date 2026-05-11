@@ -1,0 +1,32 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "d_model": 64,
+    "dropout": 0.1,
+    "family": "transformer",
+    "ff_dim": 128,
+    "num_heads": 8,
+    "num_layers": 3
+  },
+  "name": "iter_0002_island2_deeper_more_epochs",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "transformer was 4th (0.419) with under-fit train (gap +0.017). Needs more capacity AND more training time: num_layers 2->3, num_heads 4->8, epochs 20->40. If transformer is going to compete, this is its shot.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 40,
+    "loss": "ce_class_balanced",
+    "lr": 0.0005,
+    "optimizer": "adamw",
+    "seed": 203
+  }
+}

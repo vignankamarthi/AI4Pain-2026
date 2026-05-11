@@ -1,0 +1,30 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "dropout": 0.2,
+    "family": "bigru",
+    "hidden_size": 96,
+    "num_layers": 2
+  },
+  "name": "iter_0002_island1_h96_layers2",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "bigru was 1st (0.458). Compound the iter_0001-old insights (width AND depth helped tied): hidden_size 64->96, num_layers 1->2. Smaller capacity bump than h128 to test diminishing returns.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 20,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adam",
+    "seed": 202
+  }
+}

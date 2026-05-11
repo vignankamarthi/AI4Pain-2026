@@ -1,0 +1,31 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "base_channels": 24,
+    "depth": 3,
+    "family": "1d_cnn",
+    "kernel_size": 7,
+    "use_residual": true
+  },
+  "name": "iter_0002_island0_shrink_to_avoid_overfit",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "1d_cnn was 3rd (0.451) with worst gen_gap (+0.065) and worst ECE (0.13). REDUCE capacity: depth 4->3, base_channels 32->24. Switch to adamw for weight decay. Target: lower gap, better calibration.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 20,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adamw",
+    "seed": 201
+  }
+}
