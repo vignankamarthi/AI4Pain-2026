@@ -1,0 +1,130 @@
+{
+  "name": "iter_0008_child04_island4_ridge_cl",
+  "best_val_metrics": {
+    "balanced_acc": 0.40740740740740744,
+    "macro_f1": 0.398338531110459,
+    "per_class_pr": {
+      "NP": [
+        0.4725274725274725,
+        0.5972222222222222
+      ],
+      "AP": [
+        0.38461538461538464,
+        0.2777777777777778
+      ],
+      "HP": [
+        0.3424657534246575,
+        0.3472222222222222
+      ]
+    },
+    "confusion_3x3": [
+      [
+        86,
+        19,
+        39
+      ],
+      [
+        47,
+        40,
+        57
+      ],
+      [
+        49,
+        45,
+        50
+      ]
+    ],
+    "auc_ovr": 0.5896347736625515,
+    "ece": 0.019151242725827074
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.40740740740740744,
+    "macro_f1": 0.398338531110459,
+    "per_class_pr": {
+      "NP": [
+        0.4725274725274725,
+        0.5972222222222222
+      ],
+      "AP": [
+        0.38461538461538464,
+        0.2777777777777778
+      ],
+      "HP": [
+        0.3424657534246575,
+        0.3472222222222222
+      ]
+    },
+    "confusion_3x3": [
+      [
+        86,
+        19,
+        39
+      ],
+      [
+        47,
+        40,
+        57
+      ],
+      [
+        49,
+        45,
+        50
+      ]
+    ],
+    "auc_ovr": 0.5896347736625515,
+    "ece": 0.019151242725827074
+  },
+  "history": [
+    {
+      "epoch": 0,
+      "train_loss": NaN,
+      "train_bal_acc": NaN,
+      "val_bal_acc": 0.40740740740740744,
+      "val_macro_f1": 0.398338531110459
+    }
+  ],
+  "param_count": 7056,
+  "train_seconds": 0.05454826354980469,
+  "inference_seconds": 0.005677461624145508,
+  "feat_seconds": 1.5961499214172363,
+  "device": "cpu",
+  "best_alpha": 1000.0,
+  "spec": {
+    "data": {
+      "subset_seed": 0,
+      "subset_size": 10
+    },
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "minirocket",
+      "num_features": 9996,
+      "per_channel": true,
+      "random_state": 42
+    },
+    "model": {
+      "alphas": [
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        10.0,
+        100.0,
+        1000.0
+      ],
+      "class_weight": null,
+      "family": "ridge_classifier_cv"
+    },
+    "name": "iter_0008_child04_island4_ridge_cl",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0008 child 4 (island 4, ridge_classifier_cv). Strategies: ['toggle_class_weight']. Mutations: standard.",
+    "training": {
+      "loss": "ridge_regression_cv",
+      "seed": 804
+    }
+  }
+}
