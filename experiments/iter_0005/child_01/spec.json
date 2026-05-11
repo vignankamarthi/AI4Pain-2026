@@ -1,0 +1,30 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "dropout": 0.2,
+    "family": "bigru",
+    "hidden_size": 64,
+    "num_layers": 1
+  },
+  "name": "iter_0005_island1_scale_epochs_scale_hidden",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0005 island 1 (bigru) stochastic mutation. Strategies sampled (rng_seed=50505): ['scale_epochs', 'scale_hidden']. After Level 2 HIP-H accepted novelty_alpha 0.3->0.45, this batch uses composite scoring (Pareto+novelty+ECE+acc) for tournament + stochastic-sampled mutation strategies to inject variance lost in iter_0001-iter_0004.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 100,
+    "loss": "ce_class_balanced",
+    "lr": 0.0005,
+    "optimizer": "adam",
+    "seed": 501
+  }
+}

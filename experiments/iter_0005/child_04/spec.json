@@ -1,0 +1,37 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": {
+    "family": "minirocket",
+    "max_dilations_per_kernel": 64,
+    "num_features": 9996,
+    "per_channel": true,
+    "random_state": 42
+  },
+  "model": {
+    "alphas": [
+      0.001,
+      0.003,
+      0.03,
+      1.0,
+      3.0
+    ],
+    "class_weight": null,
+    "family": "ridge_classifier_cv"
+  },
+  "name": "iter_0005_island4_change_alpha_grid",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0005 island 4 (ridge_classifier_cv) stochastic mutation. Strategies sampled (rng_seed=50505): ['change_alpha_grid']. After Level 2 HIP-H accepted novelty_alpha 0.3->0.45, this batch uses composite scoring (Pareto+novelty+ECE+acc) for tournament + stochastic-sampled mutation strategies to inject variance lost in iter_0001-iter_0004.",
+  "training": {
+    "loss": "ridge_regression_cv",
+    "seed": 504
+  }
+}

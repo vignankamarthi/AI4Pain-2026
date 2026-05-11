@@ -1,0 +1,31 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "family": "multi_stream_bigru",
+    "fusion": "late_concat",
+    "fusion_dropout": 0.0,
+    "per_channel_hidden": 48,
+    "per_channel_layers": 1
+  },
+  "name": "iter_0005_island3_scale_fusion_dropout",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0005 island 3 (multi_stream_bigru) stochastic mutation. Strategies sampled (rng_seed=50505): ['scale_fusion_dropout']. After Level 2 HIP-H accepted novelty_alpha 0.3->0.45, this batch uses composite scoring (Pareto+novelty+ECE+acc) for tournament + stochastic-sampled mutation strategies to inject variance lost in iter_0001-iter_0004.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 20,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adam",
+    "seed": 503
+  }
+}

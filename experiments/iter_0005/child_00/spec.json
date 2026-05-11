@@ -1,0 +1,31 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "base_channels": 24,
+    "depth": 4,
+    "family": "1d_cnn",
+    "kernel_size": 7,
+    "use_residual": true
+  },
+  "name": "iter_0005_island0_scale_depth",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0005 island 0 (1d_cnn) stochastic mutation. Strategies sampled (rng_seed=50505): ['scale_depth']. After Level 2 HIP-H accepted novelty_alpha 0.3->0.45, this batch uses composite scoring (Pareto+novelty+ECE+acc) for tournament + stochastic-sampled mutation strategies to inject variance lost in iter_0001-iter_0004.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 20,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adamw",
+    "seed": 500
+  }
+}

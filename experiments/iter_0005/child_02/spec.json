@@ -1,0 +1,32 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "d_model": 64,
+    "dropout": 0.1,
+    "family": "transformer",
+    "ff_dim": 64,
+    "num_heads": 8,
+    "num_layers": 3
+  },
+  "name": "iter_0005_island2_scale_ff",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0005 island 2 (transformer) stochastic mutation. Strategies sampled (rng_seed=50505): ['scale_ff']. After Level 2 HIP-H accepted novelty_alpha 0.3->0.45, this batch uses composite scoring (Pareto+novelty+ECE+acc) for tournament + stochastic-sampled mutation strategies to inject variance lost in iter_0001-iter_0004.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 40,
+    "loss": "ce_class_balanced",
+    "lr": 0.0005,
+    "optimizer": "adamw",
+    "seed": 502
+  }
+}
