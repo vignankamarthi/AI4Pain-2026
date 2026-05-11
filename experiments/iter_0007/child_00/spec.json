@@ -1,0 +1,31 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "base_channels": 24,
+    "depth": 4,
+    "family": "1d_cnn",
+    "kernel_size": 7,
+    "use_residual": true
+  },
+  "name": "iter_0007_island0_swap_optimizer",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0007 island 0 (1d_cnn) stochastic mutation, structural-biased (60% structural prob to escape tabu). Strategies sampled: ['swap_optimizer'] (attempt 1).",
+  "training": {
+    "batch_size": 32,
+    "epochs": 20,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adam",
+    "seed": 700
+  }
+}

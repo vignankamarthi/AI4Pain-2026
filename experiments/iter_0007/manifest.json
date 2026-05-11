@@ -1,0 +1,67 @@
+{
+  "experiments": [
+    {
+      "run_id": "r_00000029",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0007/child_00",
+      "island": 0,
+      "family": "1d_cnn",
+      "strategies": [
+        "swap_optimizer"
+      ],
+      "parent": "r_00000021"
+    },
+    {
+      "run_id": "r_00000030",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0007/child_01",
+      "island": 1,
+      "family": "bigru",
+      "strategies": [
+        "swap_optimizer",
+        "change_padding"
+      ],
+      "parent": "r_00000027"
+    },
+    {
+      "run_id": "r_00000031",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0007/child_02",
+      "island": 2,
+      "family": "transformer",
+      "strategies": [
+        "swap_optimizer",
+        "scale_layers"
+      ],
+      "parent": "r_00000003"
+    },
+    {
+      "run_id": "r_00000032",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0007/child_03",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "strategies": [
+        "scale_epochs",
+        "change_normalize"
+      ],
+      "parent": "r_00000004"
+    },
+    {
+      "run_id": "r_00000033",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0007/child_04",
+      "island": 4,
+      "family": "ridge_classifier_cv",
+      "strategies": [
+        "toggle_class_weight"
+      ],
+      "parent": "r_00000015"
+    }
+  ]
+}

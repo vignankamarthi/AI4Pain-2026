@@ -1,0 +1,32 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "d_model": 64,
+    "dropout": 0.1,
+    "family": "transformer",
+    "ff_dim": 128,
+    "num_heads": 4,
+    "num_layers": 4
+  },
+  "name": "iter_0007_island2_swap_optimizer_scale_layers",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0007 island 2 (transformer) stochastic mutation, structural-biased (60% structural prob to escape tabu). Strategies sampled: ['swap_optimizer', 'scale_layers'] (attempt 1).",
+  "training": {
+    "batch_size": 32,
+    "epochs": 20,
+    "loss": "ce_class_balanced",
+    "lr": 0.0005,
+    "optimizer": "adamw",
+    "seed": 702
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": {
+    "family": "minirocket",
+    "max_dilations_per_kernel": 64,
+    "num_features": 9996,
+    "per_channel": true,
+    "random_state": 42
+  },
+  "model": {
+    "alphas": [
+      0.001,
+      0.003,
+      0.01,
+      0.03,
+      0.1,
+      0.3,
+      1.0,
+      3.0,
+      10.0
+    ],
+    "class_weight": "balanced",
+    "family": "ridge_classifier_cv"
+  },
+  "name": "iter_0007_island4_toggle_class_weight",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0007 island 4 (ridge_classifier_cv) stochastic mutation, structural-biased (60% structural prob to escape tabu). Strategies sampled: ['toggle_class_weight'] (attempt 1).",
+  "training": {
+    "loss": "ridge_regression_cv",
+    "seed": 704
+  }
+}
