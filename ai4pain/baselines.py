@@ -102,16 +102,13 @@ def _atomic_write_json(path: Path, payload: dict) -> None:
     tmp.replace(path)
 
 
-def train_baseline(spec: dict, data_root: Path, out_dir: Path) -> dict:
-    """End-to-end train of the BiGRU baseline.
+def run_pytorch_model(model_factory, spec: dict, data_root: Path,
+                       out_dir: Path, name_tag: str = "torch") -> dict:
+    """Generic PyTorch training pipeline shared by all neural seed families.
 
-    Args:
-        spec: dict with optional sections 'model', 'training', 'data'.
-        data_root: project's data/raw/ root.
-        out_dir: directory to write result.json into.
-
-    Returns:
-        result dict (also written to out_dir/result.json).
+    `model_factory(in_channels: int, T_max: int, model_cfg: dict, num_classes: int)`
+    returns an `nn.Module`. The rest of the pipeline (load, pad, zscore, subset,
+    train_loop, metrics, result.json) is invariant across families.
     """
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -124,14 +121,13 @@ def train_baseline(spec: dict, data_root: Path, out_dir: Path) -> dict:
     signals = tuple(spec.get("data", {}).get("signals",
                                               ["Bvp", "Eda", "Resp", "SpO2"]))
 
-    print(f"[baseline_bigru] loading train from {data_root}", flush=True)
+    print(f"[{name_tag}] loading train from {data_root}", flush=True)
     X_train, y_train, subjects_train = load_split(data_root, "train", signals=signals)
-    print(f"[baseline_bigru] {len(X_train)} train trials from "
+    print(f"[{name_tag}] {len(X_train)} train trials from "
           f"{len(set(subjects_train.tolist()))} subjects", flush=True)
     X_val, y_val, _ = load_split(data_root, "validation", signals=signals)
-    print(f"[baseline_bigru] {len(X_val)} val trials", flush=True)
+    print(f"[{name_tag}] {len(X_val)} val trials", flush=True)
 
-    # Optional subject subset filter (used by framework.eval subset-transfer).
     data_cfg = spec.get("data", {})
     subset_size = data_cfg.get("subset_size")
     subset_seed = data_cfg.get("subset_seed", 0)
@@ -144,9 +140,9 @@ def train_baseline(spec: dict, data_root: Path, out_dir: Path) -> dict:
         X_train = [X_train[i] for i in range(len(X_train)) if mask[i]]
         y_train = y_train[mask]
         subjects_train = subjects_train[mask]
-        print(f"[baseline_bigru] subset filter: K={subset_size} seed={subset_seed} "
-              f"-> {len(X_train)} trials from {len(chosen)} subjects "
-              f"({sorted(chosen)})", flush=True)
+        print(f"[{name_tag}] subset filter: K={subset_size} seed={subset_seed} "
+              f"-> {len(X_train)} trials from {len(chosen)} subjects",
+              flush=True)
 
     Xtr = pad_trials_to_max(X_train)
     Xv = pad_trials_to_max(X_val)
@@ -162,19 +158,15 @@ def train_baseline(spec: dict, data_root: Path, out_dir: Path) -> dict:
     Xtr, Xv, _, _ = per_channel_zscore(Xtr, Xv)
 
     device = _device()
-    print(f"[baseline_bigru] device: {device}", flush=True)
+    print(f"[{name_tag}] device: {device}", flush=True)
     model_cfg = spec.get("model", {})
-    model = BiGRUClassifier(
-        in_channels=len(signals),
-        hidden_size=int(model_cfg.get("hidden_size", 64)),
-        num_layers=int(model_cfg.get("num_layers", 1)),
-        dropout=float(model_cfg.get("dropout", 0.2)),
-        num_classes=3,
-    ).to(device)
+    model = model_factory(in_channels=len(signals), T_max=T_max,
+                           model_cfg=model_cfg, num_classes=3).to(device)
 
     epochs = int(train_cfg.get("epochs", 20))
     bs = int(train_cfg.get("batch_size", 32))
     lr = float(train_cfg.get("lr", 1e-3))
+    optim_name = train_cfg.get("optimizer", "adam").lower()
 
     Xtr_t = torch.from_numpy(Xtr).to(device)
     ytr_t = torch.from_numpy(y_train).to(device)
@@ -184,7 +176,10 @@ def train_baseline(spec: dict, data_root: Path, out_dir: Path) -> dict:
     class_weights = torch.tensor((counts.sum() / (3 * counts)).astype(np.float32),
                                  device=device)
     loss_fn = nn.CrossEntropyLoss(weight=class_weights)
-    optim = torch.optim.Adam(model.parameters(), lr=lr)
+    if optim_name == "adamw":
+        optim = torch.optim.AdamW(model.parameters(), lr=lr)
+    else:
+        optim = torch.optim.Adam(model.parameters(), lr=lr)
 
     train_ds = TensorDataset(Xtr_t, ytr_t)
     train_loader = DataLoader(train_ds, batch_size=bs, shuffle=True)
@@ -228,14 +223,13 @@ def train_baseline(spec: dict, data_root: Path, out_dir: Path) -> dict:
         if final_metrics["balanced_acc"] > best_val_bal_acc:
             best_val_bal_acc = final_metrics["balanced_acc"]
             best_metrics = final_metrics
-        print(f"[baseline_bigru] ep {epoch}: "
+        print(f"[{name_tag}] ep {epoch}: "
               f"train_loss={epoch_loss/max(n_batches,1):.4f} "
               f"train_bal={train_bal:.3f} "
               f"val_bal={final_metrics['balanced_acc']:.3f} "
               f"val_f1={final_metrics['macro_f1']:.3f}", flush=True)
 
     train_seconds = time.time() - t0
-
     model.eval()
     t1 = time.time()
     with torch.no_grad():
@@ -243,7 +237,7 @@ def train_baseline(spec: dict, data_root: Path, out_dir: Path) -> dict:
     inference_seconds = time.time() - t1
 
     result = {
-        "name": spec.get("name", "baseline_bigru"),
+        "name": spec.get("name", name_tag),
         "best_val_metrics": best_metrics,
         "final_val_metrics": final_metrics,
         "history": history,
@@ -254,9 +248,26 @@ def train_baseline(spec: dict, data_root: Path, out_dir: Path) -> dict:
         "spec": spec,
     }
     _atomic_write_json(out_dir / "result.json", result)
-    print(f"[baseline_bigru] best val bal_acc: {best_val_bal_acc:.3f}", flush=True)
-    print(f"[baseline_bigru] result -> {out_dir / 'result.json'}", flush=True)
+    print(f"[{name_tag}] best val bal_acc: {best_val_bal_acc:.3f}", flush=True)
+    print(f"[{name_tag}] result -> {out_dir / 'result.json'}", flush=True)
     return result
+
+
+def _bigru_factory(in_channels: int, T_max: int, model_cfg: dict,
+                    num_classes: int) -> nn.Module:
+    return BiGRUClassifier(
+        in_channels=in_channels,
+        hidden_size=int(model_cfg.get("hidden_size", 64)),
+        num_layers=int(model_cfg.get("num_layers", 1)),
+        dropout=float(model_cfg.get("dropout", 0.2)),
+        num_classes=num_classes,
+    )
+
+
+def train_baseline(spec: dict, data_root: Path, out_dir: Path) -> dict:
+    """End-to-end train of the BiGRU baseline (thin wrapper)."""
+    return run_pytorch_model(_bigru_factory, spec, data_root, out_dir,
+                              name_tag="baseline_bigru")
 
 
 def run_from_dir(run_dir: Path, data_root: Path) -> dict:

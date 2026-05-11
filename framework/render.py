@@ -27,6 +27,10 @@ from pathlib import Path
 
 FAMILY_ENTRY_POINTS: dict[str, tuple[str, str]] = {
     "bigru": ("ai4pain.baselines", "run_from_dir"),
+    "ridge_classifier_cv": ("ai4pain.minirocket", "run_from_dir"),
+    "1d_cnn": ("ai4pain.cnn_1d", "run_from_dir"),
+    "transformer": ("ai4pain.transformer", "run_from_dir"),
+    "multi_stream_bigru": ("ai4pain.multi_stream", "run_from_dir"),
 }
 
 
