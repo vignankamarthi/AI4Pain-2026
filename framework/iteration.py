@@ -31,6 +31,13 @@ import random
 
 import numpy as np
 
+# Cluster QOS hard cap: max simultaneous queued jobs per user on the
+# NEU Explorer GPU partition. Any batch larger than this fails at
+# sbatch with QOSMaxSubmitJobPerUserLimit. Mac-side helpers enforce
+# this so the cluster step is always a single `sbatch --array=0-(N-1)%4`.
+CLUSTER_BATCH_CAP = 8
+
+
 from framework.breakdown import (
     CriticPopulation,
     stagnation_escalation,

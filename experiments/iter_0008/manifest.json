@@ -117,35 +117,6 @@
       "parent": "r_00000031",
       "stagnant": false,
       "migrated_from_island": null
-    },
-    {
-      "run_id": "r_00000042",
-      "K": 10,
-      "seed_idx": 0,
-      "run_dir": "experiments/iter_0008/child_08",
-      "island": 3,
-      "family": "multi_stream_bigru",
-      "strategies": [
-        "change_normalize",
-        "swap_optimizer"
-      ],
-      "parent": "r_00000004",
-      "stagnant": false,
-      "migrated_from_island": null
-    },
-    {
-      "run_id": "r_00000043",
-      "K": 10,
-      "seed_idx": 0,
-      "run_dir": "experiments/iter_0008/child_09",
-      "island": 4,
-      "family": "ridge_classifier_cv",
-      "strategies": [
-        "change_alpha_grid"
-      ],
-      "parent": "r_00000025",
-      "stagnant": false,
-      "migrated_from_island": null
     }
   ]
 }

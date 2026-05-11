@@ -41,6 +41,15 @@ if [[ ! -f "${MANIFEST}" ]]; then
     exit 1
 fi
 
+# QOS guard: NEU Explorer caps submitted jobs per user at 8. Mac-side
+# generation must keep manifests at <= 8 entries or this slurm script
+# will be invoked with --array indices that fail submission.
+N_TASKS=$(python -c "import json; print(len(json.load(open('${MANIFEST}'))['experiments']))" 2>/dev/null || echo "?")
+if [[ "$N_TASKS" != "?" && "$N_TASKS" -gt 8 ]]; then
+    echo "WARNING: manifest has ${N_TASKS} entries; cluster QOS cap is 8." >&2
+    echo "         If sbatch submission failed, cap the manifest at 8 and resubmit." >&2
+fi
+
 # Activate venv (created locally with ~/python/bin/python3.11 -m venv .venv)
 source .venv/bin/activate
 
