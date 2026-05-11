@@ -190,7 +190,7 @@ def record_constraint_check(iteration: int, fingerprint: str | None,
                             ledger_path: Path = Path("ledger/experiments.db"),
                             ) -> None:
     """Persist one constraint_event row. Called by the constraint pipeline
-    for each rule check (rule_guards / ast_tabu / curriculum_unlock / lineage_cap).
+    for each rule check (rule_guards / ast_tabu / lineage_cap).
     """
     led = Ledger(ledger_path)
     try:

@@ -51,8 +51,8 @@ def _mutation_directive(meta: MetaState) -> str:
             "mutation, not a hyperparameter tweak. Change the model family, "
             "change the preprocessing pipeline shape, swap a major operator. "
             f"Operate near temperature {meta.temperature:.2f}, novelty_alpha "
-            f"{meta.novelty_alpha:.2f}. Stay within the curriculum's currently "
-            "unlocked primitives."
+            f"{meta.novelty_alpha:.2f}. Eligible model families are those "
+            "registered in framework.render.FAMILY_ENTRY_POINTS."
         )
     if meta.p_lit >= 0.5:
         return (
