@@ -1,0 +1,254 @@
+{
+  "name": "iter_0005_island3_scale_fusion_dropout",
+  "best_val_metrics": {
+    "balanced_acc": 0.4583333333333333,
+    "macro_f1": 0.4422524063301208,
+    "per_class_pr": {
+      "NP": [
+        0.47738693467336685,
+        0.6597222222222222
+      ],
+      "AP": [
+        0.44370860927152317,
+        0.4652777777777778
+      ],
+      "HP": [
+        0.43902439024390244,
+        0.25
+      ]
+    },
+    "confusion_3x3": [
+      [
+        95,
+        29,
+        20
+      ],
+      [
+        51,
+        67,
+        26
+      ],
+      [
+        53,
+        55,
+        36
+      ]
+    ],
+    "auc_ovr": 0.633447466563786,
+    "ece": 0.04565326876386449
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.41203703703703703,
+    "macro_f1": 0.40966067333528766,
+    "per_class_pr": {
+      "NP": [
+        0.5096774193548387,
+        0.5486111111111112
+      ],
+      "AP": [
+        0.34814814814814815,
+        0.3263888888888889
+      ],
+      "HP": [
+        0.36619718309859156,
+        0.3611111111111111
+      ]
+    },
+    "confusion_3x3": [
+      [
+        79,
+        32,
+        33
+      ],
+      [
+        40,
+        47,
+        57
+      ],
+      [
+        36,
+        56,
+        52
+      ]
+    ],
+    "auc_ovr": 0.6433095421810698,
+    "ece": 0.05453842216067844
+  },
+  "history": [
+    {
+      "epoch": 0,
+      "train_loss": 1.0988071660200756,
+      "train_bal_acc": 0.40277777777777785,
+      "val_bal_acc": 0.3958333333333333,
+      "val_macro_f1": 0.33743062155854225
+    },
+    {
+      "epoch": 1,
+      "train_loss": 1.0963647663593292,
+      "train_bal_acc": 0.39444444444444443,
+      "val_bal_acc": 0.3912037037037037,
+      "val_macro_f1": 0.30690664047234284
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.089990754922231,
+      "train_bal_acc": 0.39166666666666666,
+      "val_bal_acc": 0.3958333333333333,
+      "val_macro_f1": 0.3652470818876073
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.0833544234434764,
+      "train_bal_acc": 0.375,
+      "val_bal_acc": 0.40740740740740744,
+      "val_macro_f1": 0.3272476315954577
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.0843068361282349,
+      "train_bal_acc": 0.41111111111111115,
+      "val_bal_acc": 0.4212962962962963,
+      "val_macro_f1": 0.3717873211452119
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.085330327351888,
+      "train_bal_acc": 0.375,
+      "val_bal_acc": 0.40046296296296297,
+      "val_macro_f1": 0.34447928386607635
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.0796820123990376,
+      "train_bal_acc": 0.4138888888888889,
+      "val_bal_acc": 0.41898148148148145,
+      "val_macro_f1": 0.3920993160868272
+    },
+    {
+      "epoch": 7,
+      "train_loss": 1.0791248579819996,
+      "train_bal_acc": 0.425,
+      "val_bal_acc": 0.42824074074074076,
+      "val_macro_f1": 0.3894813605901581
+    },
+    {
+      "epoch": 8,
+      "train_loss": 1.0741354723771412,
+      "train_bal_acc": 0.42777777777777776,
+      "val_bal_acc": 0.41898148148148145,
+      "val_macro_f1": 0.36443694448672453
+    },
+    {
+      "epoch": 9,
+      "train_loss": 1.0664637237787247,
+      "train_bal_acc": 0.44166666666666665,
+      "val_bal_acc": 0.4583333333333333,
+      "val_macro_f1": 0.4422524063301208
+    },
+    {
+      "epoch": 10,
+      "train_loss": 1.0404055068890254,
+      "train_bal_acc": 0.46388888888888885,
+      "val_bal_acc": 0.4444444444444445,
+      "val_macro_f1": 0.4418466906124657
+    },
+    {
+      "epoch": 11,
+      "train_loss": 1.0381877223650615,
+      "train_bal_acc": 0.4305555555555556,
+      "val_bal_acc": 0.4467592592592593,
+      "val_macro_f1": 0.3774177357627568
+    },
+    {
+      "epoch": 12,
+      "train_loss": 1.029061143596967,
+      "train_bal_acc": 0.4611111111111111,
+      "val_bal_acc": 0.42824074074074076,
+      "val_macro_f1": 0.36619796195690285
+    },
+    {
+      "epoch": 13,
+      "train_loss": 1.0095958908398945,
+      "train_bal_acc": 0.48611111111111116,
+      "val_bal_acc": 0.3888888888888889,
+      "val_macro_f1": 0.3735642184064116
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.9918691863616308,
+      "train_bal_acc": 0.5361111111111111,
+      "val_bal_acc": 0.4398148148148148,
+      "val_macro_f1": 0.4067399498080384
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.9868366171916326,
+      "train_bal_acc": 0.5361111111111111,
+      "val_bal_acc": 0.4583333333333333,
+      "val_macro_f1": 0.4577924541350778
+    },
+    {
+      "epoch": 16,
+      "train_loss": 1.00534854332606,
+      "train_bal_acc": 0.5083333333333333,
+      "val_bal_acc": 0.4328703703703704,
+      "val_macro_f1": 0.42622472002685097
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.975148007273674,
+      "train_bal_acc": 0.5055555555555555,
+      "val_bal_acc": 0.39351851851851843,
+      "val_macro_f1": 0.3533328227028863
+    },
+    {
+      "epoch": 18,
+      "train_loss": 1.009489084283511,
+      "train_bal_acc": 0.4777777777777778,
+      "val_bal_acc": 0.4351851851851852,
+      "val_macro_f1": 0.4158730158730159
+    },
+    {
+      "epoch": 19,
+      "train_loss": 1.0198054263989131,
+      "train_bal_acc": 0.4861111111111111,
+      "val_bal_acc": 0.41203703703703703,
+      "val_macro_f1": 0.40966067333528766
+    }
+  ],
+  "param_count": 59907,
+  "train_seconds": 5.487981796264648,
+  "inference_seconds": 0.003248453140258789,
+  "device": "cuda",
+  "spec": {
+    "data": {
+      "subset_seed": 0,
+      "subset_size": 10
+    },
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "family": "multi_stream_bigru",
+      "fusion": "late_concat",
+      "fusion_dropout": 0.0,
+      "per_channel_hidden": 48,
+      "per_channel_layers": 1
+    },
+    "name": "iter_0005_island3_scale_fusion_dropout",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0005 island 3 (multi_stream_bigru) stochastic mutation. Strategies sampled (rng_seed=50505): ['scale_fusion_dropout']. After Level 2 HIP-H accepted novelty_alpha 0.3->0.45, this batch uses composite scoring (Pareto+novelty+ECE+acc) for tournament + stochastic-sampled mutation strategies to inject variance lost in iter_0001-iter_0004.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 20,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "optimizer": "adam",
+      "seed": 503
+    }
+  }
+}
