@@ -1,10 +1,44 @@
 {
   "experiments": [
     {
-      "run_id": "iter_0001",
+      "run_id": "r_00000001",
       "K": 10,
       "seed_idx": 0,
-      "run_dir": "experiments/iter_0001"
+      "run_dir": "experiments/iter_0001/child_00",
+      "island": 0,
+      "tag": "h128"
+    },
+    {
+      "run_id": "r_00000002",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0001/child_01",
+      "island": 1,
+      "tag": "layers2"
+    },
+    {
+      "run_id": "r_00000003",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0001/child_02",
+      "island": 2,
+      "tag": "dropout4"
+    },
+    {
+      "run_id": "r_00000004",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0001/child_03",
+      "island": 3,
+      "tag": "epochs40"
+    },
+    {
+      "run_id": "r_00000005",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0001/child_04",
+      "island": 4,
+      "tag": "lr3e4"
     }
   ]
 }
