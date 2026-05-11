@@ -1,0 +1,31 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "base_channels": 16,
+    "depth": 5,
+    "family": "1d_cnn",
+    "kernel_size": 5,
+    "use_residual": true
+  },
+  "name": "iter_0003_island0_drop_then_smaller",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "1d_cnn iter_0002 gained nothing material (0.451->0.454) and still overfit (gap +0.096). Shrinking was wrong axis. Try regularization axis: increase dropout via deeper but THIN: depth 3->5, base_channels 24->16, kernel 7->5. Plus adamw with higher implicit wd.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 20,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adamw",
+    "seed": 301
+  }
+}

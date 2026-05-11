@@ -1,0 +1,41 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": {
+    "family": "minirocket",
+    "max_dilations_per_kernel": 64,
+    "num_features": 9996,
+    "per_channel": true,
+    "random_state": 42
+  },
+  "model": {
+    "alphas": [
+      0.001,
+      0.003,
+      0.01,
+      0.03,
+      0.1,
+      0.3,
+      1.0,
+      3.0,
+      10.0
+    ],
+    "class_weight": null,
+    "family": "ridge_classifier_cv"
+  },
+  "name": "iter_0003_island4_more_dilations_again",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "MINIROCKET iter_0002 (max_dilations 64) showed ZERO change: 0.4074 -> 0.4074 exact. Hardcoded saturation at this dataset T length. The real fix is quantile-based biases (deferred sprint). For now, try mutation on the classifier side: alpha grid 7-decade -> finer grid in the interesting range, class_weight 'balanced'->None to test class prior.",
+  "training": {
+    "loss": "ridge_regression_cv",
+    "seed": 305
+  }
+}

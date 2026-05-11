@@ -1,0 +1,30 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "dropout": 0.2,
+    "family": "bigru",
+    "hidden_size": 64,
+    "num_layers": 1
+  },
+  "name": "iter_0003_island1_lr_5e4_h64_revert",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "bigru iter_0002 (h96+layers2) TIED iter_0001 (h64+layers1) at 0.4583 exactly. Pool saturated. Revert to h64+layers1 but try lower lr (1e-3 -> 5e-4) and longer epochs (20->30) to smooth optimization. If still stuck at 0.458, bigru really is the local optimum.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 30,
+    "loss": "ce_class_balanced",
+    "lr": 0.0005,
+    "optimizer": "adam",
+    "seed": 302
+  }
+}

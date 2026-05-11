@@ -1,0 +1,31 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "family": "multi_stream_bigru",
+    "fusion": "late_concat",
+    "fusion_dropout": 0.2,
+    "per_channel_hidden": 24,
+    "per_channel_layers": 2
+  },
+  "name": "iter_0003_island3_narrower_streams",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "multi_stream_bigru iter_0002 (per_ch_hidden 48) got WORSE: 0.456->0.444 and went under-fit (gap -0.011). Widening was wrong. Try narrower with more layers per stream: per_ch_hidden 32->24, per_ch_layers 1->2.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 20,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adam",
+    "seed": 304
+  }
+}

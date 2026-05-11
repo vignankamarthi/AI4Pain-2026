@@ -1,0 +1,32 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "d_model": 48,
+    "dropout": 0.3,
+    "family": "transformer",
+    "ff_dim": 128,
+    "num_heads": 4,
+    "num_layers": 2
+  },
+  "name": "iter_0003_island2_regularize_hard",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "transformer iter_0002 was the cautionary tale: train 0.697 vs val 0.398 (gap +0.179) at epoch 39 but best val hit at ep 2. Diagnosis: REGULARIZATION not capacity. Shrink + dropout up: d_model 64->48, num_heads 8->4, num_layers 3->2, dropout 0.1->0.3, epochs 40->15 (early stop equivalent).",
+  "training": {
+    "batch_size": 32,
+    "epochs": 15,
+    "loss": "ce_class_balanced",
+    "lr": 0.0005,
+    "optimizer": "adamw",
+    "seed": 303
+  }
+}
