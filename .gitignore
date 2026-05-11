@@ -6,10 +6,19 @@ FRAMEWORK.md
 PLAN.md
 
 
-# Plan + experiment artifacts (gitignored, ledger persists locally)
-experiments/
+# Plan + experiment artifacts (ledger persists locally)
 ledger/
 papers/
+
+# Experiments: ignore everything inside by default, but re-include the
+# official evolutionary iteration dirs so spec + run.py + manifest travel
+# through git to the cluster (no more inline-JSON sbatch --wrap).
+# Cluster outputs (result.json, trace.jsonl, checkpoints) stay ignored.
+experiments/*
+!experiments/iter_*/
+experiments/iter_*/result.json
+experiments/iter_*/trace.jsonl
+experiments/iter_*/checkpoints/
 
 # Python
 __pycache__/
@@ -20,6 +29,7 @@ dist/
 build/
 .eggs/
 .pytest_cache/
+.mypy_cache/
 
 # Virtual environments
 .venv/
