@@ -1,0 +1,29 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "family": "multi_stream_bigru",
+    "fusion": "late_concat",
+    "fusion_dropout": 0.2,
+    "per_channel_hidden": 56,
+    "per_channel_layers": 2
+  },
+  "name": "iter_0013_c00_mut_from_r83",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0013 island 3. Mutation of r_00000083 (multi_stream_bigru, hidden=40, focal=1.0, 0.5046 full 41). Strategy: [scale_per_channel_hidden 40->56]. Champion is under-trained (neg gen gap). Test if more capacity unlocks more signal.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 75,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adam",
+    "seed": 13001
+  }
+}

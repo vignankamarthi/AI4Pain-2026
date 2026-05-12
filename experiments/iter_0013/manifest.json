@@ -1,0 +1,76 @@
+{
+  "experiments": [
+    {
+      "run_id": "r_00000088",
+      "run_dir": "experiments/iter_0013/child_00",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000083",
+      "pass": "iter_0013",
+      "tag": "c00"
+    },
+    {
+      "run_id": "r_00000089",
+      "run_dir": "experiments/iter_0013/child_01",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000083",
+      "pass": "iter_0013",
+      "tag": "c01"
+    },
+    {
+      "run_id": "r_00000090",
+      "run_dir": "experiments/iter_0013/child_02",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000083",
+      "pass": "iter_0013",
+      "tag": "c02"
+    },
+    {
+      "run_id": "r_00000091",
+      "run_dir": "experiments/iter_0013/child_03",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000083",
+      "pass": "iter_0013",
+      "tag": "c03"
+    },
+    {
+      "run_id": "r_00000092",
+      "run_dir": "experiments/iter_0013/child_04",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000083",
+      "pass": "iter_0013",
+      "tag": "c04"
+    },
+    {
+      "run_id": "r_00000093",
+      "run_dir": "experiments/iter_0013/child_05",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000083",
+      "pass": "iter_0013",
+      "tag": "c05"
+    },
+    {
+      "run_id": "r_00000094",
+      "run_dir": "experiments/iter_0013/child_06",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000083",
+      "pass": "iter_0013",
+      "tag": "c06"
+    },
+    {
+      "run_id": "r_00000095",
+      "run_dir": "experiments/iter_0013/child_07",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000083",
+      "pass": "iter_0013",
+      "tag": "c07"
+    }
+  ]
+}

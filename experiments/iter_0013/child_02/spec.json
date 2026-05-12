@@ -1,0 +1,29 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "family": "multi_stream_bigru",
+    "fusion": "late_concat",
+    "fusion_dropout": 0.2,
+    "per_channel_hidden": 48,
+    "per_channel_layers": 2
+  },
+  "name": "iter_0013_c02_mut_from_r83",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0013 island 3. Mutation of r_00000083 (multi_stream_bigru, hidden=40, focal=1.0, 0.5046 full 41). Strategy: [scale_per_channel_hidden 40->48, scale_epochs 75->100, scale_lr 1e-3->5e-4]. Bigger model + lower lr + more epochs.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 100,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.0005,
+    "optimizer": "adam",
+    "seed": 13003
+  }
+}
