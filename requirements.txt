@@ -18,7 +18,8 @@ cvxopt>=1.3
 
 # ML
 scikit-learn>=1.4
-pycatch22>=0.4
+# pycatch22 removed 2026-05-11 (HIP-C dropped Catch22 from seed pool, and the
+# cluster lacks Python.h to build the C extension; nothing imports it anyway).
 # torch is INTENTIONALLY NOT listed here. Install per platform:
 #   Mac (local dev):  pip install torch
 #   Explorer cluster: pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cu121
