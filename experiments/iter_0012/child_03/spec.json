@@ -1,0 +1,29 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "family": "multi_stream_bigru",
+    "fusion": "late_concat",
+    "fusion_dropout": 0.2,
+    "per_channel_hidden": 40,
+    "per_channel_layers": 2
+  },
+  "name": "iter_0012_c03_mut_from_r71",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0012 child island 3. Champion mutation of r_00000071 (multi_stream_bigru, 0.4861 full 41). Strategies: [scale_per_channel_hidden 24->40, use_focal_loss gamma=1.0]. Capacity + HP-focused loss. Full 41.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 75,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adam",
+    "seed": 12001
+  }
+}

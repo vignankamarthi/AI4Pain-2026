@@ -1,0 +1,99 @@
+{
+  "experiments": [
+    {
+      "run_id": "r_00000080",
+      "run_dir": "experiments/iter_0012/child_00",
+      "island": 5,
+      "family": "eda_decomp_mlp",
+      "parent": null,
+      "pass": "iter_0012",
+      "strategies": [
+        "NEW_SEED_eda_decomp_mlp"
+      ]
+    },
+    {
+      "run_id": "r_00000081",
+      "run_dir": "experiments/iter_0012/child_01",
+      "island": 6,
+      "family": "spectrogram_cnn2d",
+      "parent": null,
+      "pass": "iter_0012",
+      "strategies": [
+        "NEW_SEED_spectrogram_cnn2d"
+      ]
+    },
+    {
+      "run_id": "r_00000082",
+      "run_dir": "experiments/iter_0012/child_02",
+      "island": 7,
+      "family": "hrv_features_mlp",
+      "parent": null,
+      "pass": "iter_0012",
+      "strategies": [
+        "NEW_SEED_hrv_features_mlp"
+      ]
+    },
+    {
+      "run_id": "r_00000083",
+      "run_dir": "experiments/iter_0012/child_03",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000071",
+      "pass": "iter_0012",
+      "strategies": [
+        "scale_per_channel_hidden",
+        "use_focal_loss"
+      ]
+    },
+    {
+      "run_id": "r_00000084",
+      "run_dir": "experiments/iter_0012/child_04",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000071",
+      "pass": "iter_0012",
+      "strategies": [
+        "scale_per_channel_layers",
+        "boost_hp",
+        "scale_fusion_dropout"
+      ]
+    },
+    {
+      "run_id": "r_00000085",
+      "run_dir": "experiments/iter_0012/child_05",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000071",
+      "pass": "iter_0012",
+      "strategies": [
+        "swap_optimizer",
+        "scale_lr"
+      ]
+    },
+    {
+      "run_id": "r_00000086",
+      "run_dir": "experiments/iter_0012/child_06",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000071",
+      "pass": "iter_0012",
+      "strategies": [
+        "scale_per_channel_hidden",
+        "scale_fusion_dropout"
+      ]
+    },
+    {
+      "run_id": "r_00000087",
+      "run_dir": "experiments/iter_0012/child_07",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000071",
+      "pass": "iter_0012",
+      "strategies": [
+        "use_focal_loss",
+        "boost_hp",
+        "scale_epochs"
+      ]
+    }
+  ]
+}

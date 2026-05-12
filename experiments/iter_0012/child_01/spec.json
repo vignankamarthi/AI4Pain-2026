@@ -1,0 +1,32 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": {
+    "family": "spectrogram",
+    "fs": 100,
+    "log_scale": true,
+    "noverlap": 32,
+    "nperseg": 64
+  },
+  "model": {
+    "base_channels": 16,
+    "depth": 2,
+    "dropout": 0.2,
+    "family": "spectrogram_cnn2d"
+  },
+  "name": "iter_0012_c01_seed_spectrogram_cnn2d",
+  "preprocessing": {
+    "normalize": "per_channel_zscore"
+  },
+  "reasoning_summary": "iter_0012 child_01 island 6. NEW SEED: spectrogram_cnn2d. STFT per channel -> stack (C,F,T') -> small 2D CNN. Lit sprawl: Sriram Kumar 2024 CWT+VGG16. First 2D pipeline in pop. Full 41.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 30,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adam",
+    "seed": 42
+  }
+}

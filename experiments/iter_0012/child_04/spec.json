@@ -1,0 +1,29 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "family": "multi_stream_bigru",
+    "fusion": "late_concat",
+    "fusion_dropout": 0.3,
+    "per_channel_hidden": 24,
+    "per_channel_layers": 3
+  },
+  "name": "iter_0012_c04_mut_from_r71",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0012 child island 3. Champion mutation of r_00000071 (multi_stream_bigru, 0.4861 full 41). Strategies: [scale_per_channel_layers 2->3, boost_hp=2.0, scale_fusion_dropout 0.2->0.3]. Depth + HP class weight + regularization. Full 41.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 75,
+    "hp_boost": 2.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adam",
+    "seed": 12002
+  }
+}

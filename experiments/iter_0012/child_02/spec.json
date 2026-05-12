@@ -1,0 +1,28 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": {
+    "family": "hrv_features",
+    "fs": 100
+  },
+  "model": {
+    "dropout": 0.2,
+    "family": "hrv_features_mlp",
+    "hidden": 64
+  },
+  "name": "iter_0012_c02_seed_hrv_features_mlp",
+  "preprocessing": {
+    "normalize": "per_feature_zscore"
+  },
+  "reasoning_summary": "iter_0012 child_02 island 7. NEW SEED: hrv_features_mlp. BVP peaks -> RMSSD/SDNN/pNN50/LF/HF + aux stats -> MLP. Lit sprawl: Xia 2024 HRV-only stress 98%+. Full 41.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 50,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adam",
+    "seed": 42
+  }
+}
