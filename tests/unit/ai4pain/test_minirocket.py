@@ -56,20 +56,59 @@ def test_minirocket_fit_returns_self():
 
 def test_minirocket_transform_output_shape_univariate():
     X = np.random.RandomState(0).randn(15, 200).astype(np.float32)
+    # bias_mode="zero" for legacy: features = 84 * num_dilations
     mr = minirocket.MiniRocket(num_features=84, max_dilations_per_kernel=4,
-                                random_state=42)
+                                random_state=42, bias_mode="zero")
     mr.fit(X)
     feats = mr.transform(X)
-    # Features = 84 kernels * num_dilations
     assert feats.shape[0] == 15
     assert feats.shape[1] == 84 * len(mr._dilations)
+
+
+def test_minirocket_quantile_bias_mode_shape():
+    """bias_mode='quantile' gives 84 * num_dilations * num_biases_per_pair features."""
+    X = np.random.RandomState(0).randn(15, 1000).astype(np.float32)
+    mr = minirocket.MiniRocket(num_features=9996, max_dilations_per_kernel=32,
+                                random_state=42, bias_mode="quantile")
+    mr.fit(X)
+    feats = mr.transform(X)
+    expected = 84 * len(mr._dilations) * mr._num_biases_per_pair
+    assert feats.shape == (15, expected)
+    # And total close to num_features target
+    assert abs(expected - 9996) / 9996 < 0.5
+
+
+def test_minirocket_quantile_biases_diverse():
+    """Quantile-based biases should produce varied PPV values, not just 0/1."""
+    X = np.random.RandomState(0).randn(20, 500).astype(np.float32)
+    mr = minirocket.MiniRocket(num_features=2000, max_dilations_per_kernel=8,
+                                random_state=42, bias_mode="quantile")
+    mr.fit(X)
+    feats = mr.transform(X)
+    # Mean PPV should be ~0.5 (since biases are quantile-centered)
+    assert 0.3 < float(feats.mean()) < 0.7
+    # And distribution should be non-trivial
+    assert float(feats.std()) > 0.1
+
+
+def test_minirocket_quantile_deterministic():
+    X = np.random.RandomState(0).randn(20, 500).astype(np.float32)
+    mr1 = minirocket.MiniRocket(num_features=1000, max_dilations_per_kernel=4,
+                                 random_state=42, bias_mode="quantile")
+    mr1.fit(X)
+    f1 = mr1.transform(X)
+    mr2 = minirocket.MiniRocket(num_features=1000, max_dilations_per_kernel=4,
+                                 random_state=42, bias_mode="quantile")
+    mr2.fit(X)
+    f2 = mr2.transform(X)
+    np.testing.assert_array_equal(f1, f2)
 
 
 def test_minirocket_ppv_values_in_unit_interval():
     """PPV (Proportion of Positive Values) is a proportion -> [0, 1]."""
     X = np.random.RandomState(0).randn(10, 200).astype(np.float32)
     mr = minirocket.MiniRocket(num_features=84, max_dilations_per_kernel=4,
-                                random_state=42)
+                                random_state=42, bias_mode="zero")
     mr.fit(X)
     feats = mr.transform(X)
     assert (feats >= 0).all()
@@ -79,18 +118,18 @@ def test_minirocket_ppv_values_in_unit_interval():
 def test_minirocket_deterministic_given_seed():
     X = np.random.RandomState(0).randn(10, 200).astype(np.float32)
     mr1 = minirocket.MiniRocket(num_features=84, max_dilations_per_kernel=4,
-                                 random_state=42)
+                                 random_state=42, bias_mode="zero")
     mr1.fit(X)
     f1 = mr1.transform(X)
     mr2 = minirocket.MiniRocket(num_features=84, max_dilations_per_kernel=4,
-                                 random_state=42)
+                                 random_state=42, bias_mode="zero")
     mr2.fit(X)
     f2 = mr2.transform(X)
     np.testing.assert_array_equal(f1, f2)
 
 
 def test_minirocket_transform_without_fit_raises():
-    mr = minirocket.MiniRocket(num_features=84, random_state=42)
+    mr = minirocket.MiniRocket(num_features=84, random_state=42, bias_mode="zero")
     X = np.random.randn(5, 200).astype(np.float32)
     with pytest.raises(RuntimeError):
         mr.transform(X)
@@ -100,7 +139,7 @@ def test_minirocket_handles_short_series():
     """When series is short, dilation schedule may collapse to 1 dilation."""
     X = np.random.RandomState(0).randn(10, 20).astype(np.float32)
     mr = minirocket.MiniRocket(num_features=84, max_dilations_per_kernel=4,
-                                random_state=42)
+                                random_state=42, bias_mode="zero")
     mr.fit(X)
     feats = mr.transform(X)
     assert feats.shape[0] == 10

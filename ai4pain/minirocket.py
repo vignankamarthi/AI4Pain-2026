@@ -79,12 +79,20 @@ class MiniRocket:
 
     def __init__(self, num_features: int = 9996,
                  max_dilations_per_kernel: int = 32,
-                 random_state: int = 42):
+                 random_state: int = 42,
+                 bias_mode: str = "quantile"):
         self.num_features = int(num_features)
         self.max_dilations_per_kernel = int(max_dilations_per_kernel)
         self.random_state = int(random_state)
+        # bias_mode: "quantile" (paper-faithful, biases from train conv quantiles)
+        #            "zero" (legacy simplification, bias=0)
+        self.bias_mode = bias_mode
         self._dilations: Optional[list[int]] = None
         self._kernels: Optional[torch.Tensor] = None  # (84, 1, 9)
+        # When bias_mode="quantile":
+        #   _biases is a list (len = num_dilations) of arrays (84, num_biases_per_pair)
+        self._biases: Optional[list[np.ndarray]] = None
+        self._num_biases_per_pair: int = 1
 
     def _build_kernels(self) -> torch.Tensor:
         """Return tensor (84, 1, 9) of the 84 fixed MINIROCKET kernels."""
@@ -96,12 +104,15 @@ class MiniRocket:
         return torch.from_numpy(kernels)
 
     def fit(self, X: np.ndarray) -> "MiniRocket":
-        """Compute dilation schedule and build kernels. X: (N, T)."""
+        """Compute dilation schedule, build kernels, and (if bias_mode='quantile')
+        select biases from training conv-output quantiles per (kernel, dilation).
+
+        X: (N, T).
+        """
         if X.ndim != 2:
             raise ValueError(f"X must be 2D (N, T); got shape {X.shape}")
         T = X.shape[1]
         if T < self.KERNEL_LEN:
-            # Series too short for the kernel; fall back to dilation=1 only.
             self._dilations = [1]
         else:
             max_exp = math.log2(max(1.0, (T - 1) / (self.KERNEL_LEN - 1)))
@@ -111,17 +122,70 @@ class MiniRocket:
                 np.floor(2.0 ** np.linspace(0.0, max_exp, n_dilations))
                 .astype(np.int64)
             )
-            # Ensure all dilations leave at least one output position
             valid = [int(d) for d in raw
                      if T - (self.KERNEL_LEN - 1) * int(d) >= 1]
             self._dilations = valid if valid else [1]
         self._kernels = self._build_kernels()
+
+        if self.bias_mode == "quantile":
+            self._fit_biases(X)
         return self
 
-    def transform(self, X: np.ndarray) -> np.ndarray:
-        """Convert X (N, T) to features (N, 84 * num_dilations).
+    def _fit_biases(self, X: np.ndarray) -> None:
+        """Paper-faithful bias selection: for each (kernel, dilation), pool
+        conv outputs across a sample of training trials and select evenly-
+        spaced quantiles as biases. Total features per channel =
+        84 * num_dilations * num_biases_per_pair, targeted at num_features.
+        """
+        rng = np.random.RandomState(self.random_state)
+        sample_size = min(50, X.shape[0])
+        sample_idx = rng.choice(X.shape[0], size=sample_size, replace=False)
+        X_sample = torch.from_numpy(
+            X[sample_idx].astype(np.float32)
+        ).unsqueeze(1)  # (sample_size, 1, T)
 
-        Bias is 0 throughout (simplification; see module docstring).
+        # Compute features-per-pair so total ~= num_features
+        n_pairs = self.NUM_KERNELS * len(self._dilations)
+        biases_per_pair = max(1, self.num_features // n_pairs)
+        self._num_biases_per_pair = biases_per_pair
+        # Quantiles spaced evenly in (0, 1). Skip 0 and 1 exactly.
+        quantile_levels = np.linspace(
+            1.0 / (biases_per_pair + 1),
+            biases_per_pair / (biases_per_pair + 1),
+            biases_per_pair,
+        )
+
+        self._biases = []
+        for d in self._dilations:
+            try:
+                conv = F.conv1d(X_sample, self._kernels, dilation=int(d),
+                                padding=0)  # (sample_size, 84, T_out)
+            except RuntimeError:
+                # Dilation too large; biases set to zeros (these won't be used
+                # because transform also skips bad dilations)
+                self._biases.append(np.zeros(
+                    (self.NUM_KERNELS, biases_per_pair), dtype=np.float32))
+                continue
+            if conv.shape[-1] == 0:
+                self._biases.append(np.zeros(
+                    (self.NUM_KERNELS, biases_per_pair), dtype=np.float32))
+                continue
+            # Pool over (sample, time): for each kernel, flatten then quantile
+            conv_np = conv.numpy()  # (sample_size, 84, T_out)
+            biases_for_d = np.zeros((self.NUM_KERNELS, biases_per_pair),
+                                     dtype=np.float32)
+            for ki in range(self.NUM_KERNELS):
+                pooled = conv_np[:, ki, :].flatten()
+                biases_for_d[ki] = np.quantile(pooled, quantile_levels).astype(np.float32)
+            self._biases.append(biases_for_d)
+
+    def transform(self, X: np.ndarray) -> np.ndarray:
+        """Convert X (N, T) to features.
+
+        With bias_mode='quantile' (paper-faithful):
+          features per channel = 84 * num_dilations * num_biases_per_pair
+        With bias_mode='zero' (legacy):
+          features per channel = 84 * num_dilations
         """
         if self._dilations is None or self._kernels is None:
             raise RuntimeError("MiniRocket: call fit() before transform()")
@@ -129,32 +193,42 @@ class MiniRocket:
             raise ValueError(f"X must be 2D (N, T); got shape {X.shape}")
         X_t = torch.from_numpy(X.astype(np.float32)).unsqueeze(1)  # (N, 1, T)
         features: list[torch.Tensor] = []
-        for d in self._dilations:
+        for di, d in enumerate(self._dilations):
             try:
                 conv = F.conv1d(X_t, self._kernels, dilation=int(d),
                                 padding=0)  # (N, 84, T_out)
             except RuntimeError:
-                # Dilation too large for this series; skip
                 continue
             if conv.shape[-1] == 0:
                 continue
-            ppv = (conv > 0.0).float().mean(dim=2)  # (N, 84)
-            features.append(ppv)
+            if self.bias_mode == "quantile" and self._biases is not None:
+                biases = torch.from_numpy(self._biases[di])  # (84, B)
+                # broadcasting: (N, 84, T_out) vs (1, 84, B, 1)
+                # for each bias b: PPV = mean((conv - b) > 0, dim=time)
+                B = biases.shape[1]
+                conv_expanded = conv.unsqueeze(2)  # (N, 84, 1, T_out)
+                biases_expanded = biases.unsqueeze(0).unsqueeze(-1)  # (1, 84, B, 1)
+                ppv = (conv_expanded > biases_expanded).float().mean(dim=3)  # (N, 84, B)
+                features.append(ppv.reshape(ppv.shape[0], -1))  # (N, 84*B)
+            else:
+                ppv = (conv > 0.0).float().mean(dim=2)  # (N, 84)
+                features.append(ppv)
         if not features:
             return np.zeros((X.shape[0], self.NUM_KERNELS), dtype=np.float32)
-        out = torch.cat(features, dim=1)  # (N, 84 * len(dilations_used))
+        out = torch.cat(features, dim=1)
         return out.numpy().astype(np.float32)
 
 
 def transform_multivariate(X_train: np.ndarray, X_val: np.ndarray,
                            num_features_per_channel: int = 9996,
                            max_dilations_per_kernel: int = 32,
-                           random_state: int = 42
+                           random_state: int = 42,
+                           bias_mode: str = "quantile"
                            ) -> tuple[np.ndarray, np.ndarray]:
     """Apply MiniRocket per channel, concatenate features.
 
     X_train, X_val: (N, T, C) float arrays. Returns (train_features,
-    val_features), each (N, C * 84 * num_dilations).
+    val_features), each (N, C * 84 * num_dilations * num_biases_per_pair).
     """
     if X_train.ndim != 3 or X_val.ndim != 3:
         raise ValueError("X_train and X_val must be 3D (N, T, C)")
@@ -166,6 +240,7 @@ def transform_multivariate(X_train: np.ndarray, X_val: np.ndarray,
             num_features=num_features_per_channel,
             max_dilations_per_kernel=max_dilations_per_kernel,
             random_state=random_state + c,
+            bias_mode=bias_mode,
         )
         mr.fit(X_train[:, :, c])
         train_parts.append(mr.transform(X_train[:, :, c]))
@@ -234,14 +309,18 @@ def train_minirocket(spec: dict, data_root: Path, out_dir: Path) -> dict:
     fe_cfg = spec.get("feature_extraction", {}) or {}
     num_features = int(fe_cfg.get("num_features", 9996))
     rs = int(fe_cfg.get("random_state", seed))
+    bias_mode = fe_cfg.get("bias_mode", "quantile")
+    max_dils = int(fe_cfg.get("max_dilations_per_kernel", 32))
 
-    print(f"[minirocket] extracting features...", flush=True)
+    print(f"[minirocket] extracting features (bias_mode={bias_mode}, "
+          f"num_features={num_features}, max_dils={max_dils})...", flush=True)
     t0 = time.time()
     train_feats, val_feats = transform_multivariate(
         X_train=Xtr, X_val=Xv,
         num_features_per_channel=num_features,
-        max_dilations_per_kernel=32,
+        max_dilations_per_kernel=max_dils,
         random_state=rs,
+        bias_mode=bias_mode,
     )
     feat_seconds = time.time() - t0
     print(f"[minirocket] features: train {train_feats.shape}, "
