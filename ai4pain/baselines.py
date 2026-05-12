@@ -172,10 +172,30 @@ def run_pytorch_model(model_factory, spec: dict, data_root: Path,
     ytr_t = torch.from_numpy(y_train).to(device)
     Xv_t = torch.from_numpy(Xv).to(device)
 
+    # Class weighting: support per-class override and HP-boost via spec.
+    # Class indices: 0 = No Pain (NP), 1 = Arm Pain (AP), 2 = Hand Pain (HP).
     counts = np.bincount(y_train, minlength=3)
-    class_weights = torch.tensor((counts.sum() / (3 * counts)).astype(np.float32),
-                                 device=device)
-    loss_fn = nn.CrossEntropyLoss(weight=class_weights)
+    base_weights = (counts.sum() / (3 * counts)).astype(np.float32)
+    # Apply spec-side overrides
+    loss_cfg_name = train_cfg.get("loss", "ce_class_balanced")
+    hp_boost = float(train_cfg.get("hp_boost", 1.0))  # multiplier on class 2 weight
+    if hp_boost != 1.0:
+        base_weights = base_weights.copy()
+        base_weights[2] *= hp_boost
+    class_weights = torch.tensor(base_weights, device=device)
+
+    # Loss selection: focal_loss is a HP-targeted option (FRAMEWORK §3 future
+    # work; gamma > 0 down-weights easy examples)
+    focal_gamma = float(train_cfg.get("focal_gamma", 0.0))
+    if focal_gamma > 0.0:
+        ce_per = nn.CrossEntropyLoss(weight=class_weights, reduction="none")
+        def loss_fn(logits, y):
+            ce = ce_per(logits, y)  # (B,)
+            p_correct = torch.softmax(logits, dim=1).gather(1, y.unsqueeze(1)).squeeze(1)
+            focal_mod = (1.0 - p_correct) ** focal_gamma
+            return (focal_mod * ce).mean()
+    else:
+        loss_fn = nn.CrossEntropyLoss(weight=class_weights)
     if optim_name == "adamw":
         optim = torch.optim.AdamW(model.parameters(), lr=lr)
     else:
