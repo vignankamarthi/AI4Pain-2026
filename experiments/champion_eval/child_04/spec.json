@@ -1,0 +1,28 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "family": "multi_stream_bigru",
+    "fusion": "late_concat",
+    "fusion_dropout": 0.2,
+    "per_channel_hidden": 24,
+    "per_channel_layers": 2
+  },
+  "name": "champion_eval_04_from_r_00000066_full41",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "Champion eval #4 (K=10 acc=0.4722, original run_id=r_00000066). Re-train on FULL 41 train subjects to get the true score vs the challenge baseline (0.4166 multimodal val) and partner's MINIROCKET 0.55.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 75,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "optimizer": "adam",
+    "seed": 1008
+  }
+}

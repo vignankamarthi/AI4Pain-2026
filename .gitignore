@@ -16,11 +16,13 @@ papers/
 # Cluster outputs (result.json, trace.jsonl, checkpoints) stay ignored.
 experiments/*
 !experiments/iter_*/
+!experiments/champion_eval/
 # Canonical workflow: experiment artifacts travel ONLY via git push/pull.
 # Cluster commits result.json + trace.jsonl back; Mac pulls; Claude reads
 # locally. NO terminal forensics, NO paste-text-into-chat (ANTIPATTERN 11a).
 # Only heavy weights (checkpoints/) stay out of git.
 experiments/iter_*/**/checkpoints/
+experiments/champion_eval/**/checkpoints/
 
 # Python
 __pycache__/

@@ -1,0 +1,31 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "dropout": 0.2,
+    "family": "bigru",
+    "hidden_size": 64,
+    "num_layers": 1
+  },
+  "name": "iter_0011_child06_island1_bigru",
+  "preprocessing": {
+    "normalize": "per_trial_zscore",
+    "padding": "center_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0011 island 1 (bigru). Strategies: ['use_focal_loss', 'swap_optimizer'].  Upgraded MINIROCKET (quantile biases), HP-targeted mutations available, migration_patience=5.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 30,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.0005,
+    "optimizer": "adam",
+    "seed": 1106
+  }
+}

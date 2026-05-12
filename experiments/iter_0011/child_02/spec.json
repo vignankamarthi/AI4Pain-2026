@@ -1,0 +1,33 @@
+{
+  "data": {
+    "subset_seed": 0,
+    "subset_size": 10
+  },
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "d_model": 64,
+    "dropout": 0.1,
+    "family": "transformer",
+    "ff_dim": 128,
+    "num_heads": 4,
+    "num_layers": 4
+  },
+  "name": "iter_0011_child02_island2_transfor",
+  "preprocessing": {
+    "normalize": "per_trial_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0011 island 2 (transformer). Strategies: ['use_focal_loss', 'change_normalize']. STAGNANT(gap=5) MIG<-1 Upgraded MINIROCKET (quantile biases), HP-targeted mutations available, migration_patience=5.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 20,
+    "focal_gamma": 2.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.0005,
+    "optimizer": "adam",
+    "seed": 1102
+  }
+}

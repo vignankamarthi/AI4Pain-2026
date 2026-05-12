@@ -1,0 +1,49 @@
+{
+  "experiments": [
+    {
+      "run_id": "r_00000067",
+      "K": "full",
+      "seed_idx": 0,
+      "run_dir": "experiments/champion_eval/child_00",
+      "family": "bigru",
+      "from_run": "r_00000061",
+      "k10_acc": 0.4791666666666667
+    },
+    {
+      "run_id": "r_00000068",
+      "K": "full",
+      "seed_idx": 0,
+      "run_dir": "experiments/champion_eval/child_01",
+      "family": "bigru",
+      "from_run": "r_00000022",
+      "k10_acc": 0.47685185185185186
+    },
+    {
+      "run_id": "r_00000069",
+      "K": "full",
+      "seed_idx": 0,
+      "run_dir": "experiments/champion_eval/child_02",
+      "family": "bigru",
+      "from_run": "r_00000017",
+      "k10_acc": 0.47685185185185186
+    },
+    {
+      "run_id": "r_00000070",
+      "K": "full",
+      "seed_idx": 0,
+      "run_dir": "experiments/champion_eval/child_03",
+      "family": "multi_stream_bigru",
+      "from_run": "r_00000037",
+      "k10_acc": 0.47453703703703703
+    },
+    {
+      "run_id": "r_00000071",
+      "K": "full",
+      "seed_idx": 0,
+      "run_dir": "experiments/champion_eval/child_04",
+      "family": "multi_stream_bigru",
+      "from_run": "r_00000066",
+      "k10_acc": 0.47222222222222215
+    }
+  ]
+}

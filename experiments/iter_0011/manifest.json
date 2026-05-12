@@ -1,0 +1,114 @@
+{
+  "experiments": [
+    {
+      "run_id": "r_00000072",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0011/child_00",
+      "island": 0,
+      "family": "1d_cnn",
+      "strategies": [
+        "use_focal_loss",
+        "boost_hp"
+      ],
+      "parent": "r_00000060",
+      "pass": "A"
+    },
+    {
+      "run_id": "r_00000073",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0011/child_01",
+      "island": 1,
+      "family": "bigru",
+      "strategies": [
+        "change_normalize",
+        "scale_layers"
+      ],
+      "parent": "r_00000012",
+      "pass": "A"
+    },
+    {
+      "run_id": "r_00000074",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0011/child_02",
+      "island": 2,
+      "family": "transformer",
+      "strategies": [
+        "use_focal_loss",
+        "change_normalize"
+      ],
+      "parent": "r_00000041",
+      "pass": "A"
+    },
+    {
+      "run_id": "r_00000075",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0011/child_03",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "strategies": [
+        "use_focal_loss",
+        "scale_hidden"
+      ],
+      "parent": "r_00000066",
+      "pass": "A"
+    },
+    {
+      "run_id": "r_00000076",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0011/child_04",
+      "island": 4,
+      "family": "ridge_classifier_cv",
+      "strategies": [
+        "upgrade_to_quantile_biases",
+        "change_normalize"
+      ],
+      "parent": "r_00000005",
+      "pass": "A"
+    },
+    {
+      "run_id": "r_00000077",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0011/child_05",
+      "island": 0,
+      "family": "1d_cnn",
+      "strategies": [
+        "boost_hp"
+      ],
+      "parent": "r_00000064",
+      "pass": "B"
+    },
+    {
+      "run_id": "r_00000078",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0011/child_06",
+      "island": 1,
+      "family": "bigru",
+      "strategies": [
+        "use_focal_loss",
+        "swap_optimizer"
+      ],
+      "parent": "r_00000053",
+      "pass": "B"
+    },
+    {
+      "run_id": "r_00000079",
+      "K": 10,
+      "seed_idx": 0,
+      "run_dir": "experiments/iter_0011/child_07",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "strategies": [
+        "swap_optimizer"
+      ],
+      "parent": "r_00000066",
+      "pass": "B"
+    }
+  ]
+}
