@@ -1,0 +1,256 @@
+{
+  "name": "iter_0011_child02_island2_transfor",
+  "best_val_metrics": {
+    "balanced_acc": 0.4328703703703704,
+    "macro_f1": 0.3669365671918214,
+    "per_class_pr": {
+      "NP": [
+        0.45410628019323673,
+        0.6527777777777778
+      ],
+      "AP": [
+        0.41037735849056606,
+        0.6041666666666666
+      ],
+      "HP": [
+        0.46153846153846156,
+        0.041666666666666664
+      ]
+    },
+    "confusion_3x3": [
+      [
+        94,
+        48,
+        2
+      ],
+      [
+        52,
+        87,
+        5
+      ],
+      [
+        61,
+        77,
+        6
+      ]
+    ],
+    "auc_ovr": 0.6047935956790124,
+    "ece": 0.05964038348584264
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.41898148148148145,
+    "macro_f1": 0.4096316289298745,
+    "per_class_pr": {
+      "NP": [
+        0.4523809523809524,
+        0.5277777777777778
+      ],
+      "AP": [
+        0.42857142857142855,
+        0.25
+      ],
+      "HP": [
+        0.38333333333333336,
+        0.4791666666666667
+      ]
+    },
+    "confusion_3x3": [
+      [
+        76,
+        22,
+        46
+      ],
+      [
+        43,
+        36,
+        65
+      ],
+      [
+        49,
+        26,
+        69
+      ]
+    ],
+    "auc_ovr": 0.5808015046296297,
+    "ece": 0.07470905525540865
+  },
+  "history": [
+    {
+      "epoch": 0,
+      "train_loss": 0.5306044941147169,
+      "train_bal_acc": 0.3638888888888889,
+      "val_bal_acc": 0.33796296296296297,
+      "val_macro_f1": 0.30994398432004455
+    },
+    {
+      "epoch": 1,
+      "train_loss": 0.5015742083390554,
+      "train_bal_acc": 0.34722222222222215,
+      "val_bal_acc": 0.3587962962962963,
+      "val_macro_f1": 0.26146384479717816
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.4970836639404297,
+      "train_bal_acc": 0.39166666666666666,
+      "val_bal_acc": 0.4236111111111111,
+      "val_macro_f1": 0.34051465376923556
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.4786644329627355,
+      "train_bal_acc": 0.39166666666666666,
+      "val_bal_acc": 0.4328703703703704,
+      "val_macro_f1": 0.3669365671918214
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.4858229806025823,
+      "train_bal_acc": 0.4222222222222222,
+      "val_bal_acc": 0.4259259259259259,
+      "val_macro_f1": 0.427733561504348
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.4668042262395223,
+      "train_bal_acc": 0.4083333333333334,
+      "val_bal_acc": 0.3958333333333333,
+      "val_macro_f1": 0.3593956228712336
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.45478828499714535,
+      "train_bal_acc": 0.4361111111111111,
+      "val_bal_acc": 0.3634259259259259,
+      "val_macro_f1": 0.32893715410504126
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.4598173499107361,
+      "train_bal_acc": 0.4666666666666666,
+      "val_bal_acc": 0.40740740740740744,
+      "val_macro_f1": 0.38599783587518105
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.4478807250658671,
+      "train_bal_acc": 0.4777777777777777,
+      "val_bal_acc": 0.3819444444444445,
+      "val_macro_f1": 0.37136525373813706
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.454468476275603,
+      "train_bal_acc": 0.45,
+      "val_bal_acc": 0.3703703703703704,
+      "val_macro_f1": 0.3678652734502041
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.43869077910979587,
+      "train_bal_acc": 0.4694444444444444,
+      "val_bal_acc": 0.35648148148148145,
+      "val_macro_f1": 0.3471221558104332
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.4613010634978612,
+      "train_bal_acc": 0.4361111111111111,
+      "val_bal_acc": 0.40277777777777785,
+      "val_macro_f1": 0.35064525047043854
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.44589485476414364,
+      "train_bal_acc": 0.5305555555555556,
+      "val_bal_acc": 0.3819444444444445,
+      "val_macro_f1": 0.36650882770545135
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.43892058233420056,
+      "train_bal_acc": 0.4777777777777777,
+      "val_bal_acc": 0.3819444444444445,
+      "val_macro_f1": 0.38274849626375085
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.438537135720253,
+      "train_bal_acc": 0.5305555555555556,
+      "val_bal_acc": 0.40509259259259256,
+      "val_macro_f1": 0.3966085820810397
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.433468259871006,
+      "train_bal_acc": 0.5166666666666667,
+      "val_bal_acc": 0.39351851851851855,
+      "val_macro_f1": 0.36050411812529054
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.42940400044123334,
+      "train_bal_acc": 0.5166666666666666,
+      "val_bal_acc": 0.40740740740740744,
+      "val_macro_f1": 0.3993182743182743
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.4147002200285594,
+      "train_bal_acc": 0.5277777777777778,
+      "val_bal_acc": 0.375,
+      "val_macro_f1": 0.36883062605812933
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.4110148971279462,
+      "train_bal_acc": 0.5416666666666666,
+      "val_bal_acc": 0.39351851851851855,
+      "val_macro_f1": 0.37897661613142786
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.41230308761199314,
+      "train_bal_acc": 0.5527777777777778,
+      "val_bal_acc": 0.41898148148148145,
+      "val_macro_f1": 0.4096316289298745
+    }
+  ],
+  "param_count": 134403,
+  "train_seconds": 7.376452207565308,
+  "inference_seconds": 0.0013246536254882812,
+  "device": "cuda",
+  "spec": {
+    "data": {
+      "subset_seed": 0,
+      "subset_size": 10
+    },
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "d_model": 64,
+      "dropout": 0.1,
+      "family": "transformer",
+      "ff_dim": 128,
+      "num_heads": 4,
+      "num_layers": 4
+    },
+    "name": "iter_0011_child02_island2_transfor",
+    "preprocessing": {
+      "normalize": "per_trial_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0011 island 2 (transformer). Strategies: ['use_focal_loss', 'change_normalize']. STAGNANT(gap=5) MIG<-1 Upgraded MINIROCKET (quantile biases), HP-targeted mutations available, migration_patience=5.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 20,
+      "focal_gamma": 2.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.0005,
+      "optimizer": "adam",
+      "seed": 1102
+    }
+  }
+}

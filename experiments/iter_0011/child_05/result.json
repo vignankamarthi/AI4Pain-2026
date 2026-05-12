@@ -1,0 +1,255 @@
+{
+  "name": "iter_0011_child05_island0_1d_cnn",
+  "best_val_metrics": {
+    "balanced_acc": 0.4351851851851852,
+    "macro_f1": 0.4058675523349436,
+    "per_class_pr": {
+      "NP": [
+        0.4602272727272727,
+        0.5625
+      ],
+      "AP": [
+        0.55,
+        0.1527777777777778
+      ],
+      "HP": [
+        0.39351851851851855,
+        0.5902777777777778
+      ]
+    },
+    "confusion_3x3": [
+      [
+        81,
+        6,
+        57
+      ],
+      [
+        48,
+        22,
+        74
+      ],
+      [
+        47,
+        12,
+        85
+      ]
+    ],
+    "auc_ovr": 0.6235773533950617,
+    "ece": 0.2285792882795687
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.3958333333333333,
+    "macro_f1": 0.3650128856780673,
+    "per_class_pr": {
+      "NP": [
+        0.46226415094339623,
+        0.3402777777777778
+      ],
+      "AP": [
+        0.4489795918367347,
+        0.1527777777777778
+      ],
+      "HP": [
+        0.36101083032490977,
+        0.6944444444444444
+      ]
+    },
+    "confusion_3x3": [
+      [
+        49,
+        11,
+        84
+      ],
+      [
+        29,
+        22,
+        93
+      ],
+      [
+        28,
+        16,
+        100
+      ]
+    ],
+    "auc_ovr": 0.6076469264403292,
+    "ece": 0.2326562586757872
+  },
+  "history": [
+    {
+      "epoch": 0,
+      "train_loss": 1.0822651932636898,
+      "train_bal_acc": 0.3583333333333334,
+      "val_bal_acc": 0.3055555555555556,
+      "val_macro_f1": 0.2235645491459445
+    },
+    {
+      "epoch": 1,
+      "train_loss": 1.0200453797976177,
+      "train_bal_acc": 0.36388888888888893,
+      "val_bal_acc": 0.34259259259259256,
+      "val_macro_f1": 0.24326190951528462
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.0057657212018967,
+      "train_bal_acc": 0.3972222222222222,
+      "val_bal_acc": 0.3587962962962963,
+      "val_macro_f1": 0.26240323881833316
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.9562341719865799,
+      "train_bal_acc": 0.4305555555555556,
+      "val_bal_acc": 0.35648148148148145,
+      "val_macro_f1": 0.27504129810894845
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.9603355924288431,
+      "train_bal_acc": 0.4138888888888889,
+      "val_bal_acc": 0.3796296296296296,
+      "val_macro_f1": 0.2952019550082504
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.9271199156840643,
+      "train_bal_acc": 0.46388888888888885,
+      "val_bal_acc": 0.36111111111111116,
+      "val_macro_f1": 0.2861558929723535
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.9631699025630951,
+      "train_bal_acc": 0.5,
+      "val_bal_acc": 0.4259259259259259,
+      "val_macro_f1": 0.3668693894786705
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.9559483180443445,
+      "train_bal_acc": 0.5166666666666667,
+      "val_bal_acc": 0.41203703703703703,
+      "val_macro_f1": 0.38476897358680057
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.9221210926771164,
+      "train_bal_acc": 0.5055555555555555,
+      "val_bal_acc": 0.39814814814814814,
+      "val_macro_f1": 0.3436502381804963
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.8961286296447118,
+      "train_bal_acc": 0.525,
+      "val_bal_acc": 0.41203703703703703,
+      "val_macro_f1": 0.3691100578332931
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.8708448906739553,
+      "train_bal_acc": 0.5138888888888888,
+      "val_bal_acc": 0.40046296296296297,
+      "val_macro_f1": 0.3750882819152665
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.8928114722172419,
+      "train_bal_acc": 0.5666666666666667,
+      "val_bal_acc": 0.41435185185185186,
+      "val_macro_f1": 0.37054927562603285
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.8745764444271723,
+      "train_bal_acc": 0.5277777777777778,
+      "val_bal_acc": 0.41435185185185186,
+      "val_macro_f1": 0.3646595349694335
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.8461739818255106,
+      "train_bal_acc": 0.5694444444444445,
+      "val_bal_acc": 0.38888888888888884,
+      "val_macro_f1": 0.3661852379282941
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.8471468289693197,
+      "train_bal_acc": 0.5444444444444444,
+      "val_bal_acc": 0.39351851851851855,
+      "val_macro_f1": 0.36571182071610103
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.8824045161406199,
+      "train_bal_acc": 0.5444444444444444,
+      "val_bal_acc": 0.4351851851851852,
+      "val_macro_f1": 0.4058675523349436
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.8954702268044153,
+      "train_bal_acc": 0.525,
+      "val_bal_acc": 0.3865740740740741,
+      "val_macro_f1": 0.3606306865177833
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.9022721151510874,
+      "train_bal_acc": 0.5333333333333333,
+      "val_bal_acc": 0.4166666666666667,
+      "val_macro_f1": 0.37713997298381435
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.8821724752585093,
+      "train_bal_acc": 0.5805555555555556,
+      "val_bal_acc": 0.40046296296296297,
+      "val_macro_f1": 0.3751092089402033
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.8448321372270584,
+      "train_bal_acc": 0.5611111111111111,
+      "val_bal_acc": 0.3958333333333333,
+      "val_macro_f1": 0.3650128856780673
+    }
+  ],
+  "param_count": 59203,
+  "train_seconds": 2.7286124229431152,
+  "inference_seconds": 0.0008029937744140625,
+  "device": "cuda",
+  "spec": {
+    "data": {
+      "subset_seed": 0,
+      "subset_size": 10
+    },
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "base_channels": 32,
+      "depth": 4,
+      "family": "1d_cnn",
+      "kernel_size": 7,
+      "use_residual": true
+    },
+    "name": "iter_0011_child05_island0_1d_cnn",
+    "preprocessing": {
+      "normalize": "per_trial_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0011 island 0 (1d_cnn). Strategies: ['boost_hp'].  Upgraded MINIROCKET (quantile biases), HP-targeted mutations available, migration_patience=5.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 20,
+      "hp_boost": 2.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.0003,
+      "optimizer": "adam",
+      "seed": 1105
+    }
+  }
+}
