@@ -1,0 +1,33 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": {
+    "decim": 4,
+    "family": "cvx_eda_decomp",
+    "fs": 100,
+    "tau0": 2.0,
+    "tau1": 0.7
+  },
+  "model": {
+    "dropout": 0.3,
+    "family": "eda_decomp_mlp",
+    "hidden": 96
+  },
+  "name": "iter_0018_c07_eda_decomp_revived",
+  "preprocessing": {
+    "normalize": "per_feature_zscore"
+  },
+  "reasoning_summary": "iter_0018 c07. eda_decomp_mlp REVIVED. The iter_0012 child_00 crash was a cvxEDA timeout; decim=4 solves the QP at 25Hz then interpolates back (~4x faster, near-lossless on slow EDA). hidden 96, focal 1.0.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 80,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "n_seeds": 3,
+    "optimizer": "adam",
+    "seed": 18070
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "experiments": [
+    {
+      "run_id": "r_00000144",
+      "run_dir": "experiments/iter_0018/child_00",
+      "island": 8,
+      "family": "dual_ensemble",
+      "parent": "r_00000133",
+      "pass": "iter_0018",
+      "tag": "dual_baseline"
+    },
+    {
+      "run_id": "r_00000145",
+      "run_dir": "experiments/iter_0018/child_01",
+      "island": 8,
+      "family": "dual_ensemble",
+      "parent": "r_00000133",
+      "pass": "iter_0018",
+      "tag": "dual_residual_cnn"
+    },
+    {
+      "run_id": "r_00000146",
+      "run_dir": "experiments/iter_0018/child_02",
+      "island": 8,
+      "family": "dual_ensemble",
+      "parent": "r_00000133",
+      "pass": "iter_0018",
+      "tag": "dual_nperseg192"
+    },
+    {
+      "run_id": "r_00000147",
+      "run_dir": "experiments/iter_0018/child_03",
+      "island": 6,
+      "family": "spectrogram_cnn2d",
+      "parent": "r_00000133",
+      "pass": "iter_0018",
+      "tag": "spec_residual_deep"
+    },
+    {
+      "run_id": "r_00000148",
+      "run_dir": "experiments/iter_0018/child_04",
+      "island": 6,
+      "family": "spectrogram_cnn2d",
+      "parent": "r_00000133",
+      "pass": "iter_0018",
+      "tag": "spec_residual_wide"
+    },
+    {
+      "run_id": "r_00000149",
+      "run_dir": "experiments/iter_0018/child_05",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000130",
+      "pass": "iter_0018",
+      "tag": "gru_champion"
+    },
+    {
+      "run_id": "r_00000150",
+      "run_dir": "experiments/iter_0018/child_06",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000130",
+      "pass": "iter_0018",
+      "tag": "conv1d_encoder"
+    },
+    {
+      "run_id": "r_00000151",
+      "run_dir": "experiments/iter_0018/child_07",
+      "island": 5,
+      "family": "eda_decomp_mlp",
+      "parent": "r_00000082",
+      "pass": "iter_0018",
+      "tag": "eda_decomp_revived"
+    }
+  ]
+}

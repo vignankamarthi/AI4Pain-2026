@@ -1,0 +1,35 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": {
+    "family": "spectrogram",
+    "fs": 100,
+    "log_scale": true,
+    "noverlap": 64,
+    "nperseg": 128
+  },
+  "model": {
+    "base_channels": 32,
+    "depth": 4,
+    "dropout": 0.25,
+    "family": "spectrogram_cnn2d",
+    "use_residual": true
+  },
+  "name": "iter_0018_c04_spec_residual_wide",
+  "preprocessing": {
+    "normalize": "per_channel_zscore"
+  },
+  "reasoning_summary": "iter_0018 c04. spectrogram_cnn2d residual, depth 4, base_channels 32. Structural sibling (residual + wider).",
+  "training": {
+    "batch_size": 32,
+    "epochs": 90,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "n_seeds": 3,
+    "optimizer": "adam",
+    "seed": 18040
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": {
+    "family": "dual_ensemble",
+    "fs": 100,
+    "log_scale": true,
+    "noverlap": 64,
+    "nperseg": 128
+  },
+  "model": {
+    "cnn_cfg": {
+      "base_channels": 24,
+      "depth": 3,
+      "dropout": 0.25,
+      "use_residual": false
+    },
+    "family": "dual_ensemble",
+    "gru_cfg": {
+      "encoder_type": "gru",
+      "fusion": "late_concat",
+      "fusion_dropout": 0.2,
+      "per_channel_hidden": 40,
+      "per_channel_layers": 2
+    }
+  },
+  "name": "iter_0018_c00_dual_baseline",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0018 c00. dual_ensemble: GRU co-champion (r130) + spectrogram co-champion (r133), learned per-class logit blend. The straight ensemble of the two plateaued architectures -- decorrelated errors should clear the 0.536 ceiling.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 120,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "n_seeds": 3,
+    "optimizer": "adam",
+    "seed": 18000
+  }
+}
