@@ -38,6 +38,9 @@ FAMILY_ENTRY_POINTS: dict[str, tuple[str, str]] = {
     "hrv_features_mlp": ("ai4pain.hrv", "run_from_dir"),
     # iter_0015 framework rebuild: add_aux_stream architectural operator.
     "multi_stream_aux": ("ai4pain.multi_stream_aux", "run_from_dir"),
+    # iter_0018: dual-architecture ensemble (spectrogram CNN + GRU, learned
+    # per-class logit blend).
+    "dual_ensemble": ("ai4pain.dual_ensemble", "run_from_dir"),
 }
 
 
