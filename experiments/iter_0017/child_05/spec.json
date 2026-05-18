@@ -1,0 +1,31 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "encoder_type": "bilstm",
+    "family": "multi_stream_bigru",
+    "fusion": "late_concat",
+    "fusion_dropout": 0.2,
+    "per_channel_hidden": 40,
+    "per_channel_layers": 2
+  },
+  "name": "iter_0017_c05_bilstm_enc",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0017 c05. Co-champion r130. swap_encoder gru->bilstm (bidir LSTM) + epochs 180. Structural sibling. (Note: unidir lstm regressed in iter_0015; bilstm is the bidirectional variant.)",
+  "training": {
+    "batch_size": 32,
+    "epochs": 180,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "n_seeds": 3,
+    "optimizer": "adam",
+    "seed": 17050
+  }
+}

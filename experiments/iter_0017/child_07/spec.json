@@ -1,0 +1,35 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": {
+    "family": "hrv_aux",
+    "fs": 100
+  },
+  "model": {
+    "encoder_type": "gru",
+    "family": "multi_stream_aux",
+    "fusion": "late_concat",
+    "fusion_dropout": 0.2,
+    "hrv_hidden": 48,
+    "per_channel_hidden": 56,
+    "per_channel_layers": 2
+  },
+  "name": "iter_0017_c07_aux_wide",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0017 c07. multi_stream_aux final probe: hidden 56, hrv_hidden 48, epochs 150. aux underperformed (0.45-0.51); one wider probe before retiring the family. Diversity slot.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 150,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "n_seeds": 3,
+    "optimizer": "adam",
+    "seed": 17070
+  }
+}

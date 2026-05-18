@@ -1,0 +1,31 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "encoder_type": "gru",
+    "family": "multi_stream_bigru",
+    "fusion": "max_pool",
+    "fusion_dropout": 0.2,
+    "per_channel_hidden": 40,
+    "per_channel_layers": 2
+  },
+  "name": "iter_0017_c04_gru_maxpool_long",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0017 c04. Co-champion r130. swap_fusion late_concat->max_pool + epochs 150->200. Structural sibling.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 200,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "n_seeds": 3,
+    "optimizer": "adam",
+    "seed": 17040
+  }
+}

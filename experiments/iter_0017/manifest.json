@@ -1,0 +1,76 @@
+{
+  "experiments": [
+    {
+      "run_id": "r_00000136",
+      "run_dir": "experiments/iter_0017/child_00",
+      "island": 6,
+      "family": "spectrogram_cnn2d",
+      "parent": "r_00000133",
+      "pass": "iter_0017",
+      "tag": "spec_depth4_wide"
+    },
+    {
+      "run_id": "r_00000137",
+      "run_dir": "experiments/iter_0017/child_01",
+      "island": 6,
+      "family": "spectrogram_cnn2d",
+      "parent": "r_00000133",
+      "pass": "iter_0017",
+      "tag": "spec_nperseg192"
+    },
+    {
+      "run_id": "r_00000138",
+      "run_dir": "experiments/iter_0017/child_02",
+      "island": 6,
+      "family": "spectrogram_cnn2d",
+      "parent": "r_00000133",
+      "pass": "iter_0017",
+      "tag": "spec_depth5"
+    },
+    {
+      "run_id": "r_00000139",
+      "run_dir": "experiments/iter_0017/child_03",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000130",
+      "pass": "iter_0017",
+      "tag": "gru_meanpool_wide"
+    },
+    {
+      "run_id": "r_00000140",
+      "run_dir": "experiments/iter_0017/child_04",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000130",
+      "pass": "iter_0017",
+      "tag": "gru_maxpool_long"
+    },
+    {
+      "run_id": "r_00000141",
+      "run_dir": "experiments/iter_0017/child_05",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000130",
+      "pass": "iter_0017",
+      "tag": "bilstm_enc"
+    },
+    {
+      "run_id": "r_00000142",
+      "run_dir": "experiments/iter_0017/child_06",
+      "island": 2,
+      "family": "transformer",
+      "parent": "r_00000134",
+      "pass": "iter_0017",
+      "tag": "transformer_shallow"
+    },
+    {
+      "run_id": "r_00000143",
+      "run_dir": "experiments/iter_0017/child_07",
+      "island": 4,
+      "family": "multi_stream_aux",
+      "parent": "r_00000123",
+      "pass": "iter_0017",
+      "tag": "aux_wide"
+    }
+  ]
+}

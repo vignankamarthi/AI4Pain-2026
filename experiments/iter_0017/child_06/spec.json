@@ -1,0 +1,30 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "d_model": 48,
+    "dropout": 0.2,
+    "family": "transformer",
+    "ff_dim": 96,
+    "num_heads": 4,
+    "num_layers": 2
+  },
+  "name": "iter_0017_c06_transformer_shallow",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0017 c06. transformer family: SHALLOW (d_model 48, 2 layers) -- wide+deep transformers overfit (0.46-0.48). Test if a tiny transformer generalizes better. Diversity slot.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 120,
+    "loss": "ce_class_balanced",
+    "lr": 0.0005,
+    "n_seeds": 3,
+    "optimizer": "adamw",
+    "seed": 17060
+  }
+}
