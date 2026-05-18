@@ -1,0 +1,153 @@
+{
+  "name": "iter_0016_c02_gru_champion_3seed",
+  "best_val_metrics": {
+    "balanced_acc": 0.5339506172839507,
+    "macro_f1": 0.5217459224283335,
+    "auc_ovr": 0.720818329903978,
+    "ece": 0.07474551582134063,
+    "per_class_pr": {
+      "NP": [
+        0.6994979997606828,
+        0.7222222222222222
+      ],
+      "AP": [
+        0.4558257918552036,
+        0.5208333333333334
+      ],
+      "HP": [
+        0.44494266908060015,
+        0.3587962962962963
+      ]
+    },
+    "confusion_3x3": [
+      [
+        312,
+        57,
+        63
+      ],
+      [
+        73,
+        225,
+        134
+      ],
+      [
+        64,
+        213,
+        155
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7818287037037037,
+      "f1": 0.8493017566406861,
+      "pain_precision": 0.8587313919788148,
+      "pain_recall": 0.8414351851851851,
+      "auc": 0.8345630787037037,
+      "confusion_2x2": [
+        [
+          312,
+          120
+        ],
+        [
+          137,
+          727
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.5339506172839507,
+    "macro_f1": 0.5217459224283335,
+    "auc_ovr": 0.720818329903978,
+    "ece": 0.07474551582134063,
+    "per_class_pr": {
+      "NP": [
+        0.6994979997606828,
+        0.7222222222222222
+      ],
+      "AP": [
+        0.4558257918552036,
+        0.5208333333333334
+      ],
+      "HP": [
+        0.44494266908060015,
+        0.3587962962962963
+      ]
+    },
+    "confusion_3x3": [
+      [
+        312,
+        57,
+        63
+      ],
+      [
+        73,
+        225,
+        134
+      ],
+      [
+        64,
+        213,
+        155
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7818287037037037,
+      "f1": 0.8493017566406861,
+      "pain_precision": 0.8587313919788148,
+      "pain_recall": 0.8414351851851851,
+      "auc": 0.8345630787037037,
+      "confusion_2x2": [
+        [
+          312,
+          120
+        ],
+        [
+          137,
+          727
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.5416666666666666,
+    0.525462962962963,
+    0.5347222222222222
+  ],
+  "balanced_acc_std": 0.006637596656668654,
+  "train_seconds": 846.2791833877563,
+  "inference_seconds": 0.003830432891845703,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "encoder_type": "gru",
+      "family": "multi_stream_bigru",
+      "fusion": "late_concat",
+      "fusion_dropout": 0.2,
+      "per_channel_hidden": 40,
+      "per_channel_layers": 2
+    },
+    "name": "iter_0016_c02_gru_champion_3seed",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0016 c02. The plain-gru multi_stream champion config (r_00000089 hidden=40, gru, late_concat, focal=1.0) at epochs 150, n_seeds=3. We NEVER measured the plain champion at n_seeds=3 -- only structural mutations of it. This is the missing trustworthy baseline.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 150,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 16020
+    }
+  }
+}

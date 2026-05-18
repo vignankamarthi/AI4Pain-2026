@@ -1,0 +1,152 @@
+{
+  "name": "iter_0016_c06_transformer_wide",
+  "best_val_metrics": {
+    "balanced_acc": 0.45910493827160487,
+    "macro_f1": 0.4363638552249329,
+    "auc_ovr": 0.6137447487997257,
+    "ece": 0.31708545014722117,
+    "per_class_pr": {
+      "NP": [
+        0.4822889486499666,
+        0.6990740740740741
+      ],
+      "AP": [
+        0.4465726246021018,
+        0.4444444444444445
+      ],
+      "HP": [
+        0.4323372723372723,
+        0.23379629629629628
+      ]
+    },
+    "confusion_3x3": [
+      [
+        302,
+        74,
+        56
+      ],
+      [
+        159,
+        192,
+        81
+      ],
+      [
+        167,
+        164,
+        101
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6608796296296297,
+      "f1": 0.7005913323346263,
+      "pain_precision": 0.8098328187269312,
+      "pain_recall": 0.6226851851851851,
+      "auc": 0.6942676183127571,
+      "confusion_2x2": [
+        [
+          302,
+          130
+        ],
+        [
+          326,
+          538
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.45910493827160487,
+    "macro_f1": 0.4363638552249329,
+    "auc_ovr": 0.6137447487997257,
+    "ece": 0.31708545014722117,
+    "per_class_pr": {
+      "NP": [
+        0.4822889486499666,
+        0.6990740740740741
+      ],
+      "AP": [
+        0.4465726246021018,
+        0.4444444444444445
+      ],
+      "HP": [
+        0.4323372723372723,
+        0.23379629629629628
+      ]
+    },
+    "confusion_3x3": [
+      [
+        302,
+        74,
+        56
+      ],
+      [
+        159,
+        192,
+        81
+      ],
+      [
+        167,
+        164,
+        101
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6608796296296297,
+      "f1": 0.7005913323346263,
+      "pain_precision": 0.8098328187269312,
+      "pain_recall": 0.6226851851851851,
+      "auc": 0.6942676183127571,
+      "confusion_2x2": [
+        [
+          302,
+          130
+        ],
+        [
+          326,
+          538
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.4675925925925926,
+    0.45138888888888884,
+    0.4583333333333333
+  ],
+  "balanced_acc_std": 0.006637596656668723,
+  "train_seconds": 710.1374928951263,
+  "inference_seconds": 0.0009844303131103516,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "d_model": 96,
+      "dropout": 0.15,
+      "family": "transformer",
+      "ff_dim": 192,
+      "num_heads": 4,
+      "num_layers": 4
+    },
+    "name": "iter_0016_c06_transformer_wide",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0016 c06. transformer family: d_model 64->96, num_layers 3->4, epochs 150. Follow-up of transformer_deep (0.4753). Diversity slot.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 150,
+      "loss": "ce_class_balanced",
+      "lr": 0.0005,
+      "n_seeds": 3,
+      "optimizer": "adamw",
+      "seed": 16060
+    }
+  }
+}

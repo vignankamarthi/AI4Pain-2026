@@ -1,0 +1,156 @@
+{
+  "name": "iter_0016_c05_spec_nperseg128",
+  "best_val_metrics": {
+    "balanced_acc": 0.5362654320987654,
+    "macro_f1": 0.5177366201111456,
+    "auc_ovr": 0.7284754372427984,
+    "ece": 0.046092512706915535,
+    "per_class_pr": {
+      "NP": [
+        0.6100297511949323,
+        0.8217592592592592
+      ],
+      "AP": [
+        0.46121360231561276,
+        0.34490740740740744
+      ],
+      "HP": [
+        0.4930755433195679,
+        0.4421296296296296
+      ]
+    },
+    "confusion_3x3": [
+      [
+        355,
+        43,
+        34
+      ],
+      [
+        121,
+        149,
+        162
+      ],
+      [
+        109,
+        132,
+        191
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7777777777777778,
+      "f1": 0.8042649710800083,
+      "pain_precision": 0.8936438182635914,
+      "pain_recall": 0.7337962962962963,
+      "auc": 0.8448591820987655,
+      "confusion_2x2": [
+        [
+          355,
+          77
+        ],
+        [
+          230,
+          634
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.5362654320987654,
+    "macro_f1": 0.5177366201111456,
+    "auc_ovr": 0.7284754372427984,
+    "ece": 0.046092512706915535,
+    "per_class_pr": {
+      "NP": [
+        0.6100297511949323,
+        0.8217592592592592
+      ],
+      "AP": [
+        0.46121360231561276,
+        0.34490740740740744
+      ],
+      "HP": [
+        0.4930755433195679,
+        0.4421296296296296
+      ]
+    },
+    "confusion_3x3": [
+      [
+        355,
+        43,
+        34
+      ],
+      [
+        121,
+        149,
+        162
+      ],
+      [
+        109,
+        132,
+        191
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7777777777777778,
+      "f1": 0.8042649710800083,
+      "pain_precision": 0.8936438182635914,
+      "pain_recall": 0.7337962962962963,
+      "auc": 0.8448591820987655,
+      "confusion_2x2": [
+        [
+          355,
+          77
+        ],
+        [
+          230,
+          634
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.5300925925925926,
+    0.5324074074074074,
+    0.5462962962962963
+  ],
+  "balanced_acc_std": 0.007155569826771372,
+  "train_seconds": 26.26372241973877,
+  "inference_seconds": 0.00048828125,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "spectrogram",
+      "fs": 100,
+      "log_scale": true,
+      "noverlap": 64,
+      "nperseg": 128
+    },
+    "model": {
+      "base_channels": 24,
+      "depth": 3,
+      "dropout": 0.25,
+      "family": "spectrogram_cnn2d"
+    },
+    "name": "iter_0016_c05_spec_nperseg128",
+    "preprocessing": {
+      "normalize": "per_channel_zscore"
+    },
+    "reasoning_summary": "iter_0016 c05. Mutation of r_00000126. nperseg 64->128, noverlap 32->64: finer FREQUENCY resolution, coarser time -- a structurally different spectrogram. Structural sibling of c04.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 90,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 16050
+    }
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "name": "iter_0016_c01_aux_attention_fusion",
+  "best_val_metrics": {
+    "balanced_acc": 0.4529320987654321,
+    "macro_f1": 0.44693845680598626,
+    "auc_ovr": 0.6360087662894376,
+    "ece": 0.0655655012362533,
+    "per_class_pr": {
+      "NP": [
+        0.5492684766534951,
+        0.6111111111111112
+      ],
+      "AP": [
+        0.4283407307962775,
+        0.42824074074074076
+      ],
+      "HP": [
+        0.3750779642872533,
+        0.3194444444444444
+      ]
+    },
+    "confusion_3x3": [
+      [
+        264,
+        78,
+        90
+      ],
+      [
+        110,
+        185,
+        137
+      ],
+      [
+        122,
+        172,
+        138
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6712962962962963,
+      "f1": 0.7564407440308508,
+      "pain_precision": 0.7894173923486717,
+      "pain_recall": 0.7314814814814815,
+      "auc": 0.7293997556584362,
+      "confusion_2x2": [
+        [
+          264,
+          168
+        ],
+        [
+          232,
+          632
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.4529320987654321,
+    "macro_f1": 0.44693845680598626,
+    "auc_ovr": 0.6360087662894376,
+    "ece": 0.0655655012362533,
+    "per_class_pr": {
+      "NP": [
+        0.5492684766534951,
+        0.6111111111111112
+      ],
+      "AP": [
+        0.4283407307962775,
+        0.42824074074074076
+      ],
+      "HP": [
+        0.3750779642872533,
+        0.3194444444444444
+      ]
+    },
+    "confusion_3x3": [
+      [
+        264,
+        78,
+        90
+      ],
+      [
+        110,
+        185,
+        137
+      ],
+      [
+        122,
+        172,
+        138
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6712962962962963,
+      "f1": 0.7564407440308508,
+      "pain_precision": 0.7894173923486717,
+      "pain_recall": 0.7314814814814815,
+      "auc": 0.7293997556584362,
+      "confusion_2x2": [
+        [
+          264,
+          168
+        ],
+        [
+          232,
+          632
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.42824074074074076,
+    0.4444444444444444,
+    0.4861111111111111
+  ],
+  "balanced_acc_std": 0.02437587808477054,
+  "train_seconds": 857.4107856750488,
+  "inference_seconds": 0.0037714640299479165,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "hrv_aux",
+      "fs": 100
+    },
+    "model": {
+      "encoder_type": "gru",
+      "family": "multi_stream_aux",
+      "fusion": "attention_pool",
+      "fusion_dropout": 0.2,
+      "hrv_hidden": 64,
+      "per_channel_hidden": 40,
+      "per_channel_layers": 2
+    },
+    "name": "iter_0016_c01_aux_attention_fusion",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0016 c01. Mutation of r_00000123. swap_fusion late_concat->attention_pool + hrv_hidden 32->64 + epochs 150. Structural sibling #2.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 150,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 16010
+    }
+  }
+}

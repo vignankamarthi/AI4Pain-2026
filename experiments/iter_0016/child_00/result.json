@@ -1,0 +1,157 @@
+{
+  "name": "iter_0016_c00_aux_transformer_enc",
+  "best_val_metrics": {
+    "balanced_acc": 0.5015432098765431,
+    "macro_f1": 0.4801951492761209,
+    "auc_ovr": 0.6824792095336075,
+    "ece": 0.12564766183955434,
+    "per_class_pr": {
+      "NP": [
+        0.6080861726305379,
+        0.6828703703703703
+      ],
+      "AP": [
+        0.43005985615097764,
+        0.601851851851852
+      ],
+      "HP": [
+        0.4774601215777687,
+        0.2199074074074074
+      ]
+    },
+    "confusion_3x3": [
+      [
+        295,
+        102,
+        35
+      ],
+      [
+        99,
+        260,
+        73
+      ],
+      [
+        93,
+        244,
+        95
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7303240740740741,
+      "f1": 0.8029791534779886,
+      "pain_precision": 0.8315370714074386,
+      "pain_recall": 0.7777777777777777,
+      "auc": 0.7991335519547326,
+      "confusion_2x2": [
+        [
+          295,
+          137
+        ],
+        [
+          192,
+          672
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.5015432098765431,
+    "macro_f1": 0.4801951492761209,
+    "auc_ovr": 0.6824792095336075,
+    "ece": 0.12564766183955434,
+    "per_class_pr": {
+      "NP": [
+        0.6080861726305379,
+        0.6828703703703703
+      ],
+      "AP": [
+        0.43005985615097764,
+        0.601851851851852
+      ],
+      "HP": [
+        0.4774601215777687,
+        0.2199074074074074
+      ]
+    },
+    "confusion_3x3": [
+      [
+        295,
+        102,
+        35
+      ],
+      [
+        99,
+        260,
+        73
+      ],
+      [
+        93,
+        244,
+        95
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7303240740740741,
+      "f1": 0.8029791534779886,
+      "pain_precision": 0.8315370714074386,
+      "pain_recall": 0.7777777777777777,
+      "auc": 0.7991335519547326,
+      "confusion_2x2": [
+        [
+          295,
+          137
+        ],
+        [
+          192,
+          672
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.4884259259259259,
+    0.5138888888888888,
+    0.5023148148148148
+  ],
+  "balanced_acc_std": 0.010409519724716083,
+  "train_seconds": 2344.9956679344177,
+  "inference_seconds": 0.002794504165649414,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "hrv_aux",
+      "fs": 100
+    },
+    "model": {
+      "encoder_type": "transformer",
+      "family": "multi_stream_aux",
+      "fusion": "late_concat",
+      "fusion_dropout": 0.2,
+      "hrv_hidden": 32,
+      "per_channel_hidden": 40,
+      "per_channel_layers": 2
+    },
+    "name": "iter_0016_c00_aux_transformer_enc",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0016 c00. Mutation of champion r_00000123 (multi_stream_aux 0.5108). swap_encoder gru->transformer + epochs 150. Combines the two iter_0015 winners: aux HRV side-input (0.5108) + transformer encoder (0.5031).",
+    "training": {
+      "batch_size": 32,
+      "epochs": 150,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 16000
+    }
+  }
+}

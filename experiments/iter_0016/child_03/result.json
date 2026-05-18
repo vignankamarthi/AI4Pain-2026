@@ -1,0 +1,153 @@
+{
+  "name": "iter_0016_c03_bigru_transformer_enc",
+  "best_val_metrics": {
+    "balanced_acc": 0.5023148148148148,
+    "macro_f1": 0.4724848521971814,
+    "auc_ovr": 0.6804323131001372,
+    "ece": 0.10867870063233524,
+    "per_class_pr": {
+      "NP": [
+        0.5495631047021157,
+        0.7430555555555557
+      ],
+      "AP": [
+        0.45216432941891843,
+        0.5162037037037037
+      ],
+      "HP": [
+        0.5126086331968686,
+        0.2476851851851852
+      ]
+    },
+    "confusion_3x3": [
+      [
+        321,
+        79,
+        32
+      ],
+      [
+        131,
+        223,
+        78
+      ],
+      [
+        136,
+        189,
+        107
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.717013888888889,
+      "f1": 0.757946512697996,
+      "pain_precision": 0.8458999049622733,
+      "pain_recall": 0.6909722222222223,
+      "auc": 0.7761140046296297,
+      "confusion_2x2": [
+        [
+          321,
+          111
+        ],
+        [
+          267,
+          597
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.5023148148148148,
+    "macro_f1": 0.4724848521971814,
+    "auc_ovr": 0.6804323131001372,
+    "ece": 0.10867870063233524,
+    "per_class_pr": {
+      "NP": [
+        0.5495631047021157,
+        0.7430555555555557
+      ],
+      "AP": [
+        0.45216432941891843,
+        0.5162037037037037
+      ],
+      "HP": [
+        0.5126086331968686,
+        0.2476851851851852
+      ]
+    },
+    "confusion_3x3": [
+      [
+        321,
+        79,
+        32
+      ],
+      [
+        131,
+        223,
+        78
+      ],
+      [
+        136,
+        189,
+        107
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.717013888888889,
+      "f1": 0.757946512697996,
+      "pain_precision": 0.8458999049622733,
+      "pain_recall": 0.6909722222222223,
+      "auc": 0.7761140046296297,
+      "confusion_2x2": [
+        [
+          321,
+          111
+        ],
+        [
+          267,
+          597
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.5277777777777778,
+    0.4837962962962963,
+    0.4953703703703704
+  ],
+  "balanced_acc_std": 0.018614719262059914,
+  "train_seconds": 2340.536315202713,
+  "inference_seconds": 0.0023519198099772134,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "encoder_type": "transformer",
+      "family": "multi_stream_bigru",
+      "fusion": "late_concat",
+      "fusion_dropout": 0.2,
+      "per_channel_hidden": 40,
+      "per_channel_layers": 2
+    },
+    "name": "iter_0016_c03_bigru_transformer_enc",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0016 c03. Follow-up of r_00000121 (swap_encoder:transformer 0.5031). transformer encoder + epochs 150. Structural sibling of c02 (gru vs transformer encoder).",
+    "training": {
+      "batch_size": 32,
+      "epochs": 150,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 16030
+    }
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "name": "iter_0016_c07_graft",
+  "best_val_metrics": {
+    "balanced_acc": 0.5046296296296297,
+    "macro_f1": 0.41531778428660265,
+    "auc_ovr": 0.7067311814128945,
+    "ece": 0.1985789559275648,
+    "per_class_pr": {
+      "NP": [
+        0.5727272727272726,
+        0.7685185185185185
+      ],
+      "AP": [
+        0.29304029304029305,
+        0.018518518518518517
+      ],
+      "HP": [
+        0.45434291411740907,
+        0.7268518518518517
+      ]
+    },
+    "confusion_3x3": [
+      [
+        332,
+        2,
+        98
+      ],
+      [
+        143,
+        8,
+        281
+      ],
+      [
+        108,
+        10,
+        314
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7390046296296297,
+      "f1": 0.7764407165786477,
+      "pain_precision": 0.8615727075553238,
+      "pain_recall": 0.7094907407407408,
+      "auc": 0.8132635673868313,
+      "confusion_2x2": [
+        [
+          332,
+          100
+        ],
+        [
+          251,
+          613
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.5046296296296297,
+    "macro_f1": 0.41531778428660265,
+    "auc_ovr": 0.7067311814128945,
+    "ece": 0.1985789559275648,
+    "per_class_pr": {
+      "NP": [
+        0.5727272727272726,
+        0.7685185185185185
+      ],
+      "AP": [
+        0.29304029304029305,
+        0.018518518518518517
+      ],
+      "HP": [
+        0.45434291411740907,
+        0.7268518518518517
+      ]
+    },
+    "confusion_3x3": [
+      [
+        332,
+        2,
+        98
+      ],
+      [
+        143,
+        8,
+        281
+      ],
+      [
+        108,
+        10,
+        314
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7390046296296297,
+      "f1": 0.7764407165786477,
+      "pain_precision": 0.8615727075553238,
+      "pain_recall": 0.7094907407407408,
+      "auc": 0.8132635673868313,
+      "confusion_2x2": [
+        [
+          332,
+          100
+        ],
+        [
+          251,
+          613
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.5023148148148149,
+    0.5046296296296297,
+    0.5069444444444444
+  ],
+  "balanced_acc_std": 0.0018900383817771066,
+  "train_seconds": 17.550272226333618,
+  "inference_seconds": 0.0004855791727701823,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "spectrogram",
+      "fs": 100,
+      "log_scale": true,
+      "noverlap": 32,
+      "nperseg": 64
+    },
+    "graft_coherence": true,
+    "model": {
+      "base_channels": 24,
+      "depth": 3,
+      "dropout": 0.25,
+      "family": "spectrogram_cnn2d"
+    },
+    "name": "iter_0016_c07_graft",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0016 c07. graft_family crossover of champion r_00000123 (multi_stream_aux) x r_00000126 (spectrogram_cnn2d), rng seed 1600. graft_family crossover of A='A' x B='B'. Gene origins: preprocessing<-A, feature_extraction<-B, model<-B, training<-B, decode<-B. predicted_coherence=True. n_seeds=3.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 60,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 16070
+    }
+  }
+}
