@@ -297,7 +297,8 @@ def run_from_dir(run_dir: Path, data_root: Path) -> dict:
     if not spec_path.exists():
         raise FileNotFoundError(f"missing spec.json at {spec_path}")
     spec = json.loads(spec_path.read_text())
-    return train_baseline(spec, data_root=Path(data_root), out_dir=run_dir)
+    from ai4pain.multiseed import run_multiseed
+    return run_multiseed(train_baseline, spec, Path(data_root), run_dir)
 
 
 if __name__ == "__main__":

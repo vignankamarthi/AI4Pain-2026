@@ -294,7 +294,8 @@ def train_spectrogram(spec: dict, data_root: Path, out_dir: Path) -> dict:
 def run_from_dir(run_dir: Path, data_root: Path) -> dict:
     run_dir = Path(run_dir)
     spec = json.loads((run_dir / "spec.json").read_text())
-    return train_spectrogram(spec, data_root=Path(data_root), out_dir=run_dir)
+    from ai4pain.multiseed import run_multiseed
+    return run_multiseed(train_spectrogram, spec, Path(data_root), run_dir)
 
 
 if __name__ == "__main__":
