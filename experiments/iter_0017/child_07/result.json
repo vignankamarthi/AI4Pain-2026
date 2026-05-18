@@ -1,0 +1,157 @@
+{
+  "name": "iter_0017_c07_aux_wide",
+  "best_val_metrics": {
+    "balanced_acc": 0.503858024691358,
+    "macro_f1": 0.4875632314913223,
+    "auc_ovr": 0.6999555255486968,
+    "ece": 0.05147849474056267,
+    "per_class_pr": {
+      "NP": [
+        0.6140184624080932,
+        0.6712962962962963
+      ],
+      "AP": [
+        0.4383799274990985,
+        0.5671296296296297
+      ],
+      "HP": [
+        0.45712973934310264,
+        0.27314814814814814
+      ]
+    },
+    "confusion_3x3": [
+      [
+        290,
+        97,
+        45
+      ],
+      [
+        94,
+        245,
+        93
+      ],
+      [
+        95,
+        219,
+        118
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.726273148148148,
+      "f1": 0.8017265474998384,
+      "pain_precision": 0.8290920408567467,
+      "pain_recall": 0.78125,
+      "auc": 0.8110050154320988,
+      "confusion_2x2": [
+        [
+          290,
+          142
+        ],
+        [
+          189,
+          675
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.503858024691358,
+    "macro_f1": 0.4875632314913223,
+    "auc_ovr": 0.6999555255486968,
+    "ece": 0.05147849474056267,
+    "per_class_pr": {
+      "NP": [
+        0.6140184624080932,
+        0.6712962962962963
+      ],
+      "AP": [
+        0.4383799274990985,
+        0.5671296296296297
+      ],
+      "HP": [
+        0.45712973934310264,
+        0.27314814814814814
+      ]
+    },
+    "confusion_3x3": [
+      [
+        290,
+        97,
+        45
+      ],
+      [
+        94,
+        245,
+        93
+      ],
+      [
+        95,
+        219,
+        118
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.726273148148148,
+      "f1": 0.8017265474998384,
+      "pain_precision": 0.8290920408567467,
+      "pain_recall": 0.78125,
+      "auc": 0.8110050154320988,
+      "confusion_2x2": [
+        [
+          290,
+          142
+        ],
+        [
+          189,
+          675
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.5023148148148148,
+    0.5,
+    0.5092592592592592
+  ],
+  "balanced_acc_std": 0.0039344286370314435,
+  "train_seconds": 858.1800007820129,
+  "inference_seconds": 0.0037927627563476562,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "hrv_aux",
+      "fs": 100
+    },
+    "model": {
+      "encoder_type": "gru",
+      "family": "multi_stream_aux",
+      "fusion": "late_concat",
+      "fusion_dropout": 0.2,
+      "hrv_hidden": 48,
+      "per_channel_hidden": 56,
+      "per_channel_layers": 2
+    },
+    "name": "iter_0017_c07_aux_wide",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0017 c07. multi_stream_aux final probe: hidden 56, hrv_hidden 48, epochs 150. aux underperformed (0.45-0.51); one wider probe before retiring the family. Diversity slot.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 150,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 17070
+    }
+  }
+}

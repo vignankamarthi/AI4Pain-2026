@@ -1,0 +1,156 @@
+{
+  "name": "iter_0017_c01_spec_nperseg192",
+  "best_val_metrics": {
+    "balanced_acc": 0.5339506172839507,
+    "macro_f1": 0.5068014083191587,
+    "auc_ovr": 0.722867905521262,
+    "ece": 0.10300702981098936,
+    "per_class_pr": {
+      "NP": [
+        0.6007733142994027,
+        0.8125
+      ],
+      "AP": [
+        0.5122851217060478,
+        0.28935185185185186
+      ],
+      "HP": [
+        0.4806509285237226,
+        0.5
+      ]
+    },
+    "confusion_3x3": [
+      [
+        351,
+        37,
+        44
+      ],
+      [
+        118,
+        125,
+        189
+      ],
+      [
+        118,
+        98,
+        216
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.769675925925926,
+      "f1": 0.7976400755786665,
+      "pain_precision": 0.8867938367592467,
+      "pain_recall": 0.7268518518518517,
+      "auc": 0.8409770447530865,
+      "confusion_2x2": [
+        [
+          351,
+          81
+        ],
+        [
+          236,
+          628
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.5339506172839507,
+    "macro_f1": 0.5068014083191587,
+    "auc_ovr": 0.722867905521262,
+    "ece": 0.10300702981098936,
+    "per_class_pr": {
+      "NP": [
+        0.6007733142994027,
+        0.8125
+      ],
+      "AP": [
+        0.5122851217060478,
+        0.28935185185185186
+      ],
+      "HP": [
+        0.4806509285237226,
+        0.5
+      ]
+    },
+    "confusion_3x3": [
+      [
+        351,
+        37,
+        44
+      ],
+      [
+        118,
+        125,
+        189
+      ],
+      [
+        118,
+        98,
+        216
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.769675925925926,
+      "f1": 0.7976400755786665,
+      "pain_precision": 0.8867938367592467,
+      "pain_recall": 0.7268518518518517,
+      "auc": 0.8409770447530865,
+      "confusion_2x2": [
+        [
+          351,
+          81
+        ],
+        [
+          236,
+          628
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.5393518518518519,
+    0.5324074074074074,
+    0.5300925925925927
+  ],
+  "balanced_acc_std": 0.0039344286370314435,
+  "train_seconds": 25.25797390937805,
+  "inference_seconds": 0.00041222572326660156,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "spectrogram",
+      "fs": 100,
+      "log_scale": true,
+      "noverlap": 96,
+      "nperseg": 192
+    },
+    "model": {
+      "base_channels": 24,
+      "depth": 3,
+      "dropout": 0.25,
+      "family": "spectrogram_cnn2d"
+    },
+    "name": "iter_0017_c01_spec_nperseg192",
+    "preprocessing": {
+      "normalize": "per_channel_zscore"
+    },
+    "reasoning_summary": "iter_0017 c01. Champion r133. nperseg 128->192: push the finer-frequency trend that beat nperseg=64. Structural sibling.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 90,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 17010
+    }
+  }
+}

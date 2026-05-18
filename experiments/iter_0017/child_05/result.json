@@ -1,0 +1,153 @@
+{
+  "name": "iter_0017_c05_bilstm_enc",
+  "best_val_metrics": {
+    "balanced_acc": 0.4560185185185186,
+    "macro_f1": 0.44212346892981574,
+    "auc_ovr": 0.639984675068587,
+    "ece": 0.06334938849379985,
+    "per_class_pr": {
+      "NP": [
+        0.5119266383369755,
+        0.6412037037037037
+      ],
+      "AP": [
+        0.393560236751657,
+        0.4328703703703704
+      ],
+      "HP": [
+        0.45742542481672915,
+        0.29398148148148145
+      ]
+    },
+    "confusion_3x3": [
+      [
+        277,
+        118,
+        37
+      ],
+      [
+        130,
+        187,
+        115
+      ],
+      [
+        132,
+        173,
+        127
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6689814814814815,
+      "f1": 0.7431259447523276,
+      "pain_precision": 0.7967089765580332,
+      "pain_recall": 0.6967592592592592,
+      "auc": 0.7159609696502058,
+      "confusion_2x2": [
+        [
+          277,
+          155
+        ],
+        [
+          262,
+          602
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.4560185185185186,
+    "macro_f1": 0.44212346892981574,
+    "auc_ovr": 0.639984675068587,
+    "ece": 0.06334938849379985,
+    "per_class_pr": {
+      "NP": [
+        0.5119266383369755,
+        0.6412037037037037
+      ],
+      "AP": [
+        0.393560236751657,
+        0.4328703703703704
+      ],
+      "HP": [
+        0.45742542481672915,
+        0.29398148148148145
+      ]
+    },
+    "confusion_3x3": [
+      [
+        277,
+        118,
+        37
+      ],
+      [
+        130,
+        187,
+        115
+      ],
+      [
+        132,
+        173,
+        127
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6689814814814815,
+      "f1": 0.7431259447523276,
+      "pain_precision": 0.7967089765580332,
+      "pain_recall": 0.6967592592592592,
+      "auc": 0.7159609696502058,
+      "confusion_2x2": [
+        [
+          277,
+          155
+        ],
+        [
+          262,
+          602
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.4976851851851853,
+    0.4328703703703704,
+    0.4375
+  ],
+  "balanced_acc_std": 0.029523343317452183,
+  "train_seconds": 786.2548062801361,
+  "inference_seconds": 0.003659407297770182,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "encoder_type": "bilstm",
+      "family": "multi_stream_bigru",
+      "fusion": "late_concat",
+      "fusion_dropout": 0.2,
+      "per_channel_hidden": 40,
+      "per_channel_layers": 2
+    },
+    "name": "iter_0017_c05_bilstm_enc",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0017 c05. Co-champion r130. swap_encoder gru->bilstm (bidir LSTM) + epochs 180. Structural sibling. (Note: unidir lstm regressed in iter_0015; bilstm is the bidirectional variant.)",
+    "training": {
+      "batch_size": 32,
+      "epochs": 180,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 17050
+    }
+  }
+}

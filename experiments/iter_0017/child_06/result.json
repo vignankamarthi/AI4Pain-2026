@@ -1,0 +1,152 @@
+{
+  "name": "iter_0017_c06_transformer_shallow",
+  "best_val_metrics": {
+    "balanced_acc": 0.45447530864197533,
+    "macro_f1": 0.4382156971240207,
+    "auc_ovr": 0.6139805169753086,
+    "ece": 0.21590492198312727,
+    "per_class_pr": {
+      "NP": [
+        0.4987586368901525,
+        0.6620370370370371
+      ],
+      "AP": [
+        0.423242671913099,
+        0.4583333333333333
+      ],
+      "HP": [
+        0.41647701918786256,
+        0.24305555555555555
+      ]
+    },
+    "confusion_3x3": [
+      [
+        286,
+        86,
+        60
+      ],
+      [
+        146,
+        198,
+        88
+      ],
+      [
+        141,
+        186,
+        105
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6649305555555555,
+      "f1": 0.72707666389219,
+      "pain_precision": 0.799214347030941,
+      "pain_recall": 0.6678240740740741,
+      "auc": 0.6976393711419752,
+      "confusion_2x2": [
+        [
+          286,
+          146
+        ],
+        [
+          287,
+          577
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.45447530864197533,
+    "macro_f1": 0.4382156971240207,
+    "auc_ovr": 0.6139805169753086,
+    "ece": 0.21590492198312727,
+    "per_class_pr": {
+      "NP": [
+        0.4987586368901525,
+        0.6620370370370371
+      ],
+      "AP": [
+        0.423242671913099,
+        0.4583333333333333
+      ],
+      "HP": [
+        0.41647701918786256,
+        0.24305555555555555
+      ]
+    },
+    "confusion_3x3": [
+      [
+        286,
+        86,
+        60
+      ],
+      [
+        146,
+        198,
+        88
+      ],
+      [
+        141,
+        186,
+        105
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6649305555555555,
+      "f1": 0.72707666389219,
+      "pain_precision": 0.799214347030941,
+      "pain_recall": 0.6678240740740741,
+      "auc": 0.6976393711419752,
+      "confusion_2x2": [
+        [
+          286,
+          146
+        ],
+        [
+          287,
+          577
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.46759259259259256,
+    0.4699074074074074,
+    0.425925925925926
+  ],
+  "balanced_acc_std": 0.02020956921868637,
+  "train_seconds": 375.3811242580414,
+  "inference_seconds": 0.0008215904235839844,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "d_model": 48,
+      "dropout": 0.2,
+      "family": "transformer",
+      "ff_dim": 96,
+      "num_heads": 4,
+      "num_layers": 2
+    },
+    "name": "iter_0017_c06_transformer_shallow",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0017 c06. transformer family: SHALLOW (d_model 48, 2 layers) -- wide+deep transformers overfit (0.46-0.48). Test if a tiny transformer generalizes better. Diversity slot.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 120,
+      "loss": "ce_class_balanced",
+      "lr": 0.0005,
+      "n_seeds": 3,
+      "optimizer": "adamw",
+      "seed": 17060
+    }
+  }
+}

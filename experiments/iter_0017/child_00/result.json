@@ -1,0 +1,156 @@
+{
+  "name": "iter_0017_c00_spec_depth4_wide",
+  "best_val_metrics": {
+    "balanced_acc": 0.5254629629629629,
+    "macro_f1": 0.5106100863644473,
+    "auc_ovr": 0.7170098701131687,
+    "ece": 0.20976504494930492,
+    "per_class_pr": {
+      "NP": [
+        0.6137803659475486,
+        0.7592592592592592
+      ],
+      "AP": [
+        0.472308453151012,
+        0.40046296296296297
+      ],
+      "HP": [
+        0.5027791975466395,
+        0.4166666666666667
+      ]
+    },
+    "confusion_3x3": [
+      [
+        328,
+        61,
+        43
+      ],
+      [
+        122,
+        173,
+        137
+      ],
+      [
+        111,
+        141,
+        180
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7447916666666666,
+      "f1": 0.7825343594501915,
+      "pain_precision": 0.8658684335855408,
+      "pain_recall": 0.7303240740740741,
+      "auc": 0.8337633423353908,
+      "confusion_2x2": [
+        [
+          328,
+          104
+        ],
+        [
+          233,
+          631
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.5254629629629629,
+    "macro_f1": 0.5106100863644473,
+    "auc_ovr": 0.7170098701131687,
+    "ece": 0.20976504494930492,
+    "per_class_pr": {
+      "NP": [
+        0.6137803659475486,
+        0.7592592592592592
+      ],
+      "AP": [
+        0.472308453151012,
+        0.40046296296296297
+      ],
+      "HP": [
+        0.5027791975466395,
+        0.4166666666666667
+      ]
+    },
+    "confusion_3x3": [
+      [
+        328,
+        61,
+        43
+      ],
+      [
+        122,
+        173,
+        137
+      ],
+      [
+        111,
+        141,
+        180
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7447916666666666,
+      "f1": 0.7825343594501915,
+      "pain_precision": 0.8658684335855408,
+      "pain_recall": 0.7303240740740741,
+      "auc": 0.8337633423353908,
+      "confusion_2x2": [
+        [
+          328,
+          104
+        ],
+        [
+          233,
+          631
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.5439814814814815,
+    0.5092592592592592,
+    0.5231481481481483
+  ],
+  "balanced_acc_std": 0.014269476858724517,
+  "train_seconds": 30.128033876419067,
+  "inference_seconds": 0.000488440195719401,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "spectrogram",
+      "fs": 100,
+      "log_scale": true,
+      "noverlap": 64,
+      "nperseg": 128
+    },
+    "model": {
+      "base_channels": 32,
+      "depth": 4,
+      "dropout": 0.25,
+      "family": "spectrogram_cnn2d"
+    },
+    "name": "iter_0017_c00_spec_depth4_wide",
+    "preprocessing": {
+      "normalize": "per_channel_zscore"
+    },
+    "reasoning_summary": "iter_0017 c00. Champion r133 (spectrogram nperseg128, 0.5363). depth 3->4, base_channels 24->32: more 2D-CNN capacity.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 90,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 17000
+    }
+  }
+}

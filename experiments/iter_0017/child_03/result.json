@@ -1,0 +1,153 @@
+{
+  "name": "iter_0017_c03_gru_meanpool_wide",
+  "best_val_metrics": {
+    "balanced_acc": 0.49614197530864196,
+    "macro_f1": 0.46367771370822286,
+    "auc_ovr": 0.6918858239026063,
+    "ece": 0.06427259658129862,
+    "per_class_pr": {
+      "NP": [
+        0.6212745008466133,
+        0.6944444444444443
+      ],
+      "AP": [
+        0.41536991470217516,
+        0.5601851851851852
+      ],
+      "HP": [
+        0.4853698769191727,
+        0.23379629629629628
+      ]
+    },
+    "confusion_3x3": [
+      [
+        300,
+        90,
+        42
+      ],
+      [
+        99,
+        242,
+        91
+      ],
+      [
+        88,
+        243,
+        101
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7390046296296297,
+      "f1": 0.8084092810481983,
+      "pain_precision": 0.8356471448809762,
+      "pain_recall": 0.7835648148148149,
+      "auc": 0.7905414094650206,
+      "confusion_2x2": [
+        [
+          300,
+          132
+        ],
+        [
+          187,
+          677
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.49614197530864196,
+    "macro_f1": 0.46367771370822286,
+    "auc_ovr": 0.6918858239026063,
+    "ece": 0.06427259658129862,
+    "per_class_pr": {
+      "NP": [
+        0.6212745008466133,
+        0.6944444444444443
+      ],
+      "AP": [
+        0.41536991470217516,
+        0.5601851851851852
+      ],
+      "HP": [
+        0.4853698769191727,
+        0.23379629629629628
+      ]
+    },
+    "confusion_3x3": [
+      [
+        300,
+        90,
+        42
+      ],
+      [
+        99,
+        242,
+        91
+      ],
+      [
+        88,
+        243,
+        101
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7390046296296297,
+      "f1": 0.8084092810481983,
+      "pain_precision": 0.8356471448809762,
+      "pain_recall": 0.7835648148148149,
+      "auc": 0.7905414094650206,
+      "confusion_2x2": [
+        [
+          300,
+          132
+        ],
+        [
+          187,
+          677
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.5300925925925926,
+    0.5092592592592592,
+    0.4490740740740741
+  ],
+  "balanced_acc_std": 0.03435158840980253,
+  "train_seconds": 874.4815621376038,
+  "inference_seconds": 0.003647486368815104,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "encoder_type": "gru",
+      "family": "multi_stream_bigru",
+      "fusion": "mean_pool",
+      "fusion_dropout": 0.2,
+      "per_channel_hidden": 56,
+      "per_channel_layers": 2
+    },
+    "name": "iter_0017_c03_gru_meanpool_wide",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0017 c03. Co-champion r130 (gru multi_stream, 0.5340). swap_fusion late_concat->mean_pool + hidden 40->56.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 150,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 17030
+    }
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "name": "iter_0017_c02_spec_depth5",
+  "best_val_metrics": {
+    "balanced_acc": 0.5185185185185185,
+    "macro_f1": 0.4906893679234676,
+    "auc_ovr": 0.7073326581790123,
+    "ece": 0.20096417652144108,
+    "per_class_pr": {
+      "NP": [
+        0.6436781020966434,
+        0.7037037037037037
+      ],
+      "AP": [
+        0.4431338703490602,
+        0.2037037037037037
+      ],
+      "HP": [
+        0.4496765572762527,
+        0.6481481481481481
+      ]
+    },
+    "confusion_3x3": [
+      [
+        304,
+        38,
+        90
+      ],
+      [
+        91,
+        88,
+        253
+      ],
+      [
+        78,
+        74,
+        280
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7540509259259259,
+      "f1": 0.8238174550214858,
+      "pain_precision": 0.8444649354662094,
+      "pain_recall": 0.8043981481481483,
+      "auc": 0.8344425154320988,
+      "confusion_2x2": [
+        [
+          304,
+          128
+        ],
+        [
+          169,
+          695
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.5185185185185185,
+    "macro_f1": 0.4906893679234676,
+    "auc_ovr": 0.7073326581790123,
+    "ece": 0.20096417652144108,
+    "per_class_pr": {
+      "NP": [
+        0.6436781020966434,
+        0.7037037037037037
+      ],
+      "AP": [
+        0.4431338703490602,
+        0.2037037037037037
+      ],
+      "HP": [
+        0.4496765572762527,
+        0.6481481481481481
+      ]
+    },
+    "confusion_3x3": [
+      [
+        304,
+        38,
+        90
+      ],
+      [
+        91,
+        88,
+        253
+      ],
+      [
+        78,
+        74,
+        280
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7540509259259259,
+      "f1": 0.8238174550214858,
+      "pain_precision": 0.8444649354662094,
+      "pain_recall": 0.8043981481481483,
+      "auc": 0.8344425154320988,
+      "confusion_2x2": [
+        [
+          304,
+          128
+        ],
+        [
+          169,
+          695
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.5208333333333334,
+    0.5208333333333334,
+    0.5138888888888888
+  ],
+  "balanced_acc_std": 0.0032736425054933163,
+  "train_seconds": 31.10654878616333,
+  "inference_seconds": 0.0005500316619873047,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "spectrogram",
+      "fs": 100,
+      "log_scale": true,
+      "noverlap": 64,
+      "nperseg": 128
+    },
+    "model": {
+      "base_channels": 24,
+      "depth": 5,
+      "dropout": 0.3,
+      "family": "spectrogram_cnn2d"
+    },
+    "name": "iter_0017_c02_spec_depth5",
+    "preprocessing": {
+      "normalize": "per_channel_zscore"
+    },
+    "reasoning_summary": "iter_0017 c02. Champion r133. depth 3->5 + dropout 0.25->0.3: deep 2D CNN with more regularization. Structural sibling.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 90,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 17020
+    }
+  }
+}

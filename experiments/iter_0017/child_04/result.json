@@ -1,0 +1,153 @@
+{
+  "name": "iter_0017_c04_gru_maxpool_long",
+  "best_val_metrics": {
+    "balanced_acc": 0.4729938271604938,
+    "macro_f1": 0.46592281088463167,
+    "auc_ovr": 0.6529036994170095,
+    "ece": 0.050805041543495494,
+    "per_class_pr": {
+      "NP": [
+        0.613617844789697,
+        0.638888888888889
+      ],
+      "AP": [
+        0.42357193054720005,
+        0.4837962962962963
+      ],
+      "HP": [
+        0.364667784789736,
+        0.29629629629629634
+      ]
+    },
+    "confusion_3x3": [
+      [
+        276,
+        77,
+        79
+      ],
+      [
+        84,
+        209,
+        139
+      ],
+      [
+        97,
+        207,
+        128
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7146990740740741,
+      "f1": 0.8006082271778784,
+      "pain_precision": 0.8132467180265754,
+      "pain_recall": 0.7905092592592592,
+      "auc": 0.7604970421810698,
+      "confusion_2x2": [
+        [
+          276,
+          156
+        ],
+        [
+          181,
+          683
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.4729938271604938,
+    "macro_f1": 0.46592281088463167,
+    "auc_ovr": 0.6529036994170095,
+    "ece": 0.050805041543495494,
+    "per_class_pr": {
+      "NP": [
+        0.613617844789697,
+        0.638888888888889
+      ],
+      "AP": [
+        0.42357193054720005,
+        0.4837962962962963
+      ],
+      "HP": [
+        0.364667784789736,
+        0.29629629629629634
+      ]
+    },
+    "confusion_3x3": [
+      [
+        276,
+        77,
+        79
+      ],
+      [
+        84,
+        209,
+        139
+      ],
+      [
+        97,
+        207,
+        128
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7146990740740741,
+      "f1": 0.8006082271778784,
+      "pain_precision": 0.8132467180265754,
+      "pain_recall": 0.7905092592592592,
+      "auc": 0.7604970421810698,
+      "confusion_2x2": [
+        [
+          276,
+          156
+        ],
+        [
+          181,
+          683
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.4791666666666667,
+    0.4930555555555555,
+    0.4467592592592593
+  ],
+  "balanced_acc_std": 0.01939784736107487,
+  "train_seconds": 1146.822244644165,
+  "inference_seconds": 0.0036600430806477866,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "encoder_type": "gru",
+      "family": "multi_stream_bigru",
+      "fusion": "max_pool",
+      "fusion_dropout": 0.2,
+      "per_channel_hidden": 40,
+      "per_channel_layers": 2
+    },
+    "name": "iter_0017_c04_gru_maxpool_long",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0017 c04. Co-champion r130. swap_fusion late_concat->max_pool + epochs 150->200. Structural sibling.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 200,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 17040
+    }
+  }
+}
