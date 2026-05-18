@@ -1,0 +1,31 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "encoder_type": "gru",
+    "family": "multi_stream_bigru",
+    "fusion": "late_concat",
+    "fusion_dropout": 0.2,
+    "per_channel_hidden": 40,
+    "per_channel_layers": 2
+  },
+  "name": "iter_0016_c02_gru_champion_3seed",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0016 c02. The plain-gru multi_stream champion config (r_00000089 hidden=40, gru, late_concat, focal=1.0) at epochs 150, n_seeds=3. We NEVER measured the plain champion at n_seeds=3 -- only structural mutations of it. This is the missing trustworthy baseline.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 150,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "n_seeds": 3,
+    "optimizer": "adam",
+    "seed": 16020
+  }
+}

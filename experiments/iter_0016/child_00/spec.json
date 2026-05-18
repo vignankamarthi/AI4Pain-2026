@@ -1,0 +1,35 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": {
+    "family": "hrv_aux",
+    "fs": 100
+  },
+  "model": {
+    "encoder_type": "transformer",
+    "family": "multi_stream_aux",
+    "fusion": "late_concat",
+    "fusion_dropout": 0.2,
+    "hrv_hidden": 32,
+    "per_channel_hidden": 40,
+    "per_channel_layers": 2
+  },
+  "name": "iter_0016_c00_aux_transformer_enc",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0016 c00. Mutation of champion r_00000123 (multi_stream_aux 0.5108). swap_encoder gru->transformer + epochs 150. Combines the two iter_0015 winners: aux HRV side-input (0.5108) + transformer encoder (0.5031).",
+  "training": {
+    "batch_size": 32,
+    "epochs": 150,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "n_seeds": 3,
+    "optimizer": "adam",
+    "seed": 16000
+  }
+}

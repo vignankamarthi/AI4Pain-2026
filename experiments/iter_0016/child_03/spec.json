@@ -1,0 +1,31 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "encoder_type": "transformer",
+    "family": "multi_stream_bigru",
+    "fusion": "late_concat",
+    "fusion_dropout": 0.2,
+    "per_channel_hidden": 40,
+    "per_channel_layers": 2
+  },
+  "name": "iter_0016_c03_bigru_transformer_enc",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0016 c03. Follow-up of r_00000121 (swap_encoder:transformer 0.5031). transformer encoder + epochs 150. Structural sibling of c02 (gru vs transformer encoder).",
+  "training": {
+    "batch_size": 32,
+    "epochs": 150,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "n_seeds": 3,
+    "optimizer": "adam",
+    "seed": 16030
+  }
+}

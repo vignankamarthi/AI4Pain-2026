@@ -1,0 +1,30 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": null,
+  "model": {
+    "d_model": 96,
+    "dropout": 0.15,
+    "family": "transformer",
+    "ff_dim": 192,
+    "num_heads": 4,
+    "num_layers": 4
+  },
+  "name": "iter_0016_c06_transformer_wide",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0016 c06. transformer family: d_model 64->96, num_layers 3->4, epochs 150. Follow-up of transformer_deep (0.4753). Diversity slot.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 150,
+    "loss": "ce_class_balanced",
+    "lr": 0.0005,
+    "n_seeds": 3,
+    "optimizer": "adamw",
+    "seed": 16060
+  }
+}

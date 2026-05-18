@@ -1,0 +1,77 @@
+{
+  "experiments": [
+    {
+      "run_id": "r_00000128",
+      "run_dir": "experiments/iter_0016/child_00",
+      "island": 4,
+      "family": "multi_stream_aux",
+      "parent": "r_00000123",
+      "pass": "iter_0016",
+      "tag": "aux+transformer_enc"
+    },
+    {
+      "run_id": "r_00000129",
+      "run_dir": "experiments/iter_0016/child_01",
+      "island": 4,
+      "family": "multi_stream_aux",
+      "parent": "r_00000123",
+      "pass": "iter_0016",
+      "tag": "aux+attention_fusion"
+    },
+    {
+      "run_id": "r_00000130",
+      "run_dir": "experiments/iter_0016/child_02",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000089",
+      "pass": "iter_0016",
+      "tag": "gru_champion_3seed"
+    },
+    {
+      "run_id": "r_00000131",
+      "run_dir": "experiments/iter_0016/child_03",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000121",
+      "pass": "iter_0016",
+      "tag": "bigru+transformer_enc"
+    },
+    {
+      "run_id": "r_00000132",
+      "run_dir": "experiments/iter_0016/child_04",
+      "island": 6,
+      "family": "spectrogram_cnn2d",
+      "parent": "r_00000126",
+      "pass": "iter_0016",
+      "tag": "spec_deep"
+    },
+    {
+      "run_id": "r_00000133",
+      "run_dir": "experiments/iter_0016/child_05",
+      "island": 6,
+      "family": "spectrogram_cnn2d",
+      "parent": "r_00000126",
+      "pass": "iter_0016",
+      "tag": "spec_nperseg128"
+    },
+    {
+      "run_id": "r_00000134",
+      "run_dir": "experiments/iter_0016/child_06",
+      "island": 2,
+      "family": "transformer",
+      "parent": "r_00000124",
+      "pass": "iter_0016",
+      "tag": "transformer_wide"
+    },
+    {
+      "run_id": "r_00000135",
+      "run_dir": "experiments/iter_0016/child_07",
+      "island": 5,
+      "family": "spectrogram_cnn2d",
+      "parent": "r_00000123",
+      "pass": "iter_0016",
+      "tag": "graft_family",
+      "graft_coherence": true
+    }
+  ]
+}

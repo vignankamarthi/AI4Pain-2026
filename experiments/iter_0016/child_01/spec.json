@@ -1,0 +1,35 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": {
+    "family": "hrv_aux",
+    "fs": 100
+  },
+  "model": {
+    "encoder_type": "gru",
+    "family": "multi_stream_aux",
+    "fusion": "attention_pool",
+    "fusion_dropout": 0.2,
+    "hrv_hidden": 64,
+    "per_channel_hidden": 40,
+    "per_channel_layers": 2
+  },
+  "name": "iter_0016_c01_aux_attention_fusion",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0016 c01. Mutation of r_00000123. swap_fusion late_concat->attention_pool + hrv_hidden 32->64 + epochs 150. Structural sibling #2.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 150,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "n_seeds": 3,
+    "optimizer": "adam",
+    "seed": 16010
+  }
+}

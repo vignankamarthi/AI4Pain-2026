@@ -1,0 +1,36 @@
+{
+  "data": {},
+  "decode": {
+    "strategy": "argmax"
+  },
+  "feature_extraction": {
+    "family": "spectrogram",
+    "fs": 100,
+    "log_scale": true,
+    "noverlap": 32,
+    "nperseg": 64
+  },
+  "graft_coherence": true,
+  "model": {
+    "base_channels": 24,
+    "depth": 3,
+    "dropout": 0.25,
+    "family": "spectrogram_cnn2d"
+  },
+  "name": "iter_0016_c07_graft",
+  "preprocessing": {
+    "normalize": "per_channel_zscore",
+    "padding": "right_zero_to_global_max"
+  },
+  "reasoning_summary": "iter_0016 c07. graft_family crossover of champion r_00000123 (multi_stream_aux) x r_00000126 (spectrogram_cnn2d), rng seed 1600. graft_family crossover of A='A' x B='B'. Gene origins: preprocessing<-A, feature_extraction<-B, model<-B, training<-B, decode<-B. predicted_coherence=True. n_seeds=3.",
+  "training": {
+    "batch_size": 32,
+    "epochs": 60,
+    "focal_gamma": 1.0,
+    "loss": "ce_class_balanced",
+    "lr": 0.001,
+    "n_seeds": 3,
+    "optimizer": "adam",
+    "seed": 16070
+  }
+}
