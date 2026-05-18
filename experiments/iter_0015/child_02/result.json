@@ -1,0 +1,153 @@
+{
+  "name": "iter_0015_c02_swapfusion_attention",
+  "best_val_metrics": {
+    "balanced_acc": 0.46913580246913583,
+    "macro_f1": 0.44738772764643064,
+    "auc_ovr": 0.6571341306584363,
+    "ece": 0.04857388410119362,
+    "per_class_pr": {
+      "NP": [
+        0.5191070475057308,
+        0.6828703703703703
+      ],
+      "AP": [
+        0.4224163667143915,
+        0.4953703703703704
+      ],
+      "HP": [
+        0.4510504656703487,
+        0.22916666666666666
+      ]
+    },
+    "confusion_3x3": [
+      [
+        295,
+        102,
+        35
+      ],
+      [
+        128,
+        214,
+        90
+      ],
+      [
+        141,
+        192,
+        99
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6857638888888888,
+      "f1": 0.7462538853124504,
+      "pain_precision": 0.8177835236658767,
+      "pain_recall": 0.6886574074074074,
+      "auc": 0.7429349922839507,
+      "confusion_2x2": [
+        [
+          295,
+          137
+        ],
+        [
+          269,
+          595
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.46913580246913583,
+    "macro_f1": 0.44738772764643064,
+    "auc_ovr": 0.6571341306584363,
+    "ece": 0.04857388410119362,
+    "per_class_pr": {
+      "NP": [
+        0.5191070475057308,
+        0.6828703703703703
+      ],
+      "AP": [
+        0.4224163667143915,
+        0.4953703703703704
+      ],
+      "HP": [
+        0.4510504656703487,
+        0.22916666666666666
+      ]
+    },
+    "confusion_3x3": [
+      [
+        295,
+        102,
+        35
+      ],
+      [
+        128,
+        214,
+        90
+      ],
+      [
+        141,
+        192,
+        99
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6857638888888888,
+      "f1": 0.7462538853124504,
+      "pain_precision": 0.8177835236658767,
+      "pain_recall": 0.6886574074074074,
+      "auc": 0.7429349922839507,
+      "confusion_2x2": [
+        [
+          295,
+          137
+        ],
+        [
+          269,
+          595
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.46296296296296297,
+    0.525462962962963,
+    0.41898148148148145
+  ],
+  "balanced_acc_std": 0.043689468107691594,
+  "train_seconds": 629.9648854732513,
+  "inference_seconds": 0.0037528673807779946,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "encoder_type": "gru",
+      "family": "multi_stream_bigru",
+      "fusion": "attention_pool",
+      "fusion_dropout": 0.2,
+      "per_channel_hidden": 40,
+      "per_channel_layers": 2
+    },
+    "name": "iter_0015_c02_swapfusion_attention",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0015 c02. swap_fusion late_concat->attention_pool on champion r_00000089. Learned attention over the 4 channel embeddings. Structural op #3. n_seeds=3.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 110,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 15020
+    }
+  }
+}

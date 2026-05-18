@@ -1,0 +1,153 @@
+{
+  "name": "iter_0015_c00_swapenc_lstm",
+  "best_val_metrics": {
+    "balanced_acc": 0.4467592592592593,
+    "macro_f1": 0.4274769104860659,
+    "auc_ovr": 0.6368393132716049,
+    "ece": 0.05684296947754458,
+    "per_class_pr": {
+      "NP": [
+        0.4809242875878074,
+        0.7222222222222223
+      ],
+      "AP": [
+        0.3960345087140293,
+        0.3125
+      ],
+      "HP": [
+        0.42812680627806676,
+        0.3055555555555555
+      ]
+    },
+    "confusion_3x3": [
+      [
+        312,
+        73,
+        47
+      ],
+      [
+        168,
+        135,
+        129
+      ],
+      [
+        168,
+        132,
+        132
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6666666666666666,
+      "f1": 0.6985770533908678,
+      "pain_precision": 0.8155926611988291,
+      "pain_recall": 0.6111111111111112,
+      "auc": 0.7152215149176954,
+      "confusion_2x2": [
+        [
+          312,
+          120
+        ],
+        [
+          336,
+          528
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.4467592592592593,
+    "macro_f1": 0.4274769104860659,
+    "auc_ovr": 0.6368393132716049,
+    "ece": 0.05684296947754458,
+    "per_class_pr": {
+      "NP": [
+        0.4809242875878074,
+        0.7222222222222223
+      ],
+      "AP": [
+        0.3960345087140293,
+        0.3125
+      ],
+      "HP": [
+        0.42812680627806676,
+        0.3055555555555555
+      ]
+    },
+    "confusion_3x3": [
+      [
+        312,
+        73,
+        47
+      ],
+      [
+        168,
+        135,
+        129
+      ],
+      [
+        168,
+        132,
+        132
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6666666666666666,
+      "f1": 0.6985770533908678,
+      "pain_precision": 0.8155926611988291,
+      "pain_recall": 0.6111111111111112,
+      "auc": 0.7152215149176954,
+      "confusion_2x2": [
+        [
+          312,
+          120
+        ],
+        [
+          336,
+          528
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.46759259259259256,
+    0.4328703703703704,
+    0.4398148148148149
+  ],
+  "balanced_acc_std": 0.01500171457964779,
+  "train_seconds": 255.7594404220581,
+  "inference_seconds": 0.003574848175048828,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "encoder_type": "lstm",
+      "family": "multi_stream_bigru",
+      "fusion": "late_concat",
+      "fusion_dropout": 0.2,
+      "per_channel_hidden": 40,
+      "per_channel_layers": 2
+    },
+    "name": "iter_0015_c00_swapenc_lstm",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0015 c00. swap_encoder gru->lstm on champion r_00000089. Structural op #1 of 3 multi_stream siblings (blender rule). n_seeds=3.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 110,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 15000
+    }
+  }
+}

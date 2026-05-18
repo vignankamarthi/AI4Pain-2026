@@ -1,0 +1,152 @@
+{
+  "name": "iter_0015_c04_transformer_deep",
+  "best_val_metrics": {
+    "balanced_acc": 0.4753086419753087,
+    "macro_f1": 0.45826494248352595,
+    "auc_ovr": 0.6454903978052126,
+    "ece": 0.21721783703492012,
+    "per_class_pr": {
+      "NP": [
+        0.5105658173136103,
+        0.7106481481481483
+      ],
+      "AP": [
+        0.4433760683760684,
+        0.28935185185185186
+      ],
+      "HP": [
+        0.441665670965034,
+        0.4259259259259259
+      ]
+    },
+    "confusion_3x3": [
+      [
+        307,
+        53,
+        72
+      ],
+      [
+        148,
+        125,
+        159
+      ],
+      [
+        146,
+        102,
+        184
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6851851851851851,
+      "f1": 0.7313033784529642,
+      "pain_precision": 0.8203888082603653,
+      "pain_recall": 0.6597222222222222,
+      "auc": 0.7266107253086419,
+      "confusion_2x2": [
+        [
+          307,
+          125
+        ],
+        [
+          294,
+          570
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.4753086419753087,
+    "macro_f1": 0.45826494248352595,
+    "auc_ovr": 0.6454903978052126,
+    "ece": 0.21721783703492012,
+    "per_class_pr": {
+      "NP": [
+        0.5105658173136103,
+        0.7106481481481483
+      ],
+      "AP": [
+        0.4433760683760684,
+        0.28935185185185186
+      ],
+      "HP": [
+        0.441665670965034,
+        0.4259259259259259
+      ]
+    },
+    "confusion_3x3": [
+      [
+        307,
+        53,
+        72
+      ],
+      [
+        148,
+        125,
+        159
+      ],
+      [
+        146,
+        102,
+        184
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6851851851851851,
+      "f1": 0.7313033784529642,
+      "pain_precision": 0.8203888082603653,
+      "pain_recall": 0.6597222222222222,
+      "auc": 0.7266107253086419,
+      "confusion_2x2": [
+        [
+          307,
+          125
+        ],
+        [
+          294,
+          570
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.4537037037037037,
+    0.46759259259259256,
+    0.5046296296296297
+  ],
+  "balanced_acc_std": 0.021494426353679204,
+  "train_seconds": 564.0813810825348,
+  "inference_seconds": 0.0011711915334065754,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "d_model": 64,
+      "dropout": 0.1,
+      "family": "transformer",
+      "ff_dim": 128,
+      "num_heads": 4,
+      "num_layers": 4
+    },
+    "name": "iter_0015_c04_transformer_deep",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0015 c04. transformer family, num_layers 3->4, epochs 110->130. Diversity slot: revive the transformer island (best was only 0.449). n_seeds=3.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 130,
+      "loss": "ce_class_balanced",
+      "lr": 0.0005,
+      "n_seeds": 3,
+      "optimizer": "adamw",
+      "seed": 15040
+    }
+  }
+}

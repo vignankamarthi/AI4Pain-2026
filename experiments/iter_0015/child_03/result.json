@@ -1,0 +1,157 @@
+{
+  "name": "iter_0015_c03_add_aux_stream",
+  "best_val_metrics": {
+    "balanced_acc": 0.5108024691358025,
+    "macro_f1": 0.508699031675376,
+    "auc_ovr": 0.69702449845679,
+    "ece": 0.046289541816085945,
+    "per_class_pr": {
+      "NP": [
+        0.6497781702914711,
+        0.6597222222222222
+      ],
+      "AP": [
+        0.45379033377692446,
+        0.4212962962962963
+      ],
+      "HP": [
+        0.4351420753087576,
+        0.45138888888888884
+      ]
+    },
+    "confusion_3x3": [
+      [
+        285,
+        62,
+        85
+      ],
+      [
+        81,
+        182,
+        169
+      ],
+      [
+        78,
+        159,
+        195
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7378472222222223,
+      "f1": 0.820865689495264,
+      "pain_precision": 0.8280301416723143,
+      "pain_recall": 0.8159722222222222,
+      "auc": 0.8072354038065844,
+      "confusion_2x2": [
+        [
+          285,
+          147
+        ],
+        [
+          159,
+          705
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.5108024691358025,
+    "macro_f1": 0.508699031675376,
+    "auc_ovr": 0.69702449845679,
+    "ece": 0.046289541816085945,
+    "per_class_pr": {
+      "NP": [
+        0.6497781702914711,
+        0.6597222222222222
+      ],
+      "AP": [
+        0.45379033377692446,
+        0.4212962962962963
+      ],
+      "HP": [
+        0.4351420753087576,
+        0.45138888888888884
+      ]
+    },
+    "confusion_3x3": [
+      [
+        285,
+        62,
+        85
+      ],
+      [
+        81,
+        182,
+        169
+      ],
+      [
+        78,
+        159,
+        195
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7378472222222223,
+      "f1": 0.820865689495264,
+      "pain_precision": 0.8280301416723143,
+      "pain_recall": 0.8159722222222222,
+      "auc": 0.8072354038065844,
+      "confusion_2x2": [
+        [
+          285,
+          147
+        ],
+        [
+          159,
+          705
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.5046296296296297,
+    0.5046296296296297,
+    0.523148148148148
+  ],
+  "balanced_acc_std": 0.008729713347982003,
+  "train_seconds": 616.4766070842743,
+  "inference_seconds": 0.0038722356160481772,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "hrv_aux",
+      "fs": 100
+    },
+    "model": {
+      "encoder_type": "gru",
+      "family": "multi_stream_aux",
+      "fusion": "late_concat",
+      "fusion_dropout": 0.2,
+      "hrv_hidden": 32,
+      "per_channel_hidden": 40,
+      "per_channel_layers": 2
+    },
+    "name": "iter_0015_c03_add_aux_stream",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0015 c03. add_aux_stream: champion multi_stream body + 26-dim HRV side-input MLP. First multi_stream_aux child. n_seeds=3.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 110,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 15030
+    }
+  }
+}

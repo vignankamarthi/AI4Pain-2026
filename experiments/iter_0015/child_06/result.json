@@ -1,0 +1,156 @@
+{
+  "name": "iter_0015_c06_spectrogram_deep",
+  "best_val_metrics": {
+    "balanced_acc": 0.4915123456790123,
+    "macro_f1": 0.46944228906526453,
+    "auc_ovr": 0.6814986282578875,
+    "ece": 0.11381037648261332,
+    "per_class_pr": {
+      "NP": [
+        0.6079889381849307,
+        0.6527777777777778
+      ],
+      "AP": [
+        0.4176124431484081,
+        0.3796296296296296
+      ],
+      "HP": [
+        0.42144892144892143,
+        0.4421296296296296
+      ]
+    },
+    "confusion_3x3": [
+      [
+        282,
+        66,
+        84
+      ],
+      [
+        99,
+        164,
+        169
+      ],
+      [
+        85,
+        156,
+        191
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7199074074074074,
+      "f1": 0.8024487590395705,
+      "pain_precision": 0.8197500030833363,
+      "pain_recall": 0.7870370370370371,
+      "auc": 0.7942467206790124,
+      "confusion_2x2": [
+        [
+          282,
+          150
+        ],
+        [
+          184,
+          680
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.4915123456790123,
+    "macro_f1": 0.46944228906526453,
+    "auc_ovr": 0.6814986282578875,
+    "ece": 0.11381037648261332,
+    "per_class_pr": {
+      "NP": [
+        0.6079889381849307,
+        0.6527777777777778
+      ],
+      "AP": [
+        0.4176124431484081,
+        0.3796296296296296
+      ],
+      "HP": [
+        0.42144892144892143,
+        0.4421296296296296
+      ]
+    },
+    "confusion_3x3": [
+      [
+        282,
+        66,
+        84
+      ],
+      [
+        99,
+        164,
+        169
+      ],
+      [
+        85,
+        156,
+        191
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7199074074074074,
+      "f1": 0.8024487590395705,
+      "pain_precision": 0.8197500030833363,
+      "pain_recall": 0.7870370370370371,
+      "auc": 0.7942467206790124,
+      "confusion_2x2": [
+        [
+          282,
+          150
+        ],
+        [
+          184,
+          680
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.49074074074074076,
+    0.4953703703703704,
+    0.4884259259259259
+  ],
+  "balanced_acc_std": 0.0028870813169552343,
+  "train_seconds": 17.445393323898315,
+  "inference_seconds": 0.0004273255666097005,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "spectrogram",
+      "fs": 100,
+      "log_scale": true,
+      "noverlap": 32,
+      "nperseg": 64
+    },
+    "model": {
+      "base_channels": 24,
+      "depth": 3,
+      "dropout": 0.25,
+      "family": "spectrogram_cnn2d"
+    },
+    "name": "iter_0015_c06_spectrogram_deep",
+    "preprocessing": {
+      "normalize": "per_channel_zscore"
+    },
+    "reasoning_summary": "iter_0015 c06. spectrogram_cnn2d revived: base_channels 16->24, depth 2->3, dropout 0.25, focal_gamma=1.0, epochs 30->60. Never mutated before. n_seeds=3.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 60,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 15060
+    }
+  }
+}

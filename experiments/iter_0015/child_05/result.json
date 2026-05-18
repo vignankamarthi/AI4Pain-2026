@@ -1,0 +1,153 @@
+{
+  "name": "iter_0015_c05_graft",
+  "best_val_metrics": {
+    "balanced_acc": 0.4375,
+    "macro_f1": 0.4136746522152939,
+    "auc_ovr": 0.6045109417866942,
+    "ece": 0.07605004581956215,
+    "per_class_pr": {
+      "NP": [
+        0.4661690546865512,
+        0.6481481481481483
+      ],
+      "AP": [
+        0.4214516147898609,
+        0.4305555555555555
+      ],
+      "HP": [
+        0.4016235420535317,
+        0.23379629629629628
+      ]
+    },
+    "confusion_3x3": [
+      [
+        280,
+        95,
+        57
+      ],
+      [
+        153,
+        186,
+        93
+      ],
+      [
+        168,
+        163,
+        101
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6383101851851851,
+      "f1": 0.6965026034193174,
+      "pain_precision": 0.781136521323854,
+      "pain_recall": 0.6284722222222222,
+      "auc": 0.6730806327160493,
+      "confusion_2x2": [
+        [
+          280,
+          152
+        ],
+        [
+          321,
+          543
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.4375,
+    "macro_f1": 0.4136746522152939,
+    "auc_ovr": 0.6045109417866942,
+    "ece": 0.07605004581956215,
+    "per_class_pr": {
+      "NP": [
+        0.4661690546865512,
+        0.6481481481481483
+      ],
+      "AP": [
+        0.4214516147898609,
+        0.4305555555555555
+      ],
+      "HP": [
+        0.4016235420535317,
+        0.23379629629629628
+      ]
+    },
+    "confusion_3x3": [
+      [
+        280,
+        95,
+        57
+      ],
+      [
+        153,
+        186,
+        93
+      ],
+      [
+        168,
+        163,
+        101
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6383101851851851,
+      "f1": 0.6965026034193174,
+      "pain_precision": 0.781136521323854,
+      "pain_recall": 0.6284722222222222,
+      "auc": 0.6730806327160493,
+      "confusion_2x2": [
+        [
+          280,
+          152
+        ],
+        [
+          321,
+          543
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.4236111111111111,
+    0.44675925925925924,
+    0.4421296296296296
+  ],
+  "balanced_acc_std": 0.010001143053098543,
+  "train_seconds": 362.1261966228485,
+  "inference_seconds": 0.000995635986328125,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "graft_coherence": true,
+    "model": {
+      "d_model": 64,
+      "dropout": 0.1,
+      "family": "transformer",
+      "ff_dim": 128,
+      "num_heads": 4,
+      "num_layers": 3
+    },
+    "name": "iter_0015_c05_graft",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0015 c05. graft_family crossover champion r_00000089 x transformer. model gene pinned to transformer to fill the quota slot (rng seed 151); other 4 genes fully random. graft_family crossover of A='A' x B='B'. Gene origins: preprocessing<-B, feature_extraction<-B, model<-B, training<-B, decode<-A. predicted_coherence=True. n_seeds=3.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 110,
+      "loss": "ce_class_balanced",
+      "lr": 0.0005,
+      "n_seeds": 3,
+      "optimizer": "adamw",
+      "seed": 15050
+    }
+  }
+}

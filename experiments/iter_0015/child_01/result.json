@@ -1,0 +1,153 @@
+{
+  "name": "iter_0015_c01_swapenc_transformer",
+  "best_val_metrics": {
+    "balanced_acc": 0.5030864197530865,
+    "macro_f1": 0.48196336487724073,
+    "auc_ovr": 0.6707952889231824,
+    "ece": 0.17471927799928333,
+    "per_class_pr": {
+      "NP": [
+        0.5449416595028297,
+        0.7870370370370371
+      ],
+      "AP": [
+        0.4554819251518627,
+        0.41203703703703703
+      ],
+      "HP": [
+        0.48119949715149407,
+        0.3101851851851852
+      ]
+    },
+    "confusion_3x3": [
+      [
+        340,
+        55,
+        37
+      ],
+      [
+        145,
+        178,
+        109
+      ],
+      [
+        140,
+        158,
+        134
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7285879629629631,
+      "f1": 0.7538208545940505,
+      "pain_precision": 0.8650550638494802,
+      "pain_recall": 0.670138888888889,
+      "auc": 0.7752298739711933,
+      "confusion_2x2": [
+        [
+          340,
+          92
+        ],
+        [
+          285,
+          579
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.5030864197530865,
+    "macro_f1": 0.48196336487724073,
+    "auc_ovr": 0.6707952889231824,
+    "ece": 0.17471927799928333,
+    "per_class_pr": {
+      "NP": [
+        0.5449416595028297,
+        0.7870370370370371
+      ],
+      "AP": [
+        0.4554819251518627,
+        0.41203703703703703
+      ],
+      "HP": [
+        0.48119949715149407,
+        0.3101851851851852
+      ]
+    },
+    "confusion_3x3": [
+      [
+        340,
+        55,
+        37
+      ],
+      [
+        145,
+        178,
+        109
+      ],
+      [
+        140,
+        158,
+        134
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7285879629629631,
+      "f1": 0.7538208545940505,
+      "pain_precision": 0.8650550638494802,
+      "pain_recall": 0.670138888888889,
+      "auc": 0.7752298739711933,
+      "confusion_2x2": [
+        [
+          340,
+          92
+        ],
+        [
+          285,
+          579
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.5000000000000001,
+    0.513888888888889,
+    0.4953703703703704
+  ],
+  "balanced_acc_std": 0.007868857274062942,
+  "train_seconds": 1719.4518887996674,
+  "inference_seconds": 0.002547661463419596,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "encoder_type": "transformer",
+      "family": "multi_stream_bigru",
+      "fusion": "late_concat",
+      "fusion_dropout": 0.2,
+      "per_channel_hidden": 40,
+      "per_channel_layers": 2
+    },
+    "name": "iter_0015_c01_swapenc_transformer",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0015 c01. swap_encoder gru->transformer on champion r_00000089. Per-channel mini-Transformer encoders. Structural op #2. n_seeds=3.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 110,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 15010
+    }
+  }
+}
