@@ -1,0 +1,76 @@
+{
+  "experiments": [
+    {
+      "run_id": "r_00000168",
+      "run_dir": "experiments/iter_0020/child_00",
+      "island": 6,
+      "family": "spectrogram_cnn2d",
+      "parent": "r_00000133",
+      "pass": "iter_0020",
+      "tag": "cwt_spectrogram"
+    },
+    {
+      "run_id": "r_00000169",
+      "run_dir": "experiments/iter_0020/child_01",
+      "island": 6,
+      "family": "spectrogram_cnn2d",
+      "parent": "r_00000133",
+      "pass": "iter_0020",
+      "tag": "cwt_residual"
+    },
+    {
+      "run_id": "r_00000170",
+      "run_dir": "experiments/iter_0020/child_02",
+      "island": 6,
+      "family": "spectrogram_cnn2d",
+      "parent": "r_00000133",
+      "pass": "iter_0020",
+      "tag": "cwt_64scales"
+    },
+    {
+      "run_id": "r_00000171",
+      "run_dir": "experiments/iter_0020/child_03",
+      "island": 8,
+      "family": "dual_ensemble",
+      "parent": "r_00000146",
+      "pass": "iter_0020",
+      "tag": "dual_cwt"
+    },
+    {
+      "run_id": "r_00000172",
+      "run_dir": "experiments/iter_0020/child_04",
+      "island": 8,
+      "family": "dual_ensemble",
+      "parent": "r_00000146",
+      "pass": "iter_0020",
+      "tag": "dual_cwt_residual"
+    },
+    {
+      "run_id": "r_00000173",
+      "run_dir": "experiments/iter_0020/child_05",
+      "island": 8,
+      "family": "dual_ensemble",
+      "parent": "r_00000146",
+      "pass": "iter_0020",
+      "tag": "dual_stft_control"
+    },
+    {
+      "run_id": "r_00000174",
+      "run_dir": "experiments/iter_0020/child_06",
+      "island": 3,
+      "family": "multi_stream_bigru",
+      "parent": "r_00000130",
+      "pass": "iter_0020",
+      "tag": "gru_champion"
+    },
+    {
+      "run_id": "r_00000175",
+      "run_dir": "experiments/iter_0020/child_07",
+      "island": 7,
+      "family": "hrv_features_mlp",
+      "parent": "r_00000082",
+      "pass": "iter_0020",
+      "tag": "hrv_wide"
+    }
+  ]
+}
