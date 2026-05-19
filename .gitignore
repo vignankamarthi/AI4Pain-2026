@@ -17,6 +17,7 @@ papers/
 experiments/*
 !experiments/iter_*/
 !experiments/champion_eval/
+!experiments/submission_*/
 # Canonical workflow: experiment artifacts travel ONLY via git push/pull.
 # Cluster commits result.json + trace.jsonl back; Mac pulls; Claude reads
 # locally. NO terminal forensics, NO paste-text-into-chat (ANTIPATTERN 11a).
