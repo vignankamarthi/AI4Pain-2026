@@ -1,0 +1,97 @@
+{
+  "name": "submission_02_multi_stream_bigru",
+  "submission": true,
+  "best_val_metrics": {
+    "balanced_acc": 0.5254629629629629,
+    "macro_f1": 0.5212403374566,
+    "per_class_pr": {
+      "NP": [
+        0.7348484848484849,
+        0.6736111111111112
+      ],
+      "AP": [
+        0.4536082474226804,
+        0.3055555555555556
+      ],
+      "HP": [
+        0.4236453201970443,
+        0.5972222222222222
+      ]
+    },
+    "confusion_3x3": [
+      [
+        97,
+        13,
+        34
+      ],
+      [
+        17,
+        44,
+        83
+      ],
+      [
+        18,
+        40,
+        86
+      ]
+    ],
+    "auc_ovr": 0.7069187242798355,
+    "ece": 0.1021226319587893,
+    "binary": {
+      "balanced_acc": 0.7760416666666667,
+      "f1": 0.8605442176870748,
+      "pain_precision": 0.8433333333333334,
+      "pain_recall": 0.8784722222222222,
+      "auc": 0.8128616898148148,
+      "confusion_2x2": [
+        [
+          97,
+          47
+        ],
+        [
+          35,
+          253
+        ]
+      ]
+    }
+  },
+  "test_n_trials": 432,
+  "test_pred_class_counts": {
+    "NP": 134,
+    "AP": 72,
+    "HP": 226
+  },
+  "test_predictions_csv": "experiments/submission_02/test_predictions.csv",
+  "train_seconds": 268.14879417419434,
+  "device": "cuda",
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "encoder_type": "gru",
+      "family": "multi_stream_bigru",
+      "fusion": "late_concat",
+      "fusion_dropout": 0.2,
+      "per_channel_hidden": 40,
+      "per_channel_layers": 2
+    },
+    "name": "submission_02_multi_stream_bigru",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "HIP-G submission #2. multi_stream BiGRU co-champion config (r130). 1D temporal architecture -- maximally different from the 2D spectrogram of submission #1.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 150,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "optimizer": "adam",
+      "seed": 20002
+    }
+  }
+}

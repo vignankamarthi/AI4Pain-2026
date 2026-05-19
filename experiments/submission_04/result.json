@@ -1,0 +1,102 @@
+{
+  "name": "submission_04_spectrogram_residual",
+  "submission": true,
+  "best_val_metrics": {
+    "balanced_acc": 0.5208333333333334,
+    "macro_f1": 0.5038721232744305,
+    "per_class_pr": {
+      "NP": [
+        0.6226415094339622,
+        0.6875
+      ],
+      "AP": [
+        0.4,
+        0.25
+      ],
+      "HP": [
+        0.4918032786885246,
+        0.625
+      ]
+    },
+    "confusion_3x3": [
+      [
+        99,
+        23,
+        22
+      ],
+      [
+        37,
+        36,
+        71
+      ],
+      [
+        23,
+        31,
+        90
+      ]
+    ],
+    "auc_ovr": 0.709836355452675,
+    "ece": 0.15648211152465252,
+    "binary": {
+      "balanced_acc": 0.7395833333333333,
+      "f1": 0.8128342245989305,
+      "pain_precision": 0.8351648351648352,
+      "pain_recall": 0.7916666666666666,
+      "auc": 0.8226273148148148,
+      "confusion_2x2": [
+        [
+          99,
+          45
+        ],
+        [
+          60,
+          228
+        ]
+      ]
+    }
+  },
+  "test_n_trials": 432,
+  "test_pred_class_counts": {
+    "NP": 151,
+    "AP": 84,
+    "HP": 197
+  },
+  "test_predictions_csv": "experiments/submission_04/test_predictions.csv",
+  "train_seconds": 14.37428092956543,
+  "device": "cuda",
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "spectrogram",
+      "fs": 100,
+      "log_scale": true,
+      "noverlap": 64,
+      "nperseg": 128,
+      "transform": "stft"
+    },
+    "model": {
+      "base_channels": 32,
+      "depth": 4,
+      "dropout": 0.25,
+      "family": "spectrogram_cnn2d",
+      "use_residual": true
+    },
+    "name": "submission_04_spectrogram_residual",
+    "preprocessing": {
+      "normalize": "per_channel_zscore"
+    },
+    "reasoning_summary": "HIP-G submission #4. Residual spectrogram CNN (r148): 2D STFT pipeline with ResNet-style blocks (depth 4) -- a distinct function class from the plain spectrogram of #1.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 90,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "optimizer": "adam",
+      "seed": 20004
+    }
+  }
+}

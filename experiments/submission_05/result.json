@@ -1,0 +1,38 @@
+{
+  "name": "submission_05_prediction_ensemble",
+  "submission": true,
+  "ensemble": true,
+  "components": [
+    "experiments/submission_01",
+    "experiments/submission_02",
+    "experiments/submission_03",
+    "experiments/submission_04"
+  ],
+  "test_n_trials": 432,
+  "test_pred_class_counts": {
+    "NP": 161,
+    "AP": 92,
+    "HP": 179
+  },
+  "test_predictions_csv": "experiments/submission_05/test_predictions.csv",
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "components": [
+        "experiments/submission_01",
+        "experiments/submission_02",
+        "experiments/submission_03",
+        "experiments/submission_04"
+      ],
+      "family": "prediction_ensemble"
+    },
+    "name": "submission_05_prediction_ensemble",
+    "preprocessing": {},
+    "reasoning_summary": "HIP-G submission #5. Prediction ensemble: averages the per-trial class probabilities of submissions #1-#4 (independently trained), argmax. Variance reduction across decorrelated models.",
+    "training": {}
+  }
+}
