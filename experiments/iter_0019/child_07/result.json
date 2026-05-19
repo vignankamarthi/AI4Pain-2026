@@ -1,0 +1,152 @@
+{
+  "name": "iter_0019_c07_hrv_wide",
+  "best_val_metrics": {
+    "balanced_acc": 0.4251543209876543,
+    "macro_f1": 0.4211132695316191,
+    "auc_ovr": 0.5893990054869684,
+    "ece": 0.042632757674580746,
+    "per_class_pr": {
+      "NP": [
+        0.4617963955326594,
+        0.5324074074074074
+      ],
+      "AP": [
+        0.4070294784580499,
+        0.3703703703703704
+      ],
+      "HP": [
+        0.40586206645928424,
+        0.3726851851851852
+      ]
+    },
+    "confusion_3x3": [
+      [
+        230,
+        105,
+        97
+      ],
+      [
+        130,
+        160,
+        142
+      ],
+      [
+        142,
+        129,
+        161
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6087962962962963,
+      "f1": 0.7129620901755845,
+      "pain_precision": 0.7455090564767352,
+      "pain_recall": 0.6851851851851851,
+      "auc": 0.6403356481481481,
+      "confusion_2x2": [
+        [
+          230,
+          202
+        ],
+        [
+          272,
+          592
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.4251543209876543,
+    "macro_f1": 0.4211132695316191,
+    "auc_ovr": 0.5893990054869684,
+    "ece": 0.042632757674580746,
+    "per_class_pr": {
+      "NP": [
+        0.4617963955326594,
+        0.5324074074074074
+      ],
+      "AP": [
+        0.4070294784580499,
+        0.3703703703703704
+      ],
+      "HP": [
+        0.40586206645928424,
+        0.3726851851851852
+      ]
+    },
+    "confusion_3x3": [
+      [
+        230,
+        105,
+        97
+      ],
+      [
+        130,
+        160,
+        142
+      ],
+      [
+        142,
+        129,
+        161
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6087962962962963,
+      "f1": 0.7129620901755845,
+      "pain_precision": 0.7455090564767352,
+      "pain_recall": 0.6851851851851851,
+      "auc": 0.6403356481481481,
+      "confusion_2x2": [
+        [
+          230,
+          202
+        ],
+        [
+          272,
+          592
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.42129629629629634,
+    0.4236111111111111,
+    0.4305555555555555
+  ],
+  "balanced_acc_std": 0.0039344286370314435,
+  "train_seconds": 15.094031810760498,
+  "inference_seconds": 0.00020678838094075522,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "hrv_features",
+      "fs": 100
+    },
+    "model": {
+      "dropout": 0.3,
+      "family": "hrv_features_mlp",
+      "hidden": 128
+    },
+    "name": "iter_0019_c07_hrv_wide",
+    "preprocessing": {
+      "normalize": "per_feature_zscore"
+    },
+    "reasoning_summary": "iter_0019 c07. hrv_features_mlp wide (hidden 128). Quota 4th family + keeps the HRV signal pathway represented; not expected to win.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 80,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 19070
+    }
+  }
+}

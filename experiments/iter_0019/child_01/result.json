@@ -1,0 +1,169 @@
+{
+  "name": "iter_0019_c01_confirm_dual_baseline",
+  "best_val_metrics": {
+    "balanced_acc": 0.5291666666666667,
+    "macro_f1": 0.4921636237710734,
+    "auc_ovr": 0.7259612911522634,
+    "ece": 0.082963723068436,
+    "per_class_pr": {
+      "NP": [
+        0.6662328494254225,
+        0.7277777777777777
+      ],
+      "AP": [
+        0.43057355937415903,
+        0.18472222222222223
+      ],
+      "HP": [
+        0.4599676311074708,
+        0.675
+      ]
+    },
+    "confusion_3x3": [
+      [
+        524,
+        59,
+        137
+      ],
+      [
+        154,
+        133,
+        433
+      ],
+      [
+        117,
+        117,
+        486
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7697916666666667,
+      "f1": 0.8328192757629548,
+      "pain_precision": 0.8575951287148156,
+      "pain_recall": 0.8118055555555556,
+      "auc": 0.8535542052469134,
+      "confusion_2x2": [
+        [
+          524,
+          196
+        ],
+        [
+          271,
+          1169
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.5291666666666667,
+    "macro_f1": 0.4921636237710734,
+    "auc_ovr": 0.7259612911522634,
+    "ece": 0.082963723068436,
+    "per_class_pr": {
+      "NP": [
+        0.6662328494254225,
+        0.7277777777777777
+      ],
+      "AP": [
+        0.43057355937415903,
+        0.18472222222222223
+      ],
+      "HP": [
+        0.4599676311074708,
+        0.675
+      ]
+    },
+    "confusion_3x3": [
+      [
+        524,
+        59,
+        137
+      ],
+      [
+        154,
+        133,
+        433
+      ],
+      [
+        117,
+        117,
+        486
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7697916666666667,
+      "f1": 0.8328192757629548,
+      "pain_precision": 0.8575951287148156,
+      "pain_recall": 0.8118055555555556,
+      "auc": 0.8535542052469134,
+      "confusion_2x2": [
+        [
+          524,
+          196
+        ],
+        [
+          271,
+          1169
+        ]
+      ]
+    }
+  },
+  "n_seeds": 5,
+  "n_seeds_completed": 5,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.5300925925925926,
+    0.5185185185185185,
+    0.5324074074074073,
+    0.5439814814814815,
+    0.5208333333333334
+  ],
+  "balanced_acc_std": 0.009095779029809493,
+  "train_seconds": 1159.0566515922546,
+  "inference_seconds": 0.0044822216033935545,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "dual_ensemble",
+      "fs": 100,
+      "log_scale": true,
+      "noverlap": 64,
+      "nperseg": 128
+    },
+    "model": {
+      "cnn_cfg": {
+        "base_channels": 24,
+        "depth": 3,
+        "dropout": 0.25,
+        "use_residual": false
+      },
+      "family": "dual_ensemble",
+      "gru_cfg": {
+        "encoder_type": "gru",
+        "fusion": "late_concat",
+        "fusion_dropout": 0.2,
+        "per_channel_hidden": 40,
+        "per_channel_layers": 2
+      }
+    },
+    "name": "iter_0019_c01_confirm_dual_baseline",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0019 c01. CONFIRMATION n_seeds=5 of dual_baseline (r144, 0.5347). Structural sibling: nperseg128.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 120,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 5,
+      "optimizer": "adam",
+      "seed": 19010
+    }
+  }
+}

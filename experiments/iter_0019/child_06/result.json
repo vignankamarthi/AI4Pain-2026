@@ -1,0 +1,153 @@
+{
+  "name": "iter_0019_c06_gru_mid_fusion",
+  "best_val_metrics": {
+    "balanced_acc": 0.41898148148148145,
+    "macro_f1": 0.37989687374972797,
+    "auc_ovr": 0.6034995498971193,
+    "ece": 0.07278048762200794,
+    "per_class_pr": {
+      "NP": [
+        0.4514288604887285,
+        0.6620370370370371
+      ],
+      "AP": [
+        0.404188443670151,
+        0.20370370370370372
+      ],
+      "HP": [
+        0.3758169934640523,
+        0.3912037037037037
+      ]
+    },
+    "confusion_3x3": [
+      [
+        286,
+        49,
+        97
+      ],
+      [
+        172,
+        88,
+        172
+      ],
+      [
+        178,
+        85,
+        169
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6284722222222222,
+      "f1": 0.6732810048497552,
+      "pain_precision": 0.7789738251747919,
+      "pain_recall": 0.5949074074074074,
+      "auc": 0.6605902777777778,
+      "confusion_2x2": [
+        [
+          286,
+          146
+        ],
+        [
+          350,
+          514
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.41898148148148145,
+    "macro_f1": 0.37989687374972797,
+    "auc_ovr": 0.6034995498971193,
+    "ece": 0.07278048762200794,
+    "per_class_pr": {
+      "NP": [
+        0.4514288604887285,
+        0.6620370370370371
+      ],
+      "AP": [
+        0.404188443670151,
+        0.20370370370370372
+      ],
+      "HP": [
+        0.3758169934640523,
+        0.3912037037037037
+      ]
+    },
+    "confusion_3x3": [
+      [
+        286,
+        49,
+        97
+      ],
+      [
+        172,
+        88,
+        172
+      ],
+      [
+        178,
+        85,
+        169
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.6284722222222222,
+      "f1": 0.6732810048497552,
+      "pain_precision": 0.7789738251747919,
+      "pain_recall": 0.5949074074074074,
+      "auc": 0.6605902777777778,
+      "confusion_2x2": [
+        [
+          286,
+          146
+        ],
+        [
+          350,
+          514
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.41203703703703703,
+    0.4259259259259259,
+    0.41898148148148145
+  ],
+  "balanced_acc_std": 0.005670115145331411,
+  "train_seconds": 191.60829210281372,
+  "inference_seconds": 0.0012154579162597656,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "encoder_type": "gru",
+      "family": "multi_stream_bigru",
+      "fusion": "mid_fusion",
+      "fusion_dropout": 0.2,
+      "per_channel_hidden": 40,
+      "per_channel_layers": 2
+    },
+    "name": "iter_0019_c06_gru_mid_fusion",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0019 c06. EXPLORE: multi_stream mid_fusion -- the only fusion mode never tested. Channels projected + concatenated before one shared encoder. Structural sibling of c05.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 120,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 19060
+    }
+  }
+}

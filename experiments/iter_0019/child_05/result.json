@@ -1,0 +1,155 @@
+{
+  "name": "iter_0019_c05_confirm_gru_champion",
+  "best_val_metrics": {
+    "balanced_acc": 0.5287037037037038,
+    "macro_f1": 0.5267102686605769,
+    "auc_ovr": 0.7178851594650206,
+    "ece": 0.07938815864423909,
+    "per_class_pr": {
+      "NP": [
+        0.7300065008276201,
+        0.6916666666666668
+      ],
+      "AP": [
+        0.42792650811309824,
+        0.4708333333333333
+      ],
+      "HP": [
+        0.44678644736609774,
+        0.42361111111111105
+      ]
+    },
+    "confusion_3x3": [
+      [
+        498,
+        123,
+        99
+      ],
+      [
+        99,
+        339,
+        282
+      ],
+      [
+        89,
+        326,
+        305
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7805555555555556,
+      "f1": 0.8590835291767295,
+      "pain_precision": 0.8500387479298095,
+      "pain_recall": 0.8694444444444442,
+      "auc": 0.8311487268518519,
+      "confusion_2x2": [
+        [
+          498,
+          222
+        ],
+        [
+          188,
+          1252
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.5287037037037038,
+    "macro_f1": 0.5267102686605769,
+    "auc_ovr": 0.7178851594650206,
+    "ece": 0.07938815864423909,
+    "per_class_pr": {
+      "NP": [
+        0.7300065008276201,
+        0.6916666666666668
+      ],
+      "AP": [
+        0.42792650811309824,
+        0.4708333333333333
+      ],
+      "HP": [
+        0.44678644736609774,
+        0.42361111111111105
+      ]
+    },
+    "confusion_3x3": [
+      [
+        498,
+        123,
+        99
+      ],
+      [
+        99,
+        339,
+        282
+      ],
+      [
+        89,
+        326,
+        305
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.7805555555555556,
+      "f1": 0.8590835291767295,
+      "pain_precision": 0.8500387479298095,
+      "pain_recall": 0.8694444444444442,
+      "auc": 0.8311487268518519,
+      "confusion_2x2": [
+        [
+          498,
+          222
+        ],
+        [
+          188,
+          1252
+        ]
+      ]
+    }
+  },
+  "n_seeds": 5,
+  "n_seeds_completed": 5,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.5138888888888888,
+    0.5231481481481483,
+    0.5300925925925927,
+    0.5393518518518519,
+    0.5370370370370371
+  ],
+  "balanced_acc_std": 0.009328445222041631,
+  "train_seconds": 1411.6858777999878,
+  "inference_seconds": 0.0037786483764648436,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": null,
+    "model": {
+      "encoder_type": "gru",
+      "family": "multi_stream_bigru",
+      "fusion": "late_concat",
+      "fusion_dropout": 0.2,
+      "per_channel_hidden": 40,
+      "per_channel_layers": 2
+    },
+    "name": "iter_0019_c05_confirm_gru_champion",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0019 c05. CONFIRMATION n_seeds=5 of the GRU co-champion (r130). Read 0.5340 (iter_0016) then 0.5193 (iter_0018) -- needs a tighter estimate.",
+    "training": {
+      "batch_size": 32,
+      "epochs": 150,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 5,
+      "optimizer": "adam",
+      "seed": 19050
+    }
+  }
+}

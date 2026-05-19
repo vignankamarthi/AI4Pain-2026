@@ -1,0 +1,167 @@
+{
+  "name": "iter_0019_c02_dual_nperseg192_residual",
+  "best_val_metrics": {
+    "balanced_acc": 0.5308641975308642,
+    "macro_f1": 0.5144927911131187,
+    "auc_ovr": 0.7016005444101509,
+    "ece": 0.25481164358832215,
+    "per_class_pr": {
+      "NP": [
+        0.6465329991645781,
+        0.6550925925925926
+      ],
+      "AP": [
+        0.45860081035472294,
+        0.3425925925925926
+      ],
+      "HP": [
+        0.48768111893321414,
+        0.5949074074074074
+      ]
+    },
+    "confusion_3x3": [
+      [
+        283,
+        79,
+        70
+      ],
+      [
+        83,
+        148,
+        201
+      ],
+      [
+        81,
+        94,
+        257
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.732638888888889,
+      "f1": 0.8159523588326504,
+      "pain_precision": 0.8280855739571336,
+      "pain_recall": 0.8101851851851851,
+      "auc": 0.8180057227366255,
+      "confusion_2x2": [
+        [
+          283,
+          149
+        ],
+        [
+          164,
+          700
+        ]
+      ]
+    }
+  },
+  "final_val_metrics": {
+    "balanced_acc": 0.5308641975308642,
+    "macro_f1": 0.5144927911131187,
+    "auc_ovr": 0.7016005444101509,
+    "ece": 0.25481164358832215,
+    "per_class_pr": {
+      "NP": [
+        0.6465329991645781,
+        0.6550925925925926
+      ],
+      "AP": [
+        0.45860081035472294,
+        0.3425925925925926
+      ],
+      "HP": [
+        0.48768111893321414,
+        0.5949074074074074
+      ]
+    },
+    "confusion_3x3": [
+      [
+        283,
+        79,
+        70
+      ],
+      [
+        83,
+        148,
+        201
+      ],
+      [
+        81,
+        94,
+        257
+      ]
+    ],
+    "binary": {
+      "balanced_acc": 0.732638888888889,
+      "f1": 0.8159523588326504,
+      "pain_precision": 0.8280855739571336,
+      "pain_recall": 0.8101851851851851,
+      "auc": 0.8180057227366255,
+      "confusion_2x2": [
+        [
+          283,
+          149
+        ],
+        [
+          164,
+          700
+        ]
+      ]
+    }
+  },
+  "n_seeds": 3,
+  "n_seeds_completed": 3,
+  "n_seeds_failed": 0,
+  "per_seed_balanced_acc": [
+    0.5324074074074074,
+    0.5393518518518517,
+    0.5208333333333334
+  ],
+  "balanced_acc_std": 0.007638499179484257,
+  "train_seconds": 694.3038184642792,
+  "inference_seconds": 0.004563649495442708,
+  "spec": {
+    "data": {},
+    "decode": {
+      "strategy": "argmax"
+    },
+    "feature_extraction": {
+      "family": "dual_ensemble",
+      "fs": 100,
+      "log_scale": true,
+      "noverlap": 96,
+      "nperseg": 192
+    },
+    "model": {
+      "cnn_cfg": {
+        "base_channels": 24,
+        "depth": 4,
+        "dropout": 0.25,
+        "use_residual": true
+      },
+      "family": "dual_ensemble",
+      "gru_cfg": {
+        "encoder_type": "gru",
+        "fusion": "late_concat",
+        "fusion_dropout": 0.2,
+        "per_channel_hidden": 40,
+        "per_channel_layers": 2
+      }
+    },
+    "name": "iter_0019_c02_dual_nperseg192_residual",
+    "preprocessing": {
+      "normalize": "per_channel_zscore",
+      "padding": "right_zero_to_global_max"
+    },
+    "reasoning_summary": "iter_0019 c02. EXPLORE: dual_ensemble combining the two iter_0018 modest helpers -- nperseg192 + residual CNN (depth 4).",
+    "training": {
+      "batch_size": 32,
+      "epochs": 120,
+      "focal_gamma": 1.0,
+      "loss": "ce_class_balanced",
+      "lr": 0.001,
+      "n_seeds": 3,
+      "optimizer": "adam",
+      "seed": 19020
+    }
+  }
+}
