@@ -2,67 +2,68 @@
   "name": "submission_04_spectrogram_residual",
   "submission": true,
   "best_val_metrics": {
-    "balanced_acc": 0.5208333333333334,
-    "macro_f1": 0.5038721232744305,
+    "balanced_acc": 0.5277777777777778,
+    "macro_f1": 0.4961286955169955,
     "per_class_pr": {
       "NP": [
-        0.6226415094339622,
-        0.6875
+        0.6096256684491979,
+        0.7916666666666666
       ],
       "AP": [
-        0.4,
-        0.25
+        0.417910447761194,
+        0.19444444444444445
       ],
       "HP": [
-        0.4918032786885246,
-        0.625
+        0.48314606741573035,
+        0.5972222222222222
       ]
     },
     "confusion_3x3": [
       [
-        99,
-        23,
-        22
+        114,
+        14,
+        16
       ],
       [
-        37,
-        36,
-        71
+        40,
+        28,
+        76
       ],
       [
-        23,
-        31,
-        90
+        33,
+        25,
+        86
       ]
     ],
-    "auc_ovr": 0.709836355452675,
-    "ece": 0.15648211152465252,
+    "auc_ovr": 0.7311358667695473,
+    "ece": 0.11220321342073106,
     "binary": {
-      "balanced_acc": 0.7395833333333333,
-      "f1": 0.8128342245989305,
-      "pain_precision": 0.8351648351648352,
-      "pain_recall": 0.7916666666666666,
-      "auc": 0.8226273148148148,
+      "balanced_acc": 0.7690972222222222,
+      "f1": 0.8067542213883677,
+      "pain_precision": 0.8775510204081632,
+      "pain_recall": 0.7465277777777778,
+      "auc": 0.8403983410493827,
       "confusion_2x2": [
         [
-          99,
-          45
+          114,
+          30
         ],
         [
-          60,
-          228
+          73,
+          215
         ]
       ]
     }
   },
   "test_n_trials": 432,
   "test_pred_class_counts": {
-    "NP": 151,
-    "AP": 84,
-    "HP": 197
+    "NP": 179,
+    "AP": 59,
+    "HP": 194
   },
   "test_predictions_csv": "experiments/submission_04/test_predictions.csv",
-  "train_seconds": 14.37428092956543,
+  "val_predictions_csv": "experiments/submission_04/val_predictions.csv",
+  "train_seconds": 15.613182306289673,
   "device": "cuda",
   "spec": {
     "data": {},
