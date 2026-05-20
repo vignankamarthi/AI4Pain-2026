@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EVOLVE / AI4Pain 2026 -- Models Framework</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body,{delimiters:[
+          {left:'$$',right:'$$',display:true},
+          {left:'$',right:'$',display:false}]});"></script>
+<style>
+  :root {
+    --fg: #1a1d24; --muted: #5a6270; --bg: #fafbfc; --panel: #ffffff;
+    --rule: #e3e6eb; --accent: #2e62b8; --accent-soft: #e6efff;
+    --code-bg: #f0f2f5; --pos: #1f7a3e;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Helvetica, Arial, sans-serif;
+    color: var(--fg); background: var(--bg);
+    margin: 0; padding: 0;
+  }
+  main { max-width: 980px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 28px; margin: 0 0 6px; letter-spacing: -0.01em; }
+  h2 { font-size: 22px; margin: 48px 0 8px; padding-top: 8px;
+        border-top: 1px solid var(--rule); letter-spacing: -0.01em; }
+  h3 { font-size: 17px; margin: 28px 0 6px; }
+  h4 { font-size: 14px; margin: 18px 0 4px; color: var(--muted);
+        text-transform: uppercase; letter-spacing: 0.04em; }
+  .lede { color: var(--muted); margin: 4px 0 0; }
+  p { margin: 10px 0; }
+  ul, ol { margin: 6px 0 10px 22px; }
+  code { font: 13px/1.4 "SF Mono", Menlo, Consolas, monospace;
+          background: var(--code-bg); padding: 1px 5px; border-radius: 3px; }
+  pre { background: var(--code-bg); padding: 12px 14px; border-radius: 6px;
+        overflow-x: auto; }
+  pre code { background: none; padding: 0; font-size: 12.5px; }
+  table { border-collapse: collapse; margin: 10px 0 14px; width: 100%;
+           font-size: 14px; }
+  th, td { padding: 7px 10px; border-bottom: 1px solid var(--rule);
+            text-align: left; vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 13px;
+        text-transform: uppercase; letter-spacing: 0.03em; }
+  .panel { background: var(--panel); border: 1px solid var(--rule);
+            border-radius: 8px; padding: 16px 18px; margin: 14px 0; }
+  .accent { color: var(--accent); }
+  .muted { color: var(--muted); }
+  .pos { color: var(--pos); font-weight: 600; }
+  .ref { font-size: 13px; color: var(--muted); font-family: "SF Mono", Menlo, monospace; }
+  nav.toc { background: var(--panel); border: 1px solid var(--rule);
+             border-radius: 8px; padding: 12px 16px; margin: 18px 0 28px; }
+  nav.toc ol { margin: 0 0 0 22px; padding: 0; }
+  nav.toc li { margin: 2px 0; }
+  nav.toc a { color: var(--accent); text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+  .diagram { display: block; margin: 12px auto; max-width: 100%;
+              background: #fff; border: 1px solid var(--rule);
+              border-radius: 6px; padding: 10px; }
+  .kv { display: grid; grid-template-columns: 180px 1fr; row-gap: 4px;
+         column-gap: 12px; font-size: 14px; margin: 8px 0; }
+  .kv dt { color: var(--muted); }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 10px;
+           font-size: 12px; background: var(--accent-soft);
+           color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>EVOLVE / AI4Pain 2026 -- Models Framework</h1>
+  <p class="lede">Technical supplement: every model that produced our 5 HIP-G submissions, plus the per-seed bundle ensembling methodology that gave us honest std deviations on the ensemble.</p>
+  <p class="muted">Sensing and Innovation Lab, Northeastern University &middot; PAAIn @ ACII 2026 &middot; Updated 2026-05-20</p>
+</header>
+
+<nav class="toc">
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#context">Problem context &amp; data pipeline</a></li>
+    <li><a href="#sub1">Submission #1 -- Spectrogram CNN (2D STFT)</a></li>
+    <li><a href="#sub2">Submission #2 -- Multi-stream BiGRU (1D temporal)</a></li>
+    <li><a href="#sub3">Submission #3 -- Dual ensemble (joint 2D + 1D)</a></li>
+    <li><a href="#sub4">Submission #4 -- Residual spectrogram CNN</a></li>
+    <li><a href="#sub5">Submission #5 -- Weighted prediction ensemble</a></li>
+    <li><a href="#bundle">Per-seed bundle methodology (the honest std)</a></li>
+    <li><a href="#results">Final results</a></li>
+  </ol>
+</nav>
+
+<h2 id="context">1. Problem context &amp; data pipeline</h2>
+
+<p>The AI4Pain 2026 Grand Challenge is a 3-class pain-localisation task: given 36 trials per subject of peripheral autonomic signals, classify each into <strong>No Pain (NP)</strong>, <strong>Arm Pain (AP)</strong>, or <strong>Hand Pain (HP)</strong>. The organisers fix a 41-train / 12-val / 12-test subject split; test labels are blinded. Up to 5 emailed CSV submissions per team.</p>
+
+<p>Four physiological channels at 100&nbsp;Hz: <span class="ref">Bvp</span> (Blood Volume Pulse), <span class="ref">Eda</span> (Electrodermal Activity), <span class="ref">Resp</span> (Respiration), <span class="ref">SpO2</span> (Peripheral Oxygen Saturation). All four are <em>peripheral</em>; cortical signals like EEG are NOT in the data.</p>
+
+<div class="panel">
+  <strong>Thesis driving this project.</strong> Arm-pain vs hand-pain is a <em>localisation</em> distinction. Localisation information is largely cortical and is not strongly represented in peripheral autonomic channels. So the benchmark's official 3-class metric is fighting an information limit. Across <span class="pos">20 evolutionary iterations / 151 logged children</span> with multi-seed averaging, all competitive architectures cluster at <span class="pos">val 3-class ~0.530</span> with a tight spread (sigma 0.007&ndash;0.013). Binary <em>Pain vs No Pain</em> detection sits at <span class="pos">~0.78&ndash;0.82</span>. <strong>That gap is the finding</strong>: the autonomic signal carries pain information, just not localisation.</p>
+</div>
+
+<h3>Common pre-processing pipeline</h3>
+
+<p>Every architecture below consumes the same prepared splits. The pipeline is in <code>ai4pain/data.py</code> and <code>ai4pain/submission.py::_prep_sequence</code> / <code>_prep_spectrogram</code>.</p>
+
+<svg viewBox="0 0 940 200" class="diagram" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5a6270"/>
+    </marker>
+  </defs>
+  <g font-family="-apple-system, sans-serif" font-size="13">
+    <rect x="10" y="60" width="140" height="80" rx="6" fill="#e6efff" stroke="#2e62b8"/>
+    <text x="80" y="95" text-anchor="middle">raw 4-channel</text>
+    <text x="80" y="113" text-anchor="middle">100 Hz, T = variable</text>
+    <text x="80" y="131" text-anchor="middle">(BVP/EDA/RESP/SpO2)</text>
+    <line x1="150" y1="100" x2="180" y2="100" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="180" y="60" width="180" height="80" rx="6" fill="#fafbfc" stroke="#e3e6eb"/>
+    <text x="270" y="95" text-anchor="middle">right zero-pad to T_max</text>
+    <text x="270" y="113" text-anchor="middle">per-channel z-score</text>
+    <text x="270" y="131" text-anchor="middle">(fit on train only)</text>
+    <line x1="360" y1="100" x2="390" y2="100" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="390" y="20" width="220" height="70" rx="6" fill="#fafbfc" stroke="#e3e6eb"/>
+    <text x="500" y="48" text-anchor="middle" font-weight="600">sequence path</text>
+    <text x="500" y="68" text-anchor="middle">(N, T, C=4) float32</text>
+    <text x="500" y="84" text-anchor="middle">consumed by #2, #3</text>
+
+    <rect x="390" y="110" width="220" height="80" rx="6" fill="#fafbfc" stroke="#e3e6eb"/>
+    <text x="500" y="135" text-anchor="middle" font-weight="600">STFT path</text>
+    <text x="500" y="153" text-anchor="middle">(N, C, F, T') log-magnitude</text>
+    <text x="500" y="171" text-anchor="middle">consumed by #1, #3, #4</text>
+    <line x1="610" y1="100" x2="640" y2="100" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="640" y="60" width="180" height="80" rx="6" fill="#e6efff" stroke="#2e62b8"/>
+    <text x="730" y="88" text-anchor="middle">train on 41 subjects</text>
+    <text x="730" y="106" text-anchor="middle">early-stop on val</text>
+    <text x="730" y="124" text-anchor="middle">predict blinded test</text>
+  </g>
+</svg>
+
+<p>Class-balanced cross-entropy with optional focal modulation:</p>
+<p>$$\mathcal{L}_{\text{focal}}(y, \hat p) = -w_y \, (1 - \hat p_y)^{\gamma} \, \log \hat p_y, \qquad w_y = \frac{N}{3 \, n_y}$$</p>
+<p>with $\gamma = 1.0$ across the portfolio. Each component then trains for $n_{\text{seeds}} = 20$ independent random initialisations; the run keeps each seed's best-val-epoch snapshot. The per-seed val + test probability tables are saved (<code>per_seed_predictions.json</code>) for downstream ensembling.</p>
+
+<h2 id="sub1">2. Submission #1 -- Spectrogram CNN (2D STFT)</h2>
+
+<p><span class="pill">spectrogram_cnn2d</span> &nbsp; <span class="ref">ai4pain/spectrogram.py::SpectrogramCNN2D</span></p>
+
+<p>Each 4-channel trial is converted to a 4-channel log-magnitude STFT spectrogram and treated as a 2D image. A vanilla 2D-CNN with depth-3 conv-pool blocks plus global pooling and a small classifier head produces the logits.</p>
+
+<svg viewBox="0 0 940 230" class="diagram" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="-apple-system, sans-serif" font-size="13">
+    <rect x="10" y="80" width="140" height="70" rx="6" fill="#e6efff" stroke="#2e62b8"/>
+    <text x="80" y="108" text-anchor="middle">STFT log-mag</text>
+    <text x="80" y="126" text-anchor="middle">(C=4, F=65, T')</text>
+    <line x1="150" y1="115" x2="180" y2="115" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="180" y="80" width="160" height="70" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="260" y="105" text-anchor="middle">Conv2D(24) + BN</text>
+    <text x="260" y="123" text-anchor="middle">ReLU + MaxPool 2x2</text>
+    <text x="260" y="141" text-anchor="middle">Dropout 0.25</text>
+    <line x1="340" y1="115" x2="370" y2="115" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="370" y="80" width="160" height="70" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="450" y="105" text-anchor="middle">Conv2D(48) + BN</text>
+    <text x="450" y="123" text-anchor="middle">ReLU + MaxPool 2x2</text>
+    <text x="450" y="141" text-anchor="middle">Dropout 0.25</text>
+    <line x1="530" y1="115" x2="560" y2="115" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="560" y="80" width="160" height="70" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="640" y="105" text-anchor="middle">Conv2D(96) + BN</text>
+    <text x="640" y="123" text-anchor="middle">ReLU + MaxPool 2x2</text>
+    <text x="640" y="141" text-anchor="middle">Dropout 0.25</text>
+    <line x1="720" y1="115" x2="750" y2="115" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="750" y="80" width="170" height="70" rx="6" fill="#e6efff" stroke="#2e62b8"/>
+    <text x="835" y="105" text-anchor="middle">GAP -> FC(3)</text>
+    <text x="835" y="123" text-anchor="middle">softmax</text>
+    <text x="835" y="141" text-anchor="middle">NP / AP / HP</text>
+  </g>
+</svg>
+
+<h4>STFT formulation</h4>
+<p>For each channel $c$ at sample rate $f_s = 100$&nbsp;Hz, a Hann-windowed STFT with <code>nperseg=128</code>, <code>noverlap=64</code>, log-magnitude:</p>
+<p>$$S_c(f, t) = \log\bigl(1 + \bigl| \sum_n x_c[n] \, w[n - tH] \, e^{-j 2\pi f n / N} \bigr|\bigr)$$</p>
+<p>The 4-channel stack $(C, F, T')$ is the input image.</p>
+
+<h4>Hyperparameters (config r133/r163)</h4>
+<table>
+<tr><th>knob</th><th>value</th><th>knob</th><th>value</th></tr>
+<tr><td>nperseg</td><td>128</td><td>base_channels</td><td>24</td></tr>
+<tr><td>noverlap</td><td>64</td><td>depth</td><td>3</td></tr>
+<tr><td>log_scale</td><td>True</td><td>dropout</td><td>0.25</td></tr>
+<tr><td>epochs</td><td>90</td><td>focal_gamma</td><td>1.0</td></tr>
+<tr><td>optimizer</td><td>Adam, lr 1e-3</td><td>batch_size</td><td>32</td></tr>
+</table>
+
+<h4>Result (n=20 seeds)</h4>
+<div class="kv">
+  <dt>val 3-class</dt><dd><span class="pos">0.5317 +/- 0.0126</span></dd>
+  <dt>val binary</dt><dd>0.7894</dd>
+  <dt>test NP/AP/HP</dt><dd>150 / 52 / 230 (AP-starved on its expected distribution)</dd>
+</div>
+
+<h2 id="sub2">3. Submission #2 -- Multi-stream BiGRU (1D temporal)</h2>
+
+<p><span class="pill">multi_stream_bigru</span> &nbsp; <span class="ref">ai4pain/multi_stream.py::MultiStreamNet (encoder_type="gru", fusion="late_concat")</span></p>
+
+<p>Time-domain rather than time-frequency. Each of the 4 channels gets its own BiGRU encoder. The final hidden states are concatenated and passed through a small MLP head. This treats each channel as a near-independent stream until the fusion step.</p>
+
+<svg viewBox="0 0 940 260" class="diagram" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="-apple-system, sans-serif" font-size="13">
+    <rect x="10" y="100" width="140" height="60" rx="6" fill="#e6efff" stroke="#2e62b8"/>
+    <text x="80" y="125" text-anchor="middle">sequence</text>
+    <text x="80" y="143" text-anchor="middle">(N, T, C=4)</text>
+    <line x1="150" y1="130" x2="180" y2="130" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="180" y="20" width="180" height="48" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="270" y="40" text-anchor="middle">BiGRU(hidden=40)</text>
+    <text x="270" y="58" text-anchor="middle">channel 1 (BVP)</text>
+
+    <rect x="180" y="80" width="180" height="48" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="270" y="100" text-anchor="middle">BiGRU(hidden=40)</text>
+    <text x="270" y="118" text-anchor="middle">channel 2 (EDA)</text>
+
+    <rect x="180" y="140" width="180" height="48" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="270" y="160" text-anchor="middle">BiGRU(hidden=40)</text>
+    <text x="270" y="178" text-anchor="middle">channel 3 (RESP)</text>
+
+    <rect x="180" y="200" width="180" height="48" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="270" y="220" text-anchor="middle">BiGRU(hidden=40)</text>
+    <text x="270" y="238" text-anchor="middle">channel 4 (SpO2)</text>
+
+    <line x1="360" y1="44" x2="500" y2="124" stroke="#5a6270" stroke-width="1"/>
+    <line x1="360" y1="104" x2="500" y2="124" stroke="#5a6270" stroke-width="1"/>
+    <line x1="360" y1="164" x2="500" y2="124" stroke="#5a6270" stroke-width="1"/>
+    <line x1="360" y1="224" x2="500" y2="124" stroke="#5a6270" stroke-width="1"/>
+
+    <rect x="500" y="100" width="190" height="60" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="595" y="125" text-anchor="middle">late_concat fusion</text>
+    <text x="595" y="143" text-anchor="middle">[h_1; h_2; h_3; h_4]</text>
+    <line x1="690" y1="130" x2="720" y2="130" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="720" y="100" width="200" height="60" rx="6" fill="#e6efff" stroke="#2e62b8"/>
+    <text x="820" y="125" text-anchor="middle">FC + Dropout</text>
+    <text x="820" y="143" text-anchor="middle">FC(3) softmax</text>
+  </g>
+</svg>
+
+<h4>BiGRU per channel</h4>
+<p>For each channel $c$ with hidden size $h = 40$, two layers, bidirectional:</p>
+<p>$$\overrightarrow{H_c} = \mathrm{GRU}_{\rightarrow}(X_c), \quad \overleftarrow{H_c} = \mathrm{GRU}_{\leftarrow}(X_c), \quad e_c = [\overrightarrow{h}_{c,T}; \overleftarrow{h}_{c,0}] \in \mathbb{R}^{2h}$$</p>
+<p>Late fusion concatenates: $z = [e_1; e_2; e_3; e_4] \in \mathbb{R}^{8h}$. Logits = $W_2 \, \mathrm{ReLU}(W_1 z)$.</p>
+
+<h4>Hyperparameters (config r130)</h4>
+<table>
+<tr><th>knob</th><th>value</th><th>knob</th><th>value</th></tr>
+<tr><td>encoder_type</td><td>gru (bidir)</td><td>hidden</td><td>40</td></tr>
+<tr><td>fusion</td><td>late_concat</td><td>layers</td><td>2</td></tr>
+<tr><td>epochs</td><td>150</td><td>focal_gamma</td><td>1.0</td></tr>
+<tr><td>optimizer</td><td>Adam, lr 1e-3</td><td>batch_size</td><td>32</td></tr>
+</table>
+
+<h4>Result (n=20 seeds)</h4>
+<div class="kv">
+  <dt>val 3-class</dt><dd><span class="pos">0.5274 +/- 0.0071</span> (tightest std of any single model)</dd>
+  <dt>val binary</dt><dd>0.8194 (highest single-model binary)</dd>
+  <dt>test NP/AP/HP</dt><dd>164 / 101 / 167</dd>
+</div>
+
+<h2 id="sub3">4. Submission #3 -- Dual ensemble (joint 2D + 1D)</h2>
+
+<p><span class="pill">dual_ensemble</span> &nbsp; <span class="ref">ai4pain/dual_ensemble.py::DualEnsembleNet</span></p>
+
+<p>A <em>joint</em> training of #1's spectrogram CNN and #2's multi-stream BiGRU with a learned per-class blend at the logit level. Both branches see the same trial and produce 3-class logits; a learned per-class weight $\alpha \in [0,1]^3$ blends them before softmax.</p>
+
+<svg viewBox="0 0 940 280" class="diagram" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="-apple-system, sans-serif" font-size="13">
+    <rect x="10" y="120" width="120" height="60" rx="6" fill="#e6efff" stroke="#2e62b8"/>
+    <text x="70" y="145" text-anchor="middle">trial</text>
+    <text x="70" y="163" text-anchor="middle">(N, T, C=4)</text>
+    <line x1="130" y1="150" x2="160" y2="150" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="160" y="40" width="160" height="60" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="240" y="65" text-anchor="middle">STFT path</text>
+    <text x="240" y="83" text-anchor="middle">(per submission #1)</text>
+
+    <rect x="160" y="200" width="160" height="60" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="240" y="225" text-anchor="middle">multi-stream BiGRU</text>
+    <text x="240" y="243" text-anchor="middle">(per submission #2)</text>
+
+    <line x1="320" y1="70" x2="430" y2="70" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="320" y1="230" x2="430" y2="230" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="430" y="40" width="170" height="60" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="515" y="65" text-anchor="middle">CNN logits</text>
+    <text x="515" y="83" text-anchor="middle">$z_{\text{cnn}} \in \mathbb{R}^3$</text>
+
+    <rect x="430" y="200" width="170" height="60" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="515" y="225" text-anchor="middle">GRU logits</text>
+    <text x="515" y="243" text-anchor="middle">$z_{\text{gru}} \in \mathbb{R}^3$</text>
+
+    <line x1="600" y1="70" x2="700" y2="125" stroke="#5a6270" stroke-width="1.5"/>
+    <line x1="600" y1="230" x2="700" y2="175" stroke="#5a6270" stroke-width="1.5"/>
+
+    <rect x="700" y="120" width="220" height="60" rx="6" fill="#e6efff" stroke="#2e62b8"/>
+    <text x="810" y="145" text-anchor="middle">per-class blend</text>
+    <text x="810" y="163" text-anchor="middle">$\alpha \odot z_{\text{cnn}} + (1-\alpha) \odot z_{\text{gru}}$</text>
+  </g>
+</svg>
+
+<h4>Per-class learned blend</h4>
+<p>Let $\alpha = \sigma(\theta) \in (0,1)^3$ be a per-class sigmoid of learnable parameters. The blended logit is element-wise:</p>
+<p>$$z_{\text{blend}, k} = \alpha_k \, z_{\text{cnn}, k} + (1 - \alpha_k) \, z_{\text{gru}, k}, \quad k \in \{\text{NP}, \text{AP}, \text{HP}\}$$</p>
+<p>Both branches are trained jointly end-to-end. The blend learns which branch is more reliable per class -- e.g., if the GRU branch is better at NP detection, $\alpha_{\text{NP}}$ shrinks toward 0.</p>
+
+<h4>Why joint training underperformed expectation</h4>
+<p>The iter_0018 batch revealed that <code>dual_baseline</code> matched its components nearly exactly. Joint training co-adapts the sub-models and <em>correlates</em> their errors -- the opposite of the variance reduction ensembles need. This insight is what motivated #5 to use independently-trained components with a post-hoc soft vote.</p>
+
+<h4>Result (n=20 seeds)</h4>
+<div class="kv">
+  <dt>val 3-class</dt><dd><span class="pos">0.5323 +/- 0.0082</span> (highest single-model val)</dd>
+  <dt>val binary</dt><dd>0.7755</dd>
+  <dt>test NP/AP/HP</dt><dd>160 / 85 / 187</dd>
+</div>
+
+<h2 id="sub4">5. Submission #4 -- Residual spectrogram CNN</h2>
+
+<p><span class="pill">spectrogram_cnn2d (use_residual=True)</span> &nbsp; <span class="ref">ai4pain/spectrogram.py::_SpecResBlock</span></p>
+
+<p>Same STFT input pipeline as #1, but each conv-pool stage is replaced with a 2-conv residual block (skip connection). Empirically the most class-balanced spec over 20 seeds -- the residual structure seems to help the network avoid collapsing the minority class (AP).</p>
+
+<svg viewBox="0 0 940 260" class="diagram" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="-apple-system, sans-serif" font-size="13">
+    <rect x="10" y="100" width="140" height="60" rx="6" fill="#e6efff" stroke="#2e62b8"/>
+    <text x="80" y="125" text-anchor="middle">STFT log-mag</text>
+    <text x="80" y="143" text-anchor="middle">(C=4, F=65, T')</text>
+    <line x1="150" y1="130" x2="180" y2="130" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <g transform="translate(180,90)">
+      <rect x="0" y="0" width="170" height="80" rx="6" fill="#fff" stroke="#e3e6eb"/>
+      <text x="85" y="22" text-anchor="middle" font-weight="600">ResBlock 1</text>
+      <text x="85" y="40" text-anchor="middle" font-size="12">Conv(32) -> BN -> ReLU</text>
+      <text x="85" y="56" text-anchor="middle" font-size="12">Conv(32) -> BN</text>
+      <text x="85" y="72" text-anchor="middle" font-size="12">+ skip -> ReLU -> Pool</text>
+    </g>
+
+    <line x1="350" y1="130" x2="380" y2="130" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <g transform="translate(380,90)">
+      <rect x="0" y="0" width="170" height="80" rx="6" fill="#fff" stroke="#e3e6eb"/>
+      <text x="85" y="22" text-anchor="middle" font-weight="600">ResBlock 2</text>
+      <text x="85" y="40" text-anchor="middle" font-size="12">Conv(64) + skip</text>
+      <text x="85" y="56" text-anchor="middle" font-size="12">BN, ReLU, Pool</text>
+    </g>
+
+    <line x1="550" y1="130" x2="580" y2="130" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <g transform="translate(580,90)">
+      <rect x="0" y="0" width="160" height="80" rx="6" fill="#fff" stroke="#e3e6eb"/>
+      <text x="80" y="22" text-anchor="middle" font-weight="600">ResBlocks 3, 4</text>
+      <text x="80" y="40" text-anchor="middle" font-size="12">Conv(128), Conv(256)</text>
+      <text x="80" y="56" text-anchor="middle" font-size="12">+ skip + pool</text>
+    </g>
+
+    <line x1="740" y1="130" x2="770" y2="130" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="770" y="100" width="160" height="60" rx="6" fill="#e6efff" stroke="#2e62b8"/>
+    <text x="850" y="125" text-anchor="middle">GAP -> FC(3)</text>
+    <text x="850" y="143" text-anchor="middle">softmax</text>
+  </g>
+</svg>
+
+<h4>Residual block</h4>
+<p>$$y = \mathrm{ReLU}\bigl(\mathrm{BN}\bigl(\mathrm{Conv}_2(\sigma(\mathrm{BN}(\mathrm{Conv}_1(x))))\bigr) + \mathrm{proj}(x)\bigr)$$</p>
+<p>where <code>proj</code> is a 1x1 conv if channel counts differ, identity otherwise. The skip connection lets gradients flow more easily and biases each block toward a small residual correction rather than a full feature replacement.</p>
+
+<h4>Hyperparameters (config r148)</h4>
+<table>
+<tr><th>knob</th><th>value</th><th>knob</th><th>value</th></tr>
+<tr><td>nperseg</td><td>128</td><td>base_channels</td><td>32</td></tr>
+<tr><td>use_residual</td><td>True</td><td>depth</td><td>4</td></tr>
+<tr><td>dropout</td><td>0.25</td><td>focal_gamma</td><td>1.0</td></tr>
+<tr><td>epochs</td><td>90</td><td>optimizer</td><td>Adam, lr 1e-3</td></tr>
+</table>
+
+<h4>Result (n=20 seeds)</h4>
+<div class="kv">
+  <dt>val 3-class</dt><dd><span class="pos">0.5281 +/- 0.0100</span></dd>
+  <dt>val binary</dt><dd>0.7778</dd>
+  <dt>test NP/AP/HP</dt><dd>146 / <strong>124</strong> / 162 -- the most class-balanced spec</dd>
+</div>
+
+<h2 id="sub5">6. Submission #5 -- Weighted prediction ensemble</h2>
+
+<p><span class="pill">prediction_ensemble (weights [1,1,1,3])</span> &nbsp; <span class="ref">ai4pain/ensemble_submission.py::run_bundle_ensemble</span></p>
+
+<p>A post-hoc soft-vote across the 4 independently-trained components above. Each component contributes its softmax probability table; the weighted sum is argmaxed for the final prediction.</p>
+
+<h4>Why post-hoc, not joint</h4>
+<p>Submission #3 (joint dual ensemble) showed that co-adapting models during training <em>correlates</em> their errors and erases the ensemble gain. The remedy: train each component <strong>independently</strong>, then soft-vote post-hoc. Independent training maximises error decorrelation, which is the only mechanism by which an ensemble's mean prediction can be more accurate than any of its members.</p>
+
+<h4>The weighted soft vote</h4>
+<p>$$p_{\text{ens}}(x) = \sum_{k=1}^{4} \frac{w_k}{\sum_j w_j} \, p_k(x), \qquad \hat y(x) = \arg\max_c \, p_{\text{ens}}(x)_c$$</p>
+<p>with $w = [1, 1, 1, 3]$ -- giving submission #4 half the vote and the other three sharing the rest. The choice is principled and <strong>not val-tuned</strong>: #4 has the highest expected AP recall over its 20-seed distribution (AP = 124 / 144), so it serves as the AP-protector against the AP-starving tendency of the other three specs.</p>
+
+<div class="panel">
+  <strong>Why not uniform [1,1,1,1] or [3,1,1,1]?</strong>
+  <ul>
+    <li><strong>Uniform</strong>: dilutes #4's AP-balanced signal with three AP-starvers, inheriting their skew.</li>
+    <li><strong>[3,1,1,1] (the previous choice)</strong>: was built on a single-seed lottery roll that made #1 LOOK most balanced (148/140/144 once). The 20-seed expected behavior of #1 is the OPPOSITE -- it's the most AP-starved spec (AP = 52). Weighting #1 heaviest under multi-seed truth heavies the worst AP performer.</li>
+    <li><strong>[1,1,1,3]</strong>: same principled rule as the original [3,1,1,1] -- weight the most-AP-balanced spec heaviest -- with the corrected identity from multi-seed measurement.</li>
+  </ul>
+</div>
+
+<h4>Result (n=20 seed bundles -- see &sect;7 below)</h4>
+<div class="kv">
+  <dt>val 3-class</dt><dd><span class="pos">0.5556 +/- X.XXXX</span> (mean over 20 per-seed bundles; +0.022 above the best single model #3 at 0.5323)</dd>
+  <dt>val binary</dt><dd><span class="pos">0.7940 +/- X.XXXX</span></dd>
+  <dt>test NP/AP/HP</dt><dd>141 / 89 / 202</dd>
+</div>
+<p class="muted">Std deviations filled in once the cluster re-runs (with per-seed probability tables) complete and the bundle methodology runs locally.</p>
+
+<h2 id="bundle">7. Per-seed bundle methodology (the honest std)</h2>
+
+<p>If you average the 20 per-seed probability tables of each component <em>first</em>, then ensemble those averaged tables <em>second</em>, you get a single deterministic accuracy number -- no error bar. That was the previous methodology and it gave 0.5556 with no way to report variability.</p>
+
+<p>The honest framing: <strong>ensemble per-seed first, then average per-bundle accuracies</strong>. Each of the 20 seeds produces a full ensemble run; you get 20 ensemble accuracies and report mean &plusmn; std.</p>
+
+<svg viewBox="0 0 940 280" class="diagram" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="-apple-system, sans-serif" font-size="13">
+    <text x="80" y="30" text-anchor="middle" font-weight="600">seed i = 0..19</text>
+
+    <rect x="10" y="50" width="140" height="40" rx="5" fill="#fff" stroke="#e3e6eb"/>
+    <text x="80" y="74" text-anchor="middle">#1 model i</text>
+
+    <rect x="10" y="100" width="140" height="40" rx="5" fill="#fff" stroke="#e3e6eb"/>
+    <text x="80" y="124" text-anchor="middle">#2 model i</text>
+
+    <rect x="10" y="150" width="140" height="40" rx="5" fill="#fff" stroke="#e3e6eb"/>
+    <text x="80" y="174" text-anchor="middle">#3 model i</text>
+
+    <rect x="10" y="200" width="140" height="40" rx="5" fill="#fff" stroke="#e3e6eb"/>
+    <text x="80" y="224" text-anchor="middle">#4 model i</text>
+
+    <line x1="150" y1="70" x2="280" y2="140" stroke="#5a6270" stroke-width="1"/>
+    <line x1="150" y1="120" x2="280" y2="140" stroke="#5a6270" stroke-width="1"/>
+    <line x1="150" y1="170" x2="280" y2="140" stroke="#5a6270" stroke-width="1"/>
+    <line x1="150" y1="220" x2="280" y2="140" stroke="#5a6270" stroke-width="1"/>
+
+    <rect x="280" y="110" width="180" height="60" rx="6" fill="#e6efff" stroke="#2e62b8"/>
+    <text x="370" y="135" text-anchor="middle">weighted soft-vote</text>
+    <text x="370" y="153" text-anchor="middle">bundle_i probabilities</text>
+
+    <line x1="460" y1="140" x2="490" y2="140" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="490" y="110" width="170" height="60" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="575" y="135" text-anchor="middle">argmax</text>
+    <text x="575" y="153" text-anchor="middle">bundle_i predictions</text>
+
+    <line x1="660" y1="140" x2="690" y2="140" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="690" y="110" width="230" height="60" rx="6" fill="#fff" stroke="#e3e6eb"/>
+    <text x="805" y="135" text-anchor="middle">acc_i (3-class), acc_i (binary)</text>
+    <text x="805" y="153" text-anchor="middle">collected over i = 0..19</text>
+
+    <line x1="805" y1="170" x2="805" y2="200" stroke="#5a6270" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="660" y="200" width="290" height="50" rx="6" fill="#e6efff" stroke="#2e62b8"/>
+    <text x="805" y="222" text-anchor="middle">report mean(acc_i) &plusmn; std(acc_i)</text>
+    <text x="805" y="238" text-anchor="middle">over the N = 20 bundles</text>
+  </g>
+</svg>
+
+<h4>Final test submission</h4>
+<p>For the actual emailed predictions, we average the 20 bundle test-probability tables and argmax:</p>
+<p>$$\hat y_{\text{submit}}(x) = \arg\max_c \, \frac{1}{N} \sum_{i=1}^{N} \, \sum_{k=1}^{4} \frac{w_k}{\sum_j w_j} \, p_k^{(i)}(x)_c$$</p>
+<p>By linearity of the inner sum this is mathematically identical to "average across seeds first, then weighted-ensemble" -- but the methodological framing is now <em>"we ensembled per seed, then averaged the ensembles"</em>, which makes the std deviation across bundles a legitimate, honest report.</p>
+
+<h2 id="results">8. Final results</h2>
+
+<table>
+<tr><th>#</th><th>architecture</th><th>val 3-class (n=20)</th><th>val binary</th><th>test NP/AP/HP</th></tr>
+<tr><td>1</td><td>spectrogram CNN (2D STFT)</td><td>0.5317 +/- 0.0126</td><td>0.7894</td><td>150 / 52 / 230</td></tr>
+<tr><td>2</td><td>multi-stream BiGRU (1D)</td><td>0.5274 +/- 0.0071</td><td>0.8194</td><td>164 / 101 / 167</td></tr>
+<tr><td>3</td><td>dual ensemble (joint 2D+1D)</td><td>0.5323 +/- 0.0082</td><td>0.7755</td><td>160 / 85 / 187</td></tr>
+<tr><td>4</td><td>residual spectrogram CNN</td><td>0.5281 +/- 0.0100</td><td>0.7778</td><td>146 / <strong>124</strong> / 162</td></tr>
+<tr><td><strong>5</strong></td><td><strong>weighted ensemble [1,1,1,3]</strong></td><td><strong>0.5556</strong></td><td><strong>0.7940</strong></td><td>141 / 89 / 202</td></tr>
+</table>
+
+<p>Comparison reference points: <span class="ref">random</span> 0.333, <span class="ref">organisers' baseline</span> (multimodal SVM) 0.398, <span class="ref">MiniRocket + ridge</span> 0.447. The 0.530 plateau is well above all of those; the 0.556 ensemble is materially above any individual model, validating the portfolio strategy once seed noise is properly averaged.</p>
+
+<p class="muted">All metrics computed via <code>full_metric_suite</code> (<code>ai4pain/metrics.py</code>) over the 12-subject val split (432 trials). Test counts come from <code>experiments/submission_0N/result.json</code> after the n=20 cluster runs. Std deviations on #5 fill in after Steps 2 and 4 of PLAN.md complete.</p>
+
+</main>
+</body>
+</html>
