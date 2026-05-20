@@ -1,9 +1,13 @@
-# EVOLVE
+# AI4Pain-2026
 
-A stochastic, LLM-driven evolutionary discovery framework. First case study:
-the AI4Pain 2026 Grand Challenge (3-class pain localisation from peripheral
-autonomic signals), targeting the PAAIn Workshop at ACII 2026 in Puebla,
-Mexico.
+Entry to the AI4Pain 2026 Grand Challenge (3-class pain localisation from
+peripheral autonomic signals), targeting the PAAIn Workshop at ACII 2026 in
+Puebla, Mexico. The submission was produced by applying a multi-level
+**Stochastic Experiment Loop** framework -- a stochastic, LLM-driven
+evolutionary discovery loop -- to this task as its first case study.
+The framework itself (under `framework/`, methodology in `FRAMEWORK.md`) is
+preserved here as scientific provenance and as a copyable reference for
+applying the same loop to future domains/projects.
 
 The repository is two things at once.
 

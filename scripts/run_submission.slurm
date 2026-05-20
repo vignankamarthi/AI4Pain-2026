@@ -16,8 +16,8 @@
 # job. The submission trains a model + predicts the blinded test split;
 # it must NOT run on a login node (wrong Python, no GPU, login-node compute).
 #
-# Submit from the EVOLVE project root on Explorer:
-#   cd /projects/SensingandInnovationLab/vignankamarthi/EVOLVE
+# Submit from the AI4Pain-2026 project root on Explorer:
+#   cd /projects/SensingandInnovationLab/vignankamarthi/AI4Pain-2026
 #   sbatch --export=ALL,SUBMISSION_DIR=experiments/submission_01 \
 #          scripts/run_submission.slurm
 #
@@ -25,7 +25,7 @@
 
 set -euo pipefail
 
-PROJECT_DIR="/projects/SensingandInnovationLab/vignankamarthi/EVOLVE"
+PROJECT_DIR="/projects/SensingandInnovationLab/vignankamarthi/AI4Pain-2026"
 
 if [[ -z "${SUBMISSION_DIR:-}" ]]; then
     echo "FATAL: SUBMISSION_DIR env var is required (path to experiments/submission_NN)" >&2

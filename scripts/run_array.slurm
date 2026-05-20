@@ -13,8 +13,8 @@
 # Manual SLURM array template. ANTIPATTERNS rule 10: framework Python NEVER
 # calls sbatch. Vignan submits this manually.
 #
-# Submit from the EVOLVE project root on Explorer with a manifest path:
-#   cd /projects/SensingandInnovationLab/vignankamarthi/EVOLVE
+# Submit from the AI4Pain-2026 project root on Explorer with a manifest path:
+#   cd /projects/SensingandInnovationLab/vignankamarthi/AI4Pain-2026
 #   sbatch --array=0-14%4 --export=ALL,MANIFEST=experiments/subset_transfer/manifest.json \
 #          scripts/run_array.slurm
 #
@@ -26,7 +26,7 @@
 
 set -euo pipefail
 
-PROJECT_DIR="/projects/SensingandInnovationLab/vignankamarthi/EVOLVE"
+PROJECT_DIR="/projects/SensingandInnovationLab/vignankamarthi/AI4Pain-2026"
 
 if [[ -z "${MANIFEST:-}" ]]; then
     echo "FATAL: MANIFEST env var is required (path to manifest.json)" >&2

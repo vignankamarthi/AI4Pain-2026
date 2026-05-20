@@ -1,4 +1,4 @@
-"""SQLite ledger for the EVOLVE framework.
+"""SQLite ledger for the Stochastic Experiment Loop framework.
 
 Tables:
   experiments         run_id, parent_id, island_id, spec_json, fitness_json, timestamps

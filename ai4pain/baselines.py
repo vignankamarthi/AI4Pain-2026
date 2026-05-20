@@ -2,7 +2,7 @@
 
 One-off baseline used to validate the manual cluster trio (HIP-D / HIP-E /
 HIP-F) and the ai4pain.data, ai4pain.splits, ai4pain.metrics, framework.ledger
-modules end-to-end. NOT part of the EVOLVE search space; framework.render will
+modules end-to-end. NOT part of the Stochastic Experiment Loop search space; framework.render will
 eventually generate richer programs. Kept as `framework/seeds.py` candidate.
 
 Architecture:

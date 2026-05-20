@@ -68,7 +68,7 @@ def test_to_portal_rows_sorts_by_subject_then_trial(tmp_path):
 def test_write_portal_csv_header_and_rows(tmp_path):
     src = tmp_path / "test_predictions.csv"
     _write_pred_csv(src, [(3, 0, "HP"), (3, 1, "NP")])
-    out = tmp_path / "EVOLVE_v1.csv"
+    out = tmp_path / "TeamName_v1.csv"
     pf.write_portal_csv(src, out)
     assert out.exists()
     with open(out) as f:

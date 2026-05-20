@@ -65,7 +65,7 @@ if __name__ == "__main__":
         project_root = project_root.parent
     else:
         raise RuntimeError(
-            "could not locate EVOLVE project root (no framework/__init__.py "
+            "could not locate project root (no framework/__init__.py "
             "found in any ancestor of " + str(Path(__file__).resolve()) + ")")
     sys.path.insert(0, str(project_root))
 

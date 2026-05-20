@@ -1,4 +1,4 @@
-"""EVOLVE: stochastic LLM-driven evolutionary discovery framework.
+"""Stochastic Experiment Loop: a stochastic LLM-driven evolutionary discovery framework.
 
 AI4Pain 2026 is the first case study. The framework will outlive this project.
 
