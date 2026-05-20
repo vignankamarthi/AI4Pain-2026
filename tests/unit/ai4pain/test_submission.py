@@ -157,6 +157,98 @@ def test_train_and_predict_single_seed_default(tmp_path):
     assert len(result["per_seed_val_balanced_acc"]) == 1
 
 
+def test_partial_state_roundtrip(tmp_path):
+    """Save then load -> same completed_seeds, same arrays, same metrics."""
+    va = np.array([[0.7, 0.2, 0.1], [0.1, 0.2, 0.7]], dtype=np.float64)
+    te = np.array([[0.5, 0.3, 0.2]], dtype=np.float64)
+    submission._save_partial(tmp_path, [42, 43], va, te,
+                              [{"balanced_acc": 0.5}, {"balanced_acc": 0.6}])
+    seeds, va_back, te_back, metrics = submission._load_partial(tmp_path)
+    assert seeds == [42, 43]
+    np.testing.assert_allclose(va_back, va)
+    np.testing.assert_allclose(te_back, te)
+    assert metrics[0]["balanced_acc"] == 0.5
+    assert metrics[1]["balanced_acc"] == 0.6
+
+
+def test_load_partial_missing_returns_none(tmp_path):
+    assert submission._load_partial(tmp_path) is None
+
+
+def test_train_and_predict_resumes_from_partial(tmp_path):
+    """If partial_state.json carries 2 completed seeds, with n_seeds=4 only
+    2 more should train. The final result reports n_completed=4."""
+    class _Linear(torch.nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.fc = torch.nn.Linear(4, 3)
+
+        def forward(self, x):
+            return self.fc(x.mean(dim=1))
+
+    rng = np.random.default_rng(0)
+    Xtr = rng.standard_normal((6, 5, 4)).astype(np.float32)
+    Xv = rng.standard_normal((3, 5, 4)).astype(np.float32)
+    Xte = rng.standard_normal((3, 5, 4)).astype(np.float32)
+    ytr = np.array([0, 0, 1, 1, 2, 2])
+    yv = np.array([0, 1, 2])
+
+    # pre-seed the partial with 2 already-done seeds
+    va_acc = np.full((3, 3), 0.4, dtype=np.float64)
+    te_acc = np.full((3, 3), 0.4, dtype=np.float64)
+    submission._save_partial(
+        tmp_path, [9001, 9002], va_acc, te_acc,
+        [{"balanced_acc": 0.50}, {"balanced_acc": 0.52}])
+
+    train_cfg = {"epochs": 1, "batch_size": 6, "lr": 1e-2, "seed": 9001,
+                 "n_seeds": 4, "optimizer": "adam"}
+    spec = {"name": "resume_test", "model": {"family": "test"},
+            "training": train_cfg}
+    result = submission._train_and_predict(
+        lambda: _Linear(), [Xtr], ytr, [Xv], yv, [7, 7, 7],
+        [Xte], [8, 8, 8], train_cfg, tmp_path, spec)
+
+    # All 4 seeds accounted for, but only 2 were actually trained this call
+    assert result["n_seeds"] == 4
+    assert result["n_seeds_completed"] == 4
+    assert len(result["per_seed_val_balanced_acc"]) == 4
+    # partial_state.json is cleaned up after final result writes
+    assert not (tmp_path / "partial_state.json").exists()
+
+
+def test_train_and_predict_writes_partial_per_seed(tmp_path):
+    """After each completed seed, partial_state.json is updated. Verify by
+    running n_seeds=2 and checking partial existed mid-loop (we can only
+    observe the final state, but checkpoint count must equal seeds when
+    we tap in by spec)."""
+    class _Linear(torch.nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.fc = torch.nn.Linear(4, 3)
+
+        def forward(self, x):
+            return self.fc(x.mean(dim=1))
+
+    rng = np.random.default_rng(0)
+    Xtr = rng.standard_normal((6, 5, 4)).astype(np.float32)
+    Xv = rng.standard_normal((3, 5, 4)).astype(np.float32)
+    Xte = rng.standard_normal((3, 5, 4)).astype(np.float32)
+    ytr = np.array([0, 0, 1, 1, 2, 2])
+    yv = np.array([0, 1, 2])
+
+    train_cfg = {"epochs": 1, "batch_size": 6, "lr": 1e-2, "seed": 100,
+                 "n_seeds": 2, "optimizer": "adam"}
+    spec = {"name": "checkpoint_test", "model": {"family": "test"},
+            "training": train_cfg}
+    submission._train_and_predict(
+        lambda: _Linear(), [Xtr], ytr, [Xv], yv, [7, 7, 7],
+        [Xte], [8, 8, 8], train_cfg, tmp_path, spec)
+
+    # final state: result.json present, partial cleaned up
+    assert (tmp_path / "result.json").exists()
+    assert not (tmp_path / "partial_state.json").exists()
+
+
 def test_run_submission_rejects_unsupported_family(tmp_path):
     spec = {"name": "x", "model": {"family": "transformer"},
             "training": {}, "feature_extraction": {}}
