@@ -41,7 +41,7 @@
   },
   "test_predictions_csv": "experiments/submission_02/test_predictions.csv",
   "val_predictions_csv": "experiments/submission_02/val_predictions.csv",
-  "train_seconds": 5379.494120597839,
+  "train_seconds": 5362.232448816299,
   "device": "cuda",
   "spec": {
     "data": {},
