@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI4Pain 2026 -- The Stochastic Experiment Loop</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body,{delimiters:[
+          {left:'$$',right:'$$',display:true},
+          {left:'$',right:'$',display:false}]});"></script>
+<style>
+  :root {
+    --fg: #1a1d24; --muted: #5a6270; --bg: #fafbfc; --panel: #ffffff;
+    --rule: #e3e6eb; --accent: #2e62b8; --accent-soft: #e6efff;
+    --code-bg: #f0f2f5; --pos: #1f7a3e;
+    --warn-bg: #fff7e6; --warn-rule: #e0c382;
+    --note-bg: #f3f7ff; --note-rule: #c8d6f0;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Helvetica, Arial, sans-serif;
+    color: var(--fg); background: var(--bg);
+    margin: 0; padding: 0;
+  }
+  main { max-width: 920px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 30px; margin: 0 0 6px; letter-spacing: -0.01em; }
+  h2 { font-size: 24px; margin: 56px 0 10px; padding-top: 12px;
+        border-top: 1px solid var(--rule); letter-spacing: -0.01em; }
+  h3 { font-size: 19px; margin: 32px 0 6px; }
+  h4 { font-size: 14px; margin: 18px 0 4px; color: var(--muted);
+        text-transform: uppercase; letter-spacing: 0.04em; }
+  .lede { color: var(--muted); margin: 4px 0 0; font-size: 17px; }
+  p { margin: 12px 0; }
+  ul, ol { margin: 8px 0 12px 22px; }
+  li { margin: 4px 0; }
+  code { font: 13px/1.4 "SF Mono", Menlo, Consolas, monospace;
+          background: var(--code-bg); padding: 1px 5px; border-radius: 3px; }
+  pre { background: var(--code-bg); padding: 14px 16px; border-radius: 6px;
+        overflow-x: auto; line-height: 1.45; }
+  pre code { background: none; padding: 0; font-size: 12.5px; }
+  table { border-collapse: collapse; margin: 12px 0 16px; width: 100%;
+           font-size: 14px; }
+  th, td { padding: 8px 10px; border-bottom: 1px solid var(--rule);
+            text-align: left; vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 13px;
+        text-transform: uppercase; letter-spacing: 0.03em; }
+  .panel { background: var(--panel); border: 1px solid var(--rule);
+            border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+  .note { background: var(--note-bg); border-left: 3px solid var(--note-rule);
+          padding: 12px 16px; margin: 16px 0; border-radius: 4px; }
+  .note .label { font-weight: 600; color: var(--accent); font-size: 13px;
+                  text-transform: uppercase; letter-spacing: 0.04em; }
+  .aside { background: var(--warn-bg); border-left: 3px solid var(--warn-rule);
+            padding: 12px 16px; margin: 16px 0; border-radius: 4px;
+            font-size: 14.5px; }
+  .aside .label { font-weight: 600; color: #8a6a1a; font-size: 13px;
+                   text-transform: uppercase; letter-spacing: 0.04em; }
+  .accent { color: var(--accent); }
+  .muted { color: var(--muted); }
+  .pos { color: var(--pos); font-weight: 600; }
+  .ref { font-size: 13px; color: var(--muted);
+          font-family: "SF Mono", Menlo, monospace; }
+  nav.toc { background: var(--panel); border: 1px solid var(--rule);
+             border-radius: 8px; padding: 14px 18px; margin: 20px 0 32px; }
+  nav.toc ol { margin: 0 0 0 22px; padding: 0; }
+  nav.toc li { margin: 3px 0; }
+  nav.toc a { color: var(--accent); text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+  .diagram { display: block; margin: 14px auto; max-width: 100%;
+              background: #fff; border: 1px solid var(--rule);
+              border-radius: 6px; padding: 12px; }
+  .ascii { background: #fff; border: 1px solid var(--rule);
+            border-radius: 6px; padding: 16px 20px; margin: 14px 0;
+            font: 13px/1.55 "SF Mono", Menlo, Consolas, monospace;
+            white-space: pre; overflow-x: auto; color: #2a2f3a; }
+  .caption { color: var(--muted); font-size: 13.5px; margin: -6px 0 18px;
+              text-align: center; font-style: italic; }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 10px;
+           font-size: 12px; background: var(--accent-soft);
+           color: var(--accent); font-weight: 600; }
+  .stub { background: #fff3cd; border: 1px dashed #c79100;
+           border-radius: 6px; padding: 18px 22px; margin: 28px 0;
+           color: #6a4f00; }
+  .stub strong { color: #4a3700; }
+  blockquote { border-left: 3px solid var(--rule); margin: 12px 0;
+                padding: 4px 16px; color: var(--muted); font-style: italic; }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>The Stochastic Experiment Loop</h1>
+  <p class="lede">A multi-level LLM-driven evolutionary discovery framework, walked through end-to-end. AI4Pain 2026 is its first case study.</p>
+  <p class="muted">Sensing and Innovation Lab, Northeastern University &middot; PAAIn @ ACII 2026 &middot; Walkthrough updated 2026-05-20</p>
+</header>
+
+<div class="note">
+  <span class="label">Reading this doc</span>
+  <p>This is the long-form explanation. It motivates each piece before it shows the math, builds the system one layer at a time, and ends with a mental model you can carry into the paper draft. The terse reference spec used to live in <code>FRAMEWORK.md</code>; this HTML replaces it. If you want one-line module pointers, the <a href="#module-map">module map</a> at the end has them.</p>
+</div>
+
+<nav class="toc">
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#why">Why this framework exists</a></li>
+    <li><a href="#bigpicture">The big picture (three levels, one diagram)</a></li>
+    <li><a href="#level0">Level 0: what is a "program"?</a></li>
+    <li><a href="#level1-engine">Level 1, part A: the evolutionary engine</a></li>
+    <li><a href="#level1-scoring">Level 1, part B: the scoring stack</a></li>
+    <li><a href="#level1-constraints">Level 1, part C: constraints</a></li>
+    <li><a href="#level1-breakdown">Level 1, part D: breakdown mechanisms</a></li>
+    <li><a href="#level1-meta">Level 1, part E: the meta-stochastic layer</a></li>
+    <li><a href="#level2">Level 2: the framework mutates itself</a></li>
+    <li><a href="#workflow">The workflow: git as the only bridge</a></li>
+    <li><a href="#observability">Observability: how Level 2 sees what's happening</a></li>
+    <li><a href="#module-map">Module &amp; ledger map</a></li>
+  </ol>
+</nav>
+
+<!-- ====================================================================== -->
+<h2 id="why">1. Why this framework exists</h2>
+
+<p>Let's start with the situation we walked into.</p>
+
+<p>The AI4Pain 2026 Grand Challenge asks you to classify each trial of peripheral autonomic signals (BVP, EDA, RESP, SpO2) into one of three classes: <strong>No Pain</strong>, <strong>Arm Pain</strong>, <strong>Hand Pain</strong>. Each subject contributes 36 trials. There are 41 training subjects, 12 validation, 12 test, and test labels are blinded. You get up to 5 emailed CSV submissions, total.</p>
+
+<p>Now pause and look at that channel list again: BVP, EDA, RESP, SpO2. All four are <em>peripheral</em> autonomic measurements. None of them are cortical. And the task is asking you to distinguish <em>arm</em> pain from <em>hand</em> pain &mdash; a <em>localisation</em> distinction. The information that tells you whether a person's arm hurts or their hand hurts is largely cortical. Peripheral autonomic signals know about pain, but they don't know much about <em>where</em>.</p>
+
+<p>That's the situation. The benchmark is asking you to extract localisation information from a channel set that mostly doesn't carry it. Published prior work on this kind of task sits in the 50&ndash;60% balanced-accuracy range. Random guessing is 33%.</p>
+
+<div class="panel">
+  <p><strong>Our thesis from day one:</strong> the benchmark is flawed, and any winning model must extract every last bit of signal from a low-information channel set. So we are not going to write one model and tune it. We are going to <em>search</em>. Hard. With every diversity-preserving mechanism we can justify from the literature.</p>
+</div>
+
+<p>That decision &mdash; "we will search hard" &mdash; is what produces the framework. The rest of this doc is the answer to one question: <em>what does it actually mean to search hard?</em></p>
+
+<h3>What we want from a search loop</h3>
+
+<p>If you were going to build a model selection loop from scratch, what would you want it to do?</p>
+
+<ol>
+  <li><strong>Try many genuinely different things.</strong> Not "the same model with different learning rates." Different architectures, different signal representations, different inductive biases.</li>
+  <li><strong>Not get stuck.</strong> If the search converges onto one family of solutions, you've lost the diversity benefit. You need something that pushes <em>away</em> from local optima.</li>
+  <li><strong>Score every candidate honestly.</strong> Single-number summaries hide failure modes. Balanced accuracy alone doesn't tell you which class is being starved. So we want a <em>vector</em> of metrics, not a scalar.</li>
+  <li><strong>Resist gaming.</strong> Any single-axis fitness will be gamed. If you optimize raw accuracy, the loop finds models that overfit. If you penalize overfitting too hard, the loop ships toys.</li>
+  <li><strong>Reject illegal candidates immediately.</strong> The challenge has hard rules (no external data, no pretrained weights). A program that violates them is not a "weak" candidate; it should never reach the cluster.</li>
+  <li><strong>See its own progress.</strong> The loop should know when it's stuck, when it's over-rejecting, when it's collapsing into a monoculture. And it should be able to <em>respond</em>.</li>
+  <li><strong>Be reproducible.</strong> Every spec, every fitness vector, every constraint rejection, every state mutation lives in a ledger. The loop must be resumable from any point. The cluster and the laptop must agree on what happened.</li>
+</ol>
+
+<p>That's the wish list. Now the framework. It has three levels because the wish list breaks naturally into three layers of concern: <em>what we evolve</em> (the candidates), <em>how we evolve them</em> (the engine), and <em>how we change the engine itself when it's stuck</em>.</p>
+
+<!-- ====================================================================== -->
+<h2 id="bigpicture">2. The big picture (three levels, one diagram)</h2>
+
+<p>Before we open any boxes, here is the whole system. One diagram. Three levels. Read it from the bottom up: programs (Level 0) are produced and consumed by the engine (Level 1), and the engine itself is mutated by the introspection layer (Level 2). Everything to the left is "what mutates," everything to the right is "what triggers a mutation."</p>
+
+<pre class="ascii">
+  +-----------------------------------------------------------------+
+  |                                                                 |
+  |  LEVEL 2  --  Framework genome mutation                         |
+  |                                                                 |
+  |  Mutates : every Level 1 parameter and operator choice          |
+  |  Trigger : an empirical compound detector over the ledger       |
+  |            (stagnation OR over-rejection OR diversity collapse) |
+  |  Gates   : bootstrap floor, HIP-H human confirmation            |
+  |  Lineage : Schmidhuber Goedel Machines, AlphaEvolve, POET       |
+  |                                                                 |
+  +---------------------+-------------------------------------------+
+                        | reads ledger -> proposes genome diff
+                        v
+  +-----------------------------------------------------------------+
+  |                                                                 |
+  |  LEVEL 1  --  The evolutionary engine                           |
+  |                                                                 |
+  |  Engine   : FunSearch islands + GENITOR replacement             |
+  |  Scoring  : Pareto + Novelty + ECE penalty + Failure boost      |
+  |  Filters  : Rule guards -> AST tabu -> Lineage cap              |
+  |  Breakers : Migration + Coevolutionary critic + Stagnation      |
+  |  Drift    : Mix-ratio + Failure-aware exploration boost         |
+  |                                                                 |
+  +---------------------+-------------------------------------------+
+                        | parent + meta-state -> child spec
+                        v
+  +-----------------------------------------------------------------+
+  |                                                                 |
+  |  LEVEL 0  --  Candidate programs (the population)               |
+  |                                                                 |
+  |  Spec   : preprocessing + features + model + training + decode  |
+  |  Life   : rendered to PyTorch, trained on cluster, scored       |
+  |  Goal   : AI4Pain 2026 submission                               |
+  |                                                                 |
+  +-----------------------------------------------------------------+
+</pre>
+<p class="caption">Figure 1. The whole system. Three levels, two arrows.</p>
+
+<p>A few things to notice before we start pulling layers apart.</p>
+
+<p><strong>Level 0 turns over every iteration.</strong> Every step of the loop, one new candidate program is created, trained, scored, and either replaces an existing population member or gets rejected. The population is in constant motion.</p>
+
+<p><strong>Level 1 is held fixed across iterations.</strong> Almost. The <em>structure</em> of Level 1 doesn't change &mdash; same islands, same GENITOR rule, same constraint pipeline. But Level 1 has a few <em>knobs</em> that drift each step: how often the prompt biases toward literature versus novelty, how aggressive the novelty bonus is, how high the temperature is. Those drifts are the meta-stochastic layer, and they live <em>inside</em> Level 1.</p>
+
+<p><strong>Level 2 is held fixed UNTIL it isn't.</strong> Most of the time, Level 2 is silent. It just watches. But when the ledger shows that Level 1 is genuinely stuck &mdash; not noisy, stuck &mdash; Level 2 proposes a structural change to Level 1 itself. Maybe scale up novelty weight, maybe add an island, maybe swap a replacement rule. That proposal is gated by a human (Vignan), and if approved, Level 1's <em>structure</em> changes for all future iterations.</p>
+
+<div class="aside">
+  <span class="label">A note on language</span>
+  <p>People in the genetic algorithms literature sometimes use "meta-evolution" or "meta-stochastic" to mean either of these layers. We are using a specific split: <em>meta-stochastic</em> = the drifting knobs <em>inside</em> Level 1 (small, per-iteration, no human in the loop), and <em>Level 2</em> = the introspection layer that <em>structurally</em> mutates Level 1 (rare, threshold-triggered, human-gated). Both are real, but they operate at different cadences and need different mechanisms. Don't conflate them.</p>
+</div>
+
+<p>OK. That's the whole system at altitude. Now let's start opening boxes, beginning at the bottom.</p>
+
+<!-- ====================================================================== -->
+<h2 id="level0">3. Level 0: what is a "program"?</h2>
+
+<p>The thing the loop evolves is a <em>program</em>. So before we explain how the loop picks them, mutates them, or scores them, we need to be clear about what one of them looks like.</p>
+
+<p>A program is not a Python file. A program is a <strong>spec</strong>: a JSON object describing how to assemble a training pipeline from named components. The framework then <em>renders</em> the spec into a PyTorch+sklearn run-script.</p>
+
+<p>Here is what a real spec from our population looks like, slightly cleaned up for readability.</p>
+
+<pre><code>{
+  "family": "multi_stream_bigru",
+  "preprocessing": {
+    "resample_hz": 100,
+    "normalize": "z_score",
+    "window_sec": 36
+  },
+  "feature_extraction": null,
+  "model": {
+    "type": "MultiStreamNet",
+    "encoder_type": "bilstm",
+    "hidden": 40,
+    "layers": 2,
+    "fusion": "late_concat",
+    "dropout": 0.3
+  },
+  "training": {
+    "loss": "focal",
+    "focal_gamma": 1.0,
+    "optimizer": "adamw",
+    "lr": 1.0e-3,
+    "epochs": 150,
+    "batch_size": 8,
+    "n_seeds": 3
+  },
+  "decode": {
+    "agg": "argmax"
+  },
+  "reasoning_summary": "Multi-stream encoder with BiLSTM per channel
+   and late concat fusion. Per-seed checkpointing; n_seeds=3 to absorb
+   the seed-variance lottery exposed in iter_0014."
+}</code></pre>
+
+<p>Five top-level keys describe the entire run: <code>preprocessing</code>, <code>feature_extraction</code>, <code>model</code>, <code>training</code>, <code>decode</code>. Call these the five <em>genes</em>. Plus a <code>family</code> tag and a <code>reasoning_summary</code> (the LLM's own rationale for this child &mdash; we'll need this for observability later).</p>
+
+<p>Why split it into five genes specifically? Because we want a clean crossover operator. If you can replace one gene at a time (or pick each gene independently from one of two parents), you get genuine recombination across the population, not just point mutations on a flat dictionary. The genes are the <strong>units of inheritance</strong> in this evolutionary algorithm.</p>
+
+<div class="note">
+  <span class="label">Vocabulary</span>
+  <p>We'll use <em>spec</em> and <em>program</em> interchangeably from here on. A <em>family</em> is a class of architecturally similar programs (e.g. <code>multi_stream_bigru</code>, <code>spectrogram_cnn2d</code>, <code>dual_ensemble</code>). A <em>child</em> is a single mutated spec produced from one or two parents. A <em>batch</em> is the set of children evaluated together on the cluster (one per active island per iteration).</p>
+</div>
+
+<h3>From spec to PyTorch</h3>
+
+<p>The spec is rendered by <code>framework/render.py</code>. Each family has a registered entry point in <code>FAMILY_ENTRY_POINTS</code> that maps the spec's <code>model.type</code> + parameters to a concrete training script. The entry points live in <code>ai4pain/</code>:</p>
+
+<pre class="ascii">
+  family                      entry point
+  ---------------------------------------------------------
+  multi_stream_bigru     -->  ai4pain/multi_stream.py
+  multi_stream_aux       -->  ai4pain/multi_stream.py (aux head)
+  spectrogram_cnn2d      -->  ai4pain/cnn_1d.py (2D variant)
+  residual_spectrogram   -->  ai4pain/cnn_1d.py (residual variant)
+  dual_ensemble          -->  ai4pain/multi_stream.py (joint head)
+  hrv_features_mlp       -->  ai4pain/baselines.py
+  minirocket             -->  ai4pain/minirocket.py
+  ...
+</pre>
+<p class="caption">Figure 2. Family registry. Adding a new family means adding one row here plus a <code>run_from_dir</code> in the corresponding module.</p>
+
+<p>The rendered script writes its output to <code>experiments/iter_NNNN/child_MM/result.json</code>. That's the contract: the framework hands the cluster a directory with <code>spec.json</code> and <code>run.py</code>; the cluster hands back a <code>result.json</code> with the fitness vector. Nothing more, nothing less.</p>
+
+<h3>What does a result.json look like?</h3>
+
+<p>The fitness vector is the only thing the loop cares about. Here's the shape:</p>
+
+<pre><code>{
+  "balanced_accuracy_3class": 0.5274,
+  "balanced_accuracy_3class_std": 0.0071,
+  "per_class_precision": [0.61, 0.43, 0.52],
+  "per_class_recall":    [0.69, 0.41, 0.48],
+  "confusion_matrix": [[99,21,24], [27,59,58], [25,49,70]],
+  "macro_f1": 0.519,
+  "auc_ovr": 0.71,
+  "ece": 0.083,
+  "binary": {
+    "balanced_accuracy": 0.8194,
+    "pain_precision": 0.84, "pain_recall": 0.81,
+    "auc": 0.88,
+    "confusion_2x2": [[112,32], [55,233]]
+  },
+  "generalization_gap": 0.038,
+  "param_count": 124931,
+  "train_wallclock_sec": 412,
+  "inference_wallclock_sec": 8,
+  "per_seed": {
+    "seeds": [0,1,2],
+    "balanced_accuracy_3class": [0.5210, 0.5301, 0.5311]
+  }
+}</code></pre>
+
+<p>Notice what is and isn't in there.</p>
+
+<p><strong>Every metric the loop will ever score against is here</strong> &mdash; not just the headline number. Balanced accuracy is the headline, but we also need the generalization gap (for Pareto), the ECE (for the confidence penalty), the parameter count (for Pareto), the wallclock (for budget enforcement), and the confusion matrix (for novelty distance in confusion-matrix space). Stripping any of these to "just save the accuracy" would force a re-run when the loop later asks for them.</p>
+
+<p><strong>There's also a per-seed block.</strong> This is here because we learned the hard way that single-seed fitness is untrustworthy on this dataset (seed-to-seed variance was around 0.11 absolute on 3-class accuracy &mdash; we'll come back to this in <a href="#level1-engine">Section 4</a>). Every fitness value the loop reads is a mean over <code>n_seeds</code> independent runs, with the per-seed list preserved for diagnostics.</p>
+
+<p><strong>And there's a binary block.</strong> The official task is 3-class, but we also project predictions to Pain-vs-No-Pain (collapsing AP and HP into one). This is purely diagnostic &mdash; the loop's tournament selection only ever uses 3-class balanced accuracy &mdash; but the binary block is the empirical fingerprint of "the autonomic signal carries pain information, just not localisation." We want every result.json to carry that fingerprint so the loop can never lose sight of it.</p>
+
+<p>That's a program. A spec, a rendered script, a result.json with a fitness vector. The population is just a list of these, sorted by fitness, partitioned across islands. Now we can talk about how the loop turns one into another.</p>
+
+<!-- ====================================================================== -->
+
+<!-- ====================================================================== -->
+<h2 id="level1-engine">4. Level 1, part A: the evolutionary engine</h2>
+
+<p>Now we have a population of programs. How do we make the next one?</p>
+
+<p>If you take the simplest possible evolutionary algorithm, here is what one step looks like:</p>
+
+<ol>
+  <li>pick a parent from the population</li>
+  <li>mutate it to produce a child</li>
+  <li>score the child</li>
+  <li>insert the child, evict the worst</li>
+</ol>
+
+<p>That's it. Pick, mutate, score, replace. Every fancier algorithm is some elaboration of this loop, and that's what Level 1 is: a careful elaboration of these four steps to do them well on a slow, expensive evaluation budget (each child takes minutes-to-hours of cluster time).</p>
+
+<p>The elaborations come from two sources in the literature: <strong>FunSearch</strong> (Romera-Paredes et al., Nature 2024) for the population structure, and <strong>GENITOR</strong> (Whitley 1988) for the replacement rule. Let's take them in that order.</p>
+
+<h3>FunSearch: islands, not a global pool</h3>
+
+<p>If you keep one big population and always pick parents from it, the population quickly converges. The best program gets copied; near-copies of it dominate. Diversity dies. With one global pool, a single bad evaluation streak can kill global progress, because every parent in the pool descends from the same recent winners.</p>
+
+<p>FunSearch's answer is to keep <strong>M islands</strong> in parallel, each holding its own subpopulation of K programs. Mutations happen within an island. Once in a while, the worst-performing islands get reset (their bottom-K programs reseed from the global champion plus perturbation), but most of the time the islands evolve independently.</p>
+
+<pre class="ascii">
+       +-----+   +-----+   +-----+   +-----+
+       | I0  |   | I1  |   | I2  |   | I3  |     M islands
+       +--+--+   +--+--+   +--+--+   +--+--+     (default M=4)
+          |         |         |         |
+          v         v         v         v
+       K programs per island, rank-sorted by fitness    (default K=8)
+
+  iteration step on island I_j:
+    1. rank-based tournament selection -> parent
+    2. mutation operator (Claude Code session) reads
+       a context blob, writes child spec JSON
+    3. constraint pipeline (Section 6) -> reject + regenerate if blocked
+    4. render to PyTorch (framework/render.py) -> cluster eval
+       -> fitness vector
+    5. GENITOR replacement: evict lowest-fitness member, insert child
+       island size stays K (steady-state, not generational)
+
+  every R iterations (reset_cadence, default 50):
+    bottom-K islands by best-fitness reseed from
+    the global champion plus perturbation
+</pre>
+<p class="caption">Figure 3. One step of the engine, on one island. The whole population is M of these running in parallel.</p>
+
+<p>The key insight is that <strong>isolation preserves diversity</strong>. A bad mutation in island I2 doesn't poison I0's gene pool. If I2's whole tree of descendants is a dead end, the reset cadence eventually catches it. Meanwhile, I0 has been evolving in a completely different direction.</p>
+
+<h3>GENITOR: one child at a time, not a generation</h3>
+
+<p>Classical genetic algorithms work in <em>generations</em>: you evaluate the whole population, then produce a whole new population at once. That works fine when each evaluation is fast and parallel.</p>
+
+<p>It doesn't work for us. Each evaluation here is a full PyTorch training run on the cluster. Generations would mean: ship 32 children, wait for all of them to finish, then pick parents for the next generation. The slowest training run blocks the entire population from advancing.</p>
+
+<p>GENITOR (Whitley 1988) is the steady-state alternative: <strong>one child per step</strong>. You produce one child, score it, evict the worst current member, insert the child. Repeat. No synchronization barriers. Each cluster job can return whenever it's ready and the population just keeps moving.</p>
+
+<p>For us, "one child per step" actually means "one child per island per batch": we ship N children together (one per active island), which the cluster's SLURM array runs in parallel up to a concurrent cap. But the <em>replacement rule</em> is per-island steady-state, not generational. The island's size stays K throughout.</p>
+
+<div class="aside">
+  <span class="label">Why "the mutation operator IS this Claude Code session"</span>
+  <p>In classical FunSearch, the mutation operator is a paid LLM API call. We don't have that budget, and the project's hard rules forbid an external LLM SDK in <code>requirements.txt</code>. So the mutation operator is <em>this Claude Code session</em>. <code>framework/mutation.py</code> doesn't call an API; it assembles a context blob (recent best programs in the parent's island, fitness vectors, meta-stochastic state, constraint feedback from the last few rejections). The session reads that blob conversationally and emits the child spec. No SDK. No API key. The framework is hand-driven, by design.</p>
+</div>
+
+<h3>What does a mutation actually <em>do</em>?</h3>
+
+<p>Most generic evolutionary algorithms either do <em>point mutations</em> (perturb one number) or <em>crossover</em> (combine two parents). We do both, but we also do something stronger: <strong>architectural operators</strong> that move along axes orthogonal to hyperparameters.</p>
+
+<p>Why? Because we lived through iterations 12&ndash;14, where the loop did nothing but hyperparameter tweaks, and the entire population stalled inside its own seed-noise floor. Bumping <code>hidden=40</code> to <code>hidden=56</code> changes the AST fingerprint, but doesn't change the inductive bias of the model. To produce genuinely different architectures, we need operators that change <em>structure</em>, not numbers.</p>
+
+<p>The four structural operators that landed in the iter_0015 rebuild:</p>
+
+<div class="panel">
+  <h4>swap_encoder</h4>
+  <p>In the <code>multi_stream</code> family, replace the per-channel encoder. <code>encoder_type</code> is drawn from {<code>gru</code>, <code>lstm</code>, <code>bilstm</code>, <code>transformer</code>, <code>conv1d</code>}. Each gives the network a fundamentally different inductive bias: GRU is fast and recurrent; transformer attends globally with no recurrence; conv1d is local and translation-equivariant. Same surrounding pipeline, different temporal prior.</p>
+
+  <h4>swap_fusion</h4>
+  <p>Change how the per-channel embeddings combine before the classifier. <code>fusion</code> is drawn from {<code>late_concat</code>, <code>mean_pool</code>, <code>max_pool</code>, <code>attention_pool</code>, <code>mid_fusion</code>}. Different fusion = different way of routing inter-channel information.</p>
+
+  <h4>add_aux_stream</h4>
+  <p>Branch into a sibling family <code>multi_stream_aux</code>: same <code>MultiStreamNet</code> body, but fused with a 26-dim HRV-feature side-MLP. The network sees both the raw signal AND its autonomic summary. Lets the loop test whether engineered features carry signal the deep encoder is missing.</p>
+
+  <h4>graft_family</h4>
+  <p>A fully-random per-gene crossover of two parent specs. Each of the 5 genes (preprocessing, feature_extraction, model, training, decode) is independently picked from parent A or parent B at 50/50. <code>predict_graft_coherence</code> tags type-contract violations (e.g. CNN model with non-spectrogram input), but incoherent grafts are <em>tagged, not blocked</em>: the ledger tolerates a missing result.json and Level 2 can read the failure rate. Sometimes the incoherence is the discovery.</p>
+</div>
+
+<p>These four are the <strong>structural teeth</strong> of the search. AST tabu (Section 6) catches near-duplicate fingerprints, but it can't catch monoculture by itself: <code>hidden=40</code> and <code>hidden=56</code> are different fingerprints. The structural operators force the search to walk across families, not just along hyperparameter axes.</p>
+
+<h3>Multi-seed fitness (a lesson learned the hard way)</h3>
+
+<p>Earlier we said the result.json carries a <code>per_seed</code> block. Here's the story behind it.</p>
+
+<p>iter_0013 returned a champion with val balanced accuracy 0.5486. Big win, well above the population. iter_0014 reseeded the <em>same configuration</em> with a different random seed, and the result was 0.4352. Same code, same data, same hyperparameters &mdash; an absolute spread of ~0.11 between two seeds.</p>
+
+<p>That single fact invalidated every fitness comparison the loop had been making. A 0.5486 "champion" and a 0.4352 "failure" could be the same spec. Tournament selection was picking parents based on noise. The loop was thrashing.</p>
+
+<div class="panel">
+  <p><strong>The fix:</strong> every fitness evaluation runs <code>n_seeds</code> independent training runs (default 3 during search, 20 at submission time). The fitness vector reports the <em>mean</em>, with the per-seed list preserved. The tournament selection sees the mean. The Pareto sort sees the mean. The novelty distance sees the mean.</p>
+  <p>This dropped the per-spec sigma from ~0.11 to ~0.007&ndash;0.013, which is the floor of what 12 val subjects can resolve. Most importantly, it dropped it <em>below</em> the differences between architecturally distinct specs &mdash; so the loop could finally see signal instead of noise.</p>
+</div>
+
+<p>OK. We now have a parent, a child spec produced by mutation, and a way to replace the worst member of an island. But we still haven't said how we <em>score</em>. That's the next section.</p>
+
+<!-- ====================================================================== -->
+<h2 id="level1-scoring">5. Level 1, part B: the scoring stack</h2>
+
+<p>Vanilla FunSearch returns a single scalar: "did the program solve the problem better than the previous best." We can't use a single scalar, for a reason that's easy to demonstrate.</p>
+
+<p>Suppose the loop produced two children, both at val balanced accuracy 0.52:</p>
+
+<ul>
+  <li><strong>Child A:</strong> 0.52 val, 0.95 train. Generalization gap = 0.43. Memorized the training set.</li>
+  <li><strong>Child B:</strong> 0.52 val, 0.54 train. Generalization gap = 0.02. Honest.</li>
+</ul>
+
+<p>By raw balanced accuracy, A and B tie. A scalar fitness can't distinguish them. But if you pick A as parent and mutate it, you're propagating "memorize the training set" as a strategy. The next batch is full of overfitters.</p>
+
+<p>So fitness needs to be a <strong>vector</strong>, and we need a principled way to compare vectors. We compose four mechanisms, in this order:</p>
+
+<pre class="ascii">
+   raw fitness vector
+   (balanced_acc, generalization_gap, param_count, ECE)
+                |
+                v
+   +-----------------------------+
+   | 5.1 Pareto NSGA-II          |   non-dominated sort + crowding
+   +--------------+--------------+   prevents single-axis gaming
+                  |
+                  v
+   +-----------------------------+
+   | 5.2 Novelty (Lehman+Stanley)|   score = a*acc + (1-a)*novelty
+   +--------------+--------------+   novelty = kNN dist in
+                  |                  confusion-matrix space
+                  v
+   +-----------------------------+
+   | 5.3 ECE-weighted accuracy   |   score *= (1 - lambda*ECE)
+   +--------------+--------------+   penalize confident-wrong
+                  |
+                  v
+   +-----------------------------+
+   | 5.4 Failure-aware boost     |   if recent fitness delta < 0,
+   +--------------+--------------+   raise exploration knobs
+                  |
+                  v
+       final composite score
+</pre>
+<p class="caption">Figure 4. The scoring stack. Each box takes the previous box's output and adds one more thing the loop should care about.</p>
+
+<h3>5.1 Pareto NSGA-II: anti-gaming</h3>
+
+<p>The fitness vector is <code>(balanced_accuracy, generalization_gap = val - train, parameter_count, calibration_ECE)</code>. We want to maximize the first and minimize the other three.</p>
+
+<p>Pareto sorting is the right tool here. A program <em>dominates</em> another if it's at least as good on every axis and strictly better on at least one. Non-dominated sorting (Deb 2002, NSGA-II) ranks the population into "frontiers": the first frontier contains all non-dominated programs, the second contains all programs dominated only by the first, and so on.</p>
+
+<p>Tournament selection then picks from the lowest frontier (best). Within a frontier, ties break on <em>crowding distance</em>: prefer the program with more empty fitness-space around it, to keep the frontier spread out rather than clumped.</p>
+
+<p>The effect: the LLM can't game a single axis. If it tries to push accuracy up by adding parameters, the param_count axis dominates it back. If it tries to push the generalization gap down by underfitting, accuracy dominates it back. The Pareto frontier is the loop's notion of "good in multiple senses simultaneously."</p>
+
+<h3>5.2 Novelty (Lehman &amp; Stanley 2011)</h3>
+
+<p>Pareto sorting prevents gaming, but it doesn't drive <em>exploration</em>. A population can be Pareto-diverse while still doing the same thing in different ways. We need an explicit push toward novelty.</p>
+
+<p>The clean formulation comes from Lehman &amp; Stanley's "novelty search" paper: define a <strong>behavioral characterization</strong> for each program &mdash; some descriptor of <em>what it does</em>, not how it scores &mdash; and reward programs that are far from their nearest neighbors in that descriptor space.</p>
+
+<p>Our behavioral characterization is the <strong>confusion matrix</strong>. Two programs have different behavior if they make different kinds of mistakes. Specifically: novelty of child <code>c</code> = mean k-NN distance from <code>c</code>'s flattened confusion matrix to the nearest k confusion matrices in the population.</p>
+
+<p>The final novelty-augmented score is:</p>
+
+<p>$$\text{score}(c) = \alpha \cdot \text{accuracy}(c) + (1 - \alpha) \cdot \text{novelty}(c)$$</p>
+
+<p>$\alpha$ is part of the meta-stochastic state and drifts. When the population converges (all confusion matrices look alike), novelty rewards rise, and $\alpha$ can be pushed lower to favor exploration. When the population is spread out, $\alpha$ rises back and accuracy dominates again. We'll come back to this drift in Section 8.</p>
+
+<h3>5.3 ECE-weighted accuracy: calibration matters</h3>
+
+<p>A model that predicts the right class with 99% confidence and is wrong is worse than a model that predicts the right class with 51% confidence and is wrong. Both lose a point. But the first model is <em>confidently</em> wrong; the second is <em>uncertainly</em> wrong. Soft predictions from the second can still be aggregated usefully in an ensemble; soft predictions from the first poison every ensemble that includes it.</p>
+
+<p>So we penalize miscalibration. Expected Calibration Error (ECE) bins the predictions by confidence and measures the average gap between bin confidence and bin accuracy. We apply it as a multiplicative penalty:</p>
+
+<p>$$\text{score}(c) := \text{score}(c) \cdot (1 - \lambda \cdot \text{ECE}(c))$$</p>
+
+<p>$\lambda$ is in the framework genome, so Level 2 can tune it. Default $\lambda = 0.5$. The penalty is bounded (ECE is in [0, 1], so the multiplier is in [0.5, 1] at $\lambda = 0.5$).</p>
+
+<h3>5.4 Failure-aware exploration boost</h3>
+
+<p>The last stage is a feedback loop: if the loop is making no progress, <em>open up exploration</em>. We track a rolling window of the last N children's fitness delta (each child's score minus the mean of its parent island). When that rolling mean drops below threshold &mdash; meaning the recent batch has been losing ground &mdash; the loop responds:</p>
+
+<ul>
+  <li><strong>Prompt temperature rises.</strong> The mutation operator (this Claude Code session) is instructed to produce more aggressive structural mutations rather than safe variants.</li>
+  <li><strong>Novelty alpha drops.</strong> The novelty term dominates the accuracy term in the composite score, so the loop rewards being-different over being-good.</li>
+  <li><strong>Tabu strictness rises.</strong> Near-duplicate fingerprints get rejected even more aggressively.</li>
+</ul>
+
+<p>When fitness deltas come back positive, all three knobs relax back toward defaults. This is the <strong>master valve</strong> for exploration; we'll see in Section 7 that there's a per-island cousin of this that fires locally.</p>
+
+<div class="note">
+  <span class="label">Why these four, in this order</span>
+  <p>Pareto comes first because it operates on the raw fitness vector and is the only stage that produces a partial order (rather than a scalar). Novelty comes next because it transforms a Pareto-best set into a scored set within that frontier. ECE applies multiplicatively after both, because it doesn't care which axis you scored well on. Failure-aware boost is last because it operates over time (rolling window of recent scores), not on a single program in isolation. Each layer reads the output of the previous and adds one more thing the loop cares about.</p>
+</div>
+
+<!-- ====================================================================== -->
+<h2 id="level1-constraints">6. Level 1, part C: constraints</h2>
+
+<p>Some children should never be evaluated at all. The challenge has hard rules: no external data, no pretrained weights, no foundation models. If the LLM proposes a program that imports <code>transformers.from_pretrained</code>, shipping it to the cluster is wasted budget. It should be killed in-flight.</p>
+
+<p>Vanilla FunSearch's only constraint is "the code must compile and run." We need more. Three filters in a hard-reject pipeline, plus a per-batch quota:</p>
+
+<pre class="ascii">
+   child spec
+       |
+       v
+   +-----------------------+   rejection logged to constraint_events
+   | 6.1 Rule guards       | --reject--> regenerate with feedback
+   +-----------+-----------+   in the mutation prompt
+        accept |
+        v
+   +-----------------------+
+   | 6.2 AST tabu          | --reject--> regenerate
+   +-----------+-----------+
+        accept |
+        v
+   +-----------------------+
+   | 6.3 Lineage cap       | --reject--> regenerate
+   +-----------+-----------+
+        accept |
+        v
+   batch assembly + 6.4 family quota (per-batch gate)
+        |
+        v
+   render -> cluster
+</pre>
+<p class="caption">Figure 5. The constraint pipeline. Three per-child filters, one per-batch quota.</p>
+
+<h3>6.1 Rule guards</h3>
+
+<p>Hard-coded challenge rules. Auto-reject programs that:</p>
+
+<ul>
+  <li>import pretrained weight loaders: <code>torch.hub.load</code>, <code>transformers.from_pretrained</code>, <code>huggingface_hub</code>, equivalents</li>
+  <li>access external data: <code>urlopen</code>, <code>requests</code>, <code>wget</code>, <code>gdown</code></li>
+  <li>exceed parameter cap (default 10M, in framework genome)</li>
+  <li>exceed train-time cap (default 30 min on H200, in framework genome)</li>
+</ul>
+
+<p>Every rejection is logged in <code>constraint_events</code> with the offending rule name. Level 2 (Section 9) reads this table to compute rejection rates per rule per window, and proposes parameter scales when one rule is choking the search.</p>
+
+<h3>6.2 AST tabu</h3>
+
+<p>Each program is fingerprinted by an AST-based hash that ignores variable names and literal values, but captures structure: which family, which encoder type, which fusion, which loss, which layer arrangement. The last K accepted fingerprints (default K = 50, in framework genome) form a tabu list. Near-duplicate fingerprints are rejected.</p>
+
+<p>This is a <strong>cheap exploration prior</strong>: you don't need to retrain a near-duplicate of something you trained 20 steps ago. The mutation operator gets the rejection feedback in its next prompt context and learns to propose something structurally different.</p>
+
+<h3>6.3 Lineage inbreeding cap</h3>
+
+<p>If you keep selecting the same parent and producing children from it, the loop collapses into a single descendant tree. The lineage cap rejects children that trace ancestry to more than N (default 5) consecutive same-parent generations. Combined with tabu, this gives the search a recency-and-relatedness window that prevents the population from inbreeding.</p>
+
+<h3>6.4 Family quota (per-batch hard gate)</h3>
+
+<p>Filters 6.1&ndash;6.3 are per-child. They catch one bad child at a time. But the population can still drift into monoculture through entirely-valid children: every child is structurally novel relative to the last 50, every child respects lineage, but every child is in the same family. We learned this empirically: iter_0012&ndash;0014 produced <strong>24 consecutive children</strong> from the <code>multi_stream_bigru</code> family, and the loop ground to a halt inside that family's local geometry.</p>
+
+<p>The fix is a per-<em>batch</em> gate, run after children are generated but before the manifest is shipped to the cluster:</p>
+
+<ul>
+  <li><code>max_per_family</code> (default 3, range [2, 8]): no model family may exceed this count in one batch of 8.</li>
+  <li><code>min_families</code> (default 4, range [2, 8]): the batch must span at least this many distinct families.</li>
+</ul>
+
+<p><code>framework.iteration.allocate_family_slots</code> assigns target families to the N batch slots <em>before</em> mutation prompts are written, under-weighting families that dominated recent batches. <code>validate_batch_family_quota</code> is a hard gate run on the manifest: a batch that violates the quota does not reach the cluster.</p>
+
+<p>There's also a <strong>blender rule</strong>. If a family has 2 or more slots in a batch, the second slot's child must differ from the first via a <em>structural</em> operator (swap_encoder, swap_fusion, etc.), not a hyperparameter knob. <code>assign_blender_flags</code> tags each slot with the operator type the mutation operator is required to use.</p>
+
+<div class="aside">
+  <span class="label">A note on what we removed</span>
+  <p>A previous "curriculum_unlock" filter gated complex families until simpler ones had been explored first. It was scorched on 2026-05-11 (logged in CLAUDE.md). Threshold-based gating proved brittle on this dataset's hard ceiling: simple families never crossed the threshold because the ceiling itself was at ~0.53. All families with entry points in <code>FAMILY_ENTRY_POINTS</code> are eligible from iteration 1. The Pareto param_count axis handles the simplicity-vs-complexity tradeoff cleanly.</p>
+</div>
+
+<!-- ====================================================================== -->
+<h2 id="level1-breakdown">7. Level 1, part D: breakdown mechanisms</h2>
+
+<p>Stuck mechanisms need unsticking. Vanilla FunSearch only resets the bottom-K islands every R iterations. That's a blunt tool. We layer three more focused mechanisms on top:</p>
+
+<pre class="ascii">
+  stagnation signals
+        |
+        +--> 7.1 Inter-island migration
+        |       trigger: island gap >= migration_patience
+        |       action: child is composed from THIS island's parent
+        |               and ANOTHER island's parent (crossover)
+        |
+        +--> 7.2 Coevolutionary critic (Hillis 1990)
+        |       a parallel evolving population of HARD test cases
+        |       evolves to maximize program failure rate
+        |       programs evolve to survive critics
+        |       an actual arms race
+        |
+        +--> 7.3 Per-island stagnation -> escalating temperature
+                trigger: island best hasn't improved in K generations
+                action: raise THIS island's prompt temperature
+                        + novelty alpha, force structural mutations
+</pre>
+<p class="caption">Figure 6. Three breakdown mechanisms. They fire independently and target different scales: 7.1 cross-island, 7.2 against the val set's hardness, 7.3 within one island.</p>
+
+<h3>7.1 Inter-island migration</h3>
+
+<p>If an island's best fitness flatlines for K generations (default K = 10, in genome), its next child gets a foreign parent. The mutation operator's prompt now contains <em>two</em> parent specs &mdash; one from this island, one from a stuck-resistant peer island &mdash; and is asked to compose a crossover child from both. This is genuine cross-pollination, not just within-island variation.</p>
+
+<p>The wiring lives in <code>framework.iteration.prepare_batch(migration_patience=...)</code>: when the trigger fires, the per-slot prompt includes both <code>parent_spec</code> and <code>foreign_parent_spec</code>, and the mutation operator emits a hybrid.</p>
+
+<h3>7.2 Coevolutionary critic (Hillis 1990)</h3>
+
+<p>Most evolutionary search uses a <em>fixed</em> fitness landscape: the val set is the val set, programs evolve to climb it, and the val set never fights back. Hillis's insight is that you can make the landscape <em>evolve too</em>. Run a second population whose individuals are <strong>hard test cases</strong> &mdash; subsets of the val set, signal perturbations, channel permutations. Critics evolve to <em>maximize</em> program failure rate. Programs evolve to survive critics. An arms race emerges, and both populations push each other into higher fitness.</p>
+
+<p>In our framework, a critic individual is a triple:</p>
+
+<ul>
+  <li><strong>subject_subset</strong>: which val subjects to score on (a hard subset is one most programs do poorly on)</li>
+  <li><strong>signal_perturbation</strong>: noise / occlusion / time-warp applied to inputs</li>
+  <li><strong>channel_permutation</strong>: scramble or zero-out a subset of the 4 channels</li>
+</ul>
+
+<p>The critic population has its own ledger table (<code>critic_population</code>), its own GENITOR replacement, and its own fitness: a critic's fitness is the <em>average failure rate of the current program population on that critic</em>. Hard critics survive; easy ones get replaced.</p>
+
+<p>Each batch, one new critic is evolved (currently by mutating <code>channel_permutation</code>) and the top critics are surfaced in the mutation prompt via <code>include_critic_in_prompt</code>. The full critic-aware training fitness (training programs to be robust to the critic population in their loss) is deferred to a cluster-side sprint &mdash; we wired the critic population, but the program fitness function still uses the standard val set. The critic infrastructure is there; the next iteration of the framework will close the loop.</p>
+
+<h3>7.3 Per-island stagnation &rarr; escalating temperature</h3>
+
+<p>The smallest-scale unsticker: if a single island's best hasn't improved in K generations, that island's <em>local</em> meta-stochastic state escalates. The prompt temperature for that island multiplies by 1.5. The novelty alpha increases by 0.2. Forced structural-mutation operators get higher prior in the mutation prompt.</p>
+
+<p>This is the <strong>local cousin</strong> of the global failure-aware boost in Section 5.4. The global version pushes the whole loop. The local version pushes a single island. They coexist because they target different signals: global stagnation is "nothing in the population is improving"; local stagnation is "this corner of the population is dead."</p>
+
+<!-- ====================================================================== -->
+<h2 id="level1-meta">8. Level 1, part E: the meta-stochastic layer</h2>
+
+<p>So far Level 1's parameters have been "defaults plus failure-aware boost when stuck." We can do better. Two parameters drift stochastically across iterations, persisted in the <code>meta_state</code> table:</p>
+
+<h3>8.1 Mix-ratio drift</h3>
+
+<p>The mutation prompt has two modes, biased by a single number <code>p_lit</code> in [0.2, 0.8]:</p>
+
+<ul>
+  <li>When <code>p_lit</code> is high, the prompt biases toward <em>literature</em>: "what would the most-cited paper on this signal type do? What's the standard inductive bias for periodic physiological signals?"</li>
+  <li>When <code>p_lit</code> is low, the prompt biases toward <em>novelty</em>: "what is a novel structural mutation that would surprise me? What's a combination of operators that doesn't appear in the recent population?"</li>
+</ul>
+
+<p><code>p_lit</code> does a Gaussian random walk: every 10 iterations, draw a step from $\mathcal{N}(0, \sigma^2)$ with default $\sigma = 0.05$, then clamp to [0.2, 0.8]. Over the course of a long run, the loop spends time in literature-mode and time in novelty-mode without ever committing to either.</p>
+
+<p>Why a random walk? Because the optimal mode is itself unknown and time-varying. Early in the search, literature-mode is high-value (you don't know what the basic strong baselines look like, the literature has them). Late in the search, when the basic baselines are exhausted, novelty-mode is high-value (you need to find combinations that haven't been published). A random walk lets the loop sample both regimes naturally.</p>
+
+<h3>8.2 Failure-aware boost (the master valve)</h3>
+
+<p>Already described in Section 5.4. The recap, in this context: when recent fitness deltas turn negative, this single mechanism opens up <em>every</em> exploration knob simultaneously: prompt temperature rises, novelty alpha rises, tabu strictness rises, lineage cap tightens. When fitness recovers, the valve closes back toward defaults.</p>
+
+<p>In ledger terms: the failure-aware boost reads <code>median_fitness_delta_per_island(window)</code> and writes back to the <code>meta_state</code> row at the end of each batch. The next batch's mutation prompts pick up the updated knobs automatically.</p>
+
+<div class="note">
+  <span class="label">The wiring</span>
+  <p>As of 2026-05-11, both 8.1 and 8.2 are live: each batch, <code>prepare_batch(evolve_meta=True)</code> loads the latest <code>meta_state</code> row, calls <code>step_meta_state</code> (which drifts <code>p_lit</code> + applies <code>update_failure_boost</code> + <code>relax_toward_defaults</code>), and persists the new state. Across batches, the meta-stochastic knobs really do evolve. Level 2 can later mutate the drift schedules themselves.</p>
+</div>
+
+<!-- ====================================================================== -->
+<h2 id="level2">9. Level 2: the framework mutates itself</h2>
+
+<p>Now we get to the part that makes this a <strong>three-level</strong> framework and not just a fancy evolutionary algorithm.</p>
+
+<p>Everything in Sections 4&ndash;8 was Level 1: an engine with fixed structure and a few knobs that drift. The engine can get stuck. When it gets stuck, the meta-stochastic layer (Section 8) opens up exploration. That handles most stagnation.</p>
+
+<p>But what if the engine is stuck because Level 1's <em>structure</em> is wrong for this problem?</p>
+
+<p>Concretely: what if the AST tabu length is too aggressive and is rejecting 80% of children? The failure-aware boost will fire, exploration will open up, but the tabu list is still rejecting most of what the loop produces. The knob you need to turn is the tabu length itself, not the prompt temperature.</p>
+
+<p>Or: what if a particular family has dominated the population for 24 children, and the family quota <code>max_per_family = 3</code> is too lax to catch it? You need to <em>tighten the quota</em>, not just push novelty.</p>
+
+<p>Or: what if a single island is consistently the worst and never recovers? You need to <em>drop the island</em>, not just reset its bottom-K.</p>
+
+<p>These are all <strong>structural</strong> changes to Level 1. They can't be expressed as drift on existing knobs. So we need a layer that can propose them, validate them, and apply them with appropriate guardrails. That layer is Level 2.</p>
+
+<h3>9.1 The framework genome</h3>
+
+<p>Level 2 works on the <strong>framework genome</strong>: a JSON snapshot of every Level 1 parameter and operator choice. The schema lives in <code>framework/introspect.py:GENOME_RULE_GUARDS</code>. A small slice of it:</p>
+
+<pre><code>{
+  "island_count": 4,                // range [2, 8]
+  "island_size": 8,                 // range [4, 16]
+  "reset_cadence": 50,              // range [10, 200]
+  "novelty_alpha": 0.7,             // range [0.3, 0.95]
+  "ece_lambda": 0.5,                // range [0.0, 1.0]
+  "ast_tabu_k": 50,                 // range [10, 200]
+  "lineage_cap": 5,                 // range [2, 10]
+  "max_per_family": 3,              // range [2, 8]
+  "min_families": 4,                // range [2, 8]
+  "migration_patience": 10,         // range [5, 30]
+  "p_lit_drift_sigma": 0.05,        // range [0.01, 0.20]
+  "failure_boost_gain": 1.5,        // range [1.0, 3.0]
+  "replacement_rule": "GENITOR",    // enum {GENITOR, TOURNAMENT}
+  ...
+}</code></pre>
+
+<p>Every field has a declared range (the "rule guard"). A Level 2 mutation that proposes a value outside the range is rejected before it ever reaches the live state. This is the safety contract: Level 2 can <strong>tune</strong> Level 1, it cannot <strong>break</strong> Level 1.</p>
+
+<h3>9.2 When does Level 2 fire?</h3>
+
+<p>You might be expecting "every M iterations." That was the placeholder when we first sketched the framework. It's the wrong answer. M is arbitrary; firing on a fixed cadence will sometimes fire when nothing is wrong, and other times will silently miss real pathologies.</p>
+
+<p>The right trigger is <strong>compound, empirical, and read from the ledger</strong>. Level 2 fires when ANY of three pathologies appears in recent ledger state, AND a few guards are satisfied:</p>
+
+<pre class="ascii">
+   end of each iteration:
+            |
+            v
+   +-----------------------------+
+   | current_iter >= 20 ?        |--no--> wait (bootstrap floor)
+   +--------------+--------------+
+                  yes |
+                  v
+   +-----------------------------+
+   | iters_since_fire >= 10 ?    |--no--> wait (chatter guard)
+   +--------------+--------------+
+                  yes |
+                  v
+   +-----------------------------+
+   | iters_since_fire >= 100 ?   |--yes--> FIRE (silence cap)
+   +--------------+--------------+
+                  no |
+                  v
+   +-----------------------------+
+   | median fitness delta over   |
+   | window W (20) < 0.005       |--yes--> FIRE (stagnation)
+   +--------------+--------------+
+                  no |
+                  v
+   +-----------------------------+
+   | constraint rejection rate   |
+   | over W > 60%                |--yes--> FIRE (over-rejection)
+   +--------------+--------------+
+                  no |
+                  v
+   +-----------------------------+
+   | fingerprint entropy now <   |
+   | 0.7 * baseline entropy      |--yes--> FIRE (diversity collapse)
+   +--------------+--------------+
+                  no |
+                  v
+               wait
+</pre>
+<p class="caption">Figure 7. The compound detector. Three pathologies, three guards: bootstrap floor (don't fire on a cold start), chatter guard (don't fire twice in 10 iterations), silence cap (don't go more than 100 iterations without checking in).</p>
+
+<p>The thresholds (window size 20, stagnation epsilon 0.005, rejection cutoff 0.6, entropy ratio 0.7, min/max gap 10/100) all live in the genome. They can themselves be mutated by future Level 2 fires &mdash; the introspection layer can adjust its own sensitivity.</p>
+
+<h3>9.3 The seven typed operators</h3>
+
+<p>Level 2 doesn't propose arbitrary diffs. It picks from a small typed catalog of mutations:</p>
+
+<table>
+  <thead>
+    <tr><th>Op</th><th>Schema</th><th>Use when</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>ADD_ISLAND</code></td><td>(init_genome_perturbation)</td><td>Diversity collapse and island count below cap.</td></tr>
+    <tr><td><code>DROP_ISLAND</code></td><td>(island_id)</td><td>Persistent worst island, island count above floor.</td></tr>
+    <tr><td><code>SCALE_PARAM</code></td><td>(field, factor in [0.5, 2.0])</td><td>Tune one numeric knob inside its range.</td></tr>
+    <tr><td><code>TOGGLE_OPERATOR</code></td><td>(name, on/off)</td><td>Enable or disable a Level 1 component (e.g. failure_boost).</td></tr>
+    <tr><td><code>SWAP_OPERATOR</code></td><td>(slot, name)</td><td>Replace one operator with a sibling (e.g. GENITOR -> TOURNAMENT).</td></tr>
+    <tr><td><code>SET_THRESHOLD</code></td><td>(name, value)</td><td>Adjust stagnation, migration, or lineage threshold.</td></tr>
+    <tr><td><code>SET_AXIS_WEIGHT</code></td><td>(axis, weight)</td><td>Re-weight a Pareto axis.</td></tr>
+  </tbody>
+</table>
+
+<p>Why typed and not freeform? Because freeform diffs are unverifiable. A typed operator has a known schema and a known safety contract. <code>SCALE_PARAM(ast_tabu_k, 0.5)</code> is interpretable, range-checkable, and reversible. "Rewrite the constraint pipeline" is none of those things.</p>
+
+<h3>9.4 The proposal priority chain</h3>
+
+<p>When the compound detector fires, the proposal function reads the ledger and selects an operator by priority:</p>
+
+<ol>
+  <li><strong>Family monoculture dominant</strong> &rarr; <code>SET_THRESHOLD(max_per_family, 2)</code>. Fires when <code>detect_family_monoculture</code> sees a single model family at &ge;70% of the last 24 children. This is the highest priority because a same-family monoculture means architectural search has stopped entirely &mdash; which strictly dominates the knob-level pathologies below.</li>
+  <li><strong>Over-rejection dominant</strong> &rarr; tweak the offending constraint. Example: tabu rejected &gt;60% &rarr; <code>SCALE_PARAM(ast_tabu_k, 0.5)</code> (shorten the tabu list).</li>
+  <li><strong>Stagnation dominant</strong> &rarr; <code>SCALE_PARAM(novelty_alpha, 1.5)</code> or <code>SCALE_PARAM(p_lit_drift_sigma, 1.5)</code> or <code>SWAP_OPERATOR(replacement_rule, "TOURNAMENT")</code>.</li>
+  <li><strong>Diversity collapse dominant</strong> &rarr; <code>SET_AXIS_WEIGHT(novelty, +)</code> or <code>ADD_ISLAND</code>.</li>
+</ol>
+
+<p>An approved proposal goes through one more check before it's applied: the post-mutation genome must still satisfy <code>GENOME_RULE_GUARDS</code>, and it cannot disable any Level 1 hard constraint. (This is anti-pattern 13 in <code>ANTIPATTERNS.md</code>: Level 2 can tune Level 1 parameters within declared ranges, but it cannot redefine the constraint set itself.)</p>
+
+<p>If the check passes and the human gate (HIP-H) confirms, the mutation is applied to live state, persisted in <code>framework_mutations</code> with a timestamped row, and the next batch's mutation prompts read the new genome automatically.</p>
+
+<div class="note">
+  <span class="label">The lineage</span>
+  <p>Level 2 is the layer with the strongest published roots: Schmidhuber's <em>Gödel Machines</em> (a self-rewriting reinforcement learner with proof-based safety), DeepMind's <em>AlphaEvolve</em> (2025; LLM-driven program evolution with structural diffs), and Wang et al.'s <em>POET</em> (2019; co-evolution of environments and agents). All three are precedents for "the optimizer changes its own structure under observation." Our typed-operator catalog and rule-guard contract are the safety layer that makes this practical on a human-timescale loop.</p>
+</div>
+
+<!-- ====================================================================== -->
+<h2 id="workflow">10. The workflow: git as the only bridge</h2>
+
+<p>Up to this point the framework has been described as if it runs on one machine. It doesn't. The mutation operator (this Claude Code session) runs on Vignan's Mac. Training runs on the NEU Explorer cluster (1 H200 per task, 8 hour limit, 8 concurrent jobs, 12 GB RAM). The Mac and the cluster need a way to talk to each other.</p>
+
+<p>The temptation is to script that communication: have the Mac <code>ssh</code> into the cluster, <code>rsync</code> files, <code>sbatch</code> jobs, and watch for results. That's the "natural" engineering instinct. We don't do any of it.</p>
+
+<div class="panel">
+  <p><strong>Git is the only bridge.</strong> Mac and cluster communicate exclusively through <code>git push</code> and <code>git pull</code>. No SSH from the Mac, no <code>scp</code>, no <code>paramiko</code>, no inline-JSON <code>sbatch --wrap</code>. The framework Python on the Mac never touches the cluster. Every <code>git push</code>, every <code>ssh</code>, every <code>sbatch</code>, every <code>git pull</code> is a manual command Vignan types.</p>
+</div>
+
+<p>Why this hard constraint?</p>
+
+<ol>
+  <li><strong>Reproducibility.</strong> Every state transition lives in git. If you want to know what happened in iter_0017, you check out that commit. There's no "what was on the cluster's disk at the time" question to answer.</li>
+  <li><strong>Cognitive load.</strong> Constructing forensic SSH commands per iteration ("ssh in, cat this file, copy-paste the output back") is slow and error-prone. With git as the bridge, the per-iteration command list is the same four shell commands, always.</li>
+  <li><strong>Blast radius.</strong> A Mac-side script that does <code>ssh ... rm ...</code> can wipe a cluster directory by accident. A Mac-side script that <em>can't</em> SSH literally cannot do that. The system is safer because the operator surface is smaller.</li>
+  <li><strong>State divergence.</strong> "What got pasted into chat" and "what's on disk" can drift. With git, there is no chat-state. All cluster state lives in git, where reproducibility lives.</li>
+</ol>
+
+<h3>The four-command chain</h3>
+
+<p>One batch of the loop is exactly four operator actions (plus the Mac-side Claude reasoning that produces the specs):</p>
+
+<pre class="ascii">
+  Mac (Claude session, no shell)
+    -> generate experiments/iter_NNNN/child_MM/{spec.json, run.py}
+       and manifest.json
+    -> write ledger rows (experiments, mutation_traces,
+       constraint_events)
+    -> /Commit-Initiation: plan the commit, do not execute
+
+  Mac (Vignan, shell)              # command 1
+    -> git commit + git push
+
+  Cluster (Vignan, shell)          # commands 2 + 3
+    -> git pull
+    -> sbatch --array=0-(N-1)%4 \
+              --export=ALL,MANIFEST=experiments/iter_NNNN/manifest.json \
+              scripts/run_array.slurm
+       (cluster trains N children in parallel, writes result.json
+        into each child_MM/)
+
+  Cluster (Vignan, shell)          # command 4 (after training)
+    -> git add experiments/iter_NNNN/child_*/result.json
+       git commit + git push
+
+  Mac (Vignan, shell)              # command 5
+    -> git pull
+
+  Mac (Claude session)
+    -> read result.json files from disk
+    -> write fitness vectors to ledger
+    -> update meta-stochastic state, evolve critic, check_level2
+    -> reason next batch
+</pre>
+<p class="caption">Figure 8. One batch. Five manual commands across two machines, no automation, no SSH from the Mac.</p>
+
+<h3>What's tracked in git, what isn't</h3>
+
+<p>Two principles:</p>
+
+<ul>
+  <li><strong>result.json and trace.jsonl ARE tracked.</strong> These are small text files. They are the canonical record of what each child did, and they MUST round-trip through git so the Mac sees the same artifact the cluster wrote.</li>
+  <li><strong><code>checkpoints/</code> is NOT tracked.</strong> Model weights are large binaries. They live on the cluster filesystem; the Mac reads probability tables from the per-seed JSONs that <em>are</em> tracked. The submission pipeline preserves predictions, not weights.</li>
+</ul>
+
+<p>Anti-pattern 11a (in <code>ANTIPATTERNS.md</code>) formalizes the git-only contract. If you ever feel the urge to write a Mac-side script that touches the cluster, stop and re-read 11a.</p>
+
+<!-- ====================================================================== -->
+<h2 id="observability">11. Observability: how Level 2 sees what's happening</h2>
+
+<p>Level 2 can only make meaningful proposals if it can see <em>why</em> Level 1 is stuck, not just that it's stuck. Three observability surfaces give it that signal.</p>
+
+<h3>11.1 <code>mutation_traces</code> + JSONL mirror</h3>
+
+<p>Every accepted child is logged twice, atomically:</p>
+
+<ul>
+  <li>A row in <code>mutation_traces</code> (SQLite): <code>iteration, run_id, parent_run_ids, prompt_context, child_spec, fingerprint, reasoning_summary, accepted, created_at</code>.</li>
+  <li>An appended line to <code>experiments/&lt;run_id&gt;/trace.jsonl</code> with the same payload, JSONL-encoded.</li>
+</ul>
+
+<p>Why both? The JSONL is the durable write-ahead log: append-only, replay-safe, greppable from the cluster side. The SQLite table is the queryable materialized view that Level 2's detectors run against. If the SQLite ever corrupts, you can replay from the JSONL. Cluster runs append JSONL directly; the Mac queries via SQLite.</p>
+
+<p>The <code>reasoning_summary</code> field is the 2&ndash;5 sentence rationale this Claude Code session emits as a top-level field in every child spec. It's the human-readable answer to "why this child?" When Level 2 proposes a mutation, the trace history of recent children gives it the LLM-written narrative of how the population got where it is.</p>
+
+<h3>11.2 <code>constraint_events</code></h3>
+
+<p>Every rule check &mdash; rule_guard, AST tabu, lineage cap, family quota &mdash; logs a row to <code>constraint_events</code>: which rule, accepted or rejected, reason code, child run_id. This is what lets Level 2 compute per-rule rejection rates per window. Without it, "the loop is over-rejecting" would be an unanswerable question.</p>
+
+<h3>11.3 Query helpers on <code>Ledger</code></h3>
+
+<p>The ledger exposes a small set of pre-computed signals to keep Level 2's logic simple:</p>
+
+<ul>
+  <li><code>median_fitness_delta_per_island(window)</code> &rarr; stagnation-detector input</li>
+  <li><code>constraint_rejection_rate(window, rule=None)</code> &rarr; over-rejection-detector input</li>
+  <li><code>fingerprint_entropy(window)</code> &rarr; diversity-collapse-detector input</li>
+  <li><code>recent_mutation_traces(window)</code> &rarr; proposal context for the LLM</li>
+</ul>
+
+<p>All four are O(window) SQL queries. Level 2's compound detector composes them; the priority chain reads them to pick an operator.</p>
+
+<div class="aside">
+  <span class="label">Why no LangSmith / external observability</span>
+  <p>Adding an external observability service would add an external LLM dependency, which violates anti-pattern 11 (no external LLM SDKs). It would also fragment the trace surface: some history in the local ledger, some in the cloud. We keep everything local: SQLite for queries, JSONL for replay, both in the repo, both versioned with the code. If you ever need to debug iter_0017, you check out the commit and you have the full state, no service to log into.</p>
+</div>
+
+<!-- ====================================================================== -->
+<h2 id="module-map">12. Module &amp; ledger map</h2>
+
+<p>One reference table to close. Every section above maps to a Python module and (where relevant) a ledger table.</p>
+
+<table>
+  <thead>
+    <tr><th>Section</th><th>Module</th><th>Ledger surface</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>4 (FunSearch islands + GENITOR)</td><td><code>framework/population.py</code></td><td><code>experiments</code>, <code>lineage</code>, <code>islands</code></td></tr>
+    <tr><td>4 (spec rendering)</td><td><code>framework/render.py</code></td><td>writes <code>experiments/&lt;run_id&gt;/</code></td></tr>
+    <tr><td>4 (mutation context)</td><td><code>framework/mutation.py</code></td><td>reads <code>experiments</code>, <code>meta_state</code></td></tr>
+    <tr><td>5 (scoring stack)</td><td><code>framework/fitness.py</code></td><td>reads <code>experiments.fitness_json</code></td></tr>
+    <tr><td>6 (constraint pipeline)</td><td><code>framework/constraints.py</code></td><td>writes <code>constraint_events</code></td></tr>
+    <tr><td>7 (breakdown layer)</td><td><code>framework/breakdown.py</code></td><td><code>critic_population</code>, <code>islands</code></td></tr>
+    <tr><td>8 (meta-stochastic)</td><td><code>framework/meta.py</code></td><td><code>meta_state</code></td></tr>
+    <tr><td>9 (Level 2)</td><td><code>framework/introspect.py</code></td><td>reads all, writes <code>framework_mutations</code></td></tr>
+    <tr><td>10 (workflow / batch orchestration)</td><td><code>framework/iteration.py</code></td><td>seeds population, prepares per-batch prompts</td></tr>
+    <tr><td>10 (loop driver)</td><td><code>framework/loop.py</code></td><td>orchestrates writes across all tables</td></tr>
+    <tr><td>10 (ledger)</td><td><code>framework/ledger.py</code></td><td>all tables + <code>mutation_traces</code></td></tr>
+    <tr><td>Eval harness + subset-transfer</td><td><code>framework/eval.py</code></td><td>reads <code>experiments</code>, writes results</td></tr>
+    <tr><td>Initial seeds</td><td><code>framework/seeds.py</code></td><td>seeds <code>experiments</code> on first iter</td></tr>
+    <tr><td>Level 0 model families</td><td><code>ai4pain/baselines.py</code>, <code>ai4pain/cnn_1d.py</code>, <code>ai4pain/transformer.py</code>, <code>ai4pain/multi_stream.py</code>, <code>ai4pain/minirocket.py</code></td><td>each writes <code>result.json</code> to its run_dir</td></tr>
+    <tr><td>Data + splits + metrics</td><td><code>ai4pain/data.py</code>, <code>ai4pain/splits.py</code>, <code>ai4pain/metrics.py</code></td><td>no ledger</td></tr>
+  </tbody>
+</table>
+
+<h3>The hard rules (one-line each)</h3>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>Rule</th><th>Enforcement</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>No external data</td><td><code>framework/constraints.py:rule_guards</code></td></tr>
+    <tr><td>2</td><td>5 test submissions max</td><td><code>experiments/SUBMISSIONS.md</code> + HIP-G</td></tr>
+    <tr><td>3</td><td>No subject leakage</td><td><code>ai4pain/splits.py</code></td></tr>
+    <tr><td>4</td><td>No feature-source leakage</td><td>Reconstruction audit per new signal</td></tr>
+    <tr><td>5</td><td>No test-set touching</td><td>Test loaded only at HIP-G</td></tr>
+    <tr><td>6</td><td>No uncheckpointed loop state</td><td><code>framework/ledger.py</code> atomic writes</td></tr>
+    <tr><td>7</td><td>No silent metric drops</td><td><code>ai4pain/metrics.py</code> returns full vector</td></tr>
+    <tr><td>8</td><td>No silent constraint bypass</td><td><code>framework/constraints.py</code> raises, never warns</td></tr>
+    <tr><td>9</td><td>No silent fallback</td><td>All failures STOP and ask</td></tr>
+    <tr><td>10</td><td>No programmatic cluster ops</td><td>HIP-D / E / F only</td></tr>
+    <tr><td>11</td><td>No external LLM SDKs</td><td><code>requirements.txt</code> audit</td></tr>
+    <tr><td>11a</td><td>Git is the only Mac&harr;cluster bridge</td><td><code>scripts/</code> holds only cluster-side <code>.slurm</code> files</td></tr>
+    <tr><td>12</td><td>No Level 2 without HIP-H</td><td><code>framework/introspect.py</code> blocks on confirmation</td></tr>
+    <tr><td>13</td><td>No Level 2 bypass of Level 1</td><td><code>GENOME_RULE_GUARDS</code> in <code>introspect.py</code></td></tr>
+    <tr><td>14</td><td>No cross-repo imports</td><td>Copy with attribution</td></tr>
+    <tr><td>15</td><td>No commits from Claude</td><td>Always manual</td></tr>
+    <tr><td>16</td><td>No em dashes</td><td>All prose</td></tr>
+    <tr><td>17</td><td>No emojis</td><td>All output</td></tr>
+    <tr><td>18</td><td>No assumptions without evidence</td><td>Every choice cited</td></tr>
+    <tr><td>19</td><td>No loop run without subset-transfer</td><td>HIP-B gates loop start</td></tr>
+    <tr><td>20</td><td>No implementation without spec</td><td>This document first</td></tr>
+    <tr><td>21</td><td>No implementation without failing test</td><td><code>tests/test_&lt;module&gt;.py</code> red &rarr; green</td></tr>
+  </tbody>
+</table>
+
+<!-- ====================================================================== -->
+<h2 id="closing">Closing</h2>
+
+<p>That's the framework. Three levels, ten mechanisms, four ledger tables, one git-as-bridge contract. The whole thing was designed around a single empirical thesis: <em>the AI4Pain 2026 benchmark is asking for cortical information from a peripheral channel set, and the only path to a competitive result is to search hard with every diversity-preserving mechanism we can justify from the literature</em>.</p>
+
+<p>The architectural choices have lineage. FunSearch (Romera-Paredes et al., Nature 2024) gives us the island structure. GENITOR (Whitley 1988) gives us steady-state replacement. NSGA-II (Deb 2002) gives us multi-objective Pareto. Novelty search (Lehman &amp; Stanley 2011) gives us behavioral exploration. Hillis (1990) gives us coevolution. Promptbreeder (Fernando et al. 2023) gives us prompt-mode drift. Schmidhuber Gödel Machines, AlphaEvolve (DeepMind 2025), and POET (Wang et al. 2019) give us self-modification under safety constraints. Each piece is there because it answers a concrete pain point in the wish list at the start of Section 1.</p>
+
+<p>The framework is the contribution. AI4Pain 2026 is the first case study; the empirical results live in <code>SUBMISSIONS.md</code>, and the per-architecture details of what landed in the 5 portal submissions live in <code>MODELS_FRAMEWORK.html</code>. Future case studies will deploy the same engine on new domains. This document is the methodology snapshot used here.</p>
+
+<p class="muted">If you found a confusing section, an unmotivated jump, or a section that should have its own subsection, the doc is meant to be edited. The goal is a mental model crisp enough to write a workshop paper from. That's the test.</p>
+
+</main>
+</body>
+</html>

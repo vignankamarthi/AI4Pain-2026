@@ -5,7 +5,7 @@ peripheral autonomic signals), targeting the PAAIn Workshop at ACII 2026 in
 Puebla, Mexico. The submission was produced by applying a multi-level
 **Stochastic Experiment Loop** framework -- a stochastic, LLM-driven
 evolutionary discovery loop -- to this task as its first case study.
-The framework itself (under `framework/`, methodology in `FRAMEWORK.md`) is
+The framework itself (under `framework/`, methodology in `FRAMEWORK.html`) is
 preserved here as scientific provenance and as a copyable reference for
 applying the same loop to future domains/projects.
 
@@ -29,7 +29,7 @@ objective Pareto/novelty/confidence/failure-aware scoring + rule guards +
 AST tabu + lineage cap + migration + coevolutionary critic + mix-ratio drift
 meta-stochastic), and Level 2 (self-introspection that mutates Level 1 on an
 empirical compound-detector cadence). The mutation operator is a Claude Code
-session, not an external API client. See `FRAMEWORK.md` for the full design;
+session, not an external API client. See `FRAMEWORK.html` for the full design;
 `MODELS_FRAMEWORK.html` for per-architecture model details (diagrams + math).
 
 ## Final submission (HIP-G, 22 May 2026)
@@ -69,7 +69,7 @@ portal_submissions/    Emailable TeamName_Version.csv files (gitignored)
 ```
 
 Static identity: `CLAUDE.md`. Dynamic memory: `MEMORY.md`. Hard rules:
-`ANTIPATTERNS.md`. Architecture: `FRAMEWORK.md`. Project narrative + ledger:
+`ANTIPATTERNS.md`. Architecture: `FRAMEWORK.html`. Project narrative + ledger:
 `PLAN.md`. Submission portfolio: `SUBMISSIONS.md`. Per-architecture details:
 `MODELS_FRAMEWORK.html`.
 
